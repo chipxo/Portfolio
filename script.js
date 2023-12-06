@@ -1,24 +1,29 @@
-let button = document.getElementById("enter");
-let input = document.getElementById("userinput");
-let ul = document.querySelector("ul");
+//Solve these problems:
+
+//#1 Create a one line function that adds adds two parameters
+const gay = (a, b) => a + b;
+
+//Closure: What does the last line return?
+// const addTo = x => y => x + y;
+// var addToTen = addTo(10)
+// console.log(addToTen(3));
+
+//Currying: What does the last line return?
+// const sum = (a, b) => a + b
+// const curriedSum = (a) => (b) => a + b
+// console.log(curriedSum(30)(1));
 
 
-button.addEventListener("click", function () {
-    if (input.value.length > 0) {
-        console.log(input.value);
-        let li = document.createElement("li");
-        li.appendChild(document.createTextNode(input.value));
-        ul.appendChild(li);
-        input.value = "";
-    }
-});
+// //Currying: What does the last line return?
+// const sum = (a, b) => a + b
+// const curriedSum = (a) => (b) => a + b
+// const add5 = curriedSum(5)
+// console.log(add5(12)); 
 
+// //Composing: What does the last line return?
+const compose = (f, g) => (a) => f(g(a));
+const add1 = (num) => num + 1;
+const add5 = (num) => num + 5;
+compose(add1, add5)(10)
 
-input.addEventListener("keydown", function (event) {
-    if (input.value.length > 0 && event.key === "Enter") {
-        let li = document.createElement("li");
-    li.appendChild(document.createTextNode(input.value));
-    ul.appendChild(li);
-    input.value = "";
-    }
-})
+// //What are the two elements of a pure function?
