@@ -21,13 +21,16 @@ const cardSlice = createSlice({
         title: state.title,
         description: state.description,
       };
-
-      return {
-        ...state,
-        cards: [...state.cards, newCard],
-        title: "",
-        description: "",
-      };
+      if (state.title.length && state.description.length >= 1) {
+        return {
+          ...state,
+          title: "",
+          description: "",
+          cards: [...state.cards, newCard],
+        };
+      } else {
+        alert("Enter more charachters");
+      }
     },
     deleteCards: (state) => {
       state.cards = [];
@@ -35,9 +38,10 @@ const cardSlice = createSlice({
     deleteCard: (state, action) => {
       const indexToDelete = action.payload;
 
-      state.cards = state.cards.filter(
-        (card, index) => index !== indexToDelete,
-      );
+      return {
+        ...state,
+        cards: state.cards.filter((_, index) => index !== indexToDelete),
+      };
     },
   },
 });

@@ -1,10 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import cardReducer from "./cardSlice";
+import cardReducer from "./card/cardSlice";
+import colorReducer from "./color/colorSlice";
+import usersReducer from "./users/usersSlice";
+import productsReducer from "./fakeStore/storeSlice";
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
     card: cardReducer,
+    colorPicker: colorReducer,
+    users: usersReducer,
+    fakeStore: productsReducer,
   },
 });
-
-export default store;
