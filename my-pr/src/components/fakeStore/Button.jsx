@@ -1,9 +1,12 @@
 import React from "react";
 
-const Button = ({ onClick, text }) => {
+const Button = ({ onClick, text, color }) => {
   return (
-    <div className="mt-4">
-      <button className="btn btn-active btn-primary" onClick={onClick}>
+    <div className="">
+      <button
+        className={`btn btn-${color} btn-outline hover:btn-${color}-content`}
+        onClick={onClick}
+      >
         {text}
       </button>
     </div>

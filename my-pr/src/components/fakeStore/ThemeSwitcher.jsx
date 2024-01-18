@@ -1,6 +1,6 @@
 const ThemeSwitcher = () => {
   return (
-    <div className="dropdown sticky top-0 z-[999]">
+    <div className="dropdown">
       <div tabIndex={0} role="button" className="btn m-1">
         Theme
         <svg
@@ -15,13 +15,13 @@ const ThemeSwitcher = () => {
       </div>
       <ul
         tabIndex={0}
-        className="dropdown-content bg-base-300 rounded-box z-[1] w-52 p-2 shadow-2xl"
+        className="dropdown-content z-[1] w-52 rounded-box bg-base-300 p-2 shadow-2xl"
       >
         <li>
           <input
             type="radio"
             name="theme-dropdown"
-            className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+            className="theme-controller btn btn-ghost btn-sm btn-block justify-start"
             aria-label="Default"
             value="default"
           />
@@ -30,25 +30,17 @@ const ThemeSwitcher = () => {
           <input
             type="radio"
             name="theme-dropdown"
-            className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+            className="theme-controller btn btn-ghost btn-sm btn-block justify-start"
             aria-label="Retro"
             value="retro"
           />
         </li>
+
         <li>
           <input
             type="radio"
             name="theme-dropdown"
-            className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-            aria-label="Cyberpunk"
-            value="cyberpunk"
-          />
-        </li>
-        <li>
-          <input
-            type="radio"
-            name="theme-dropdown"
-            className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+            className="theme-controller btn btn-ghost btn-sm btn-block justify-start"
             aria-label="Valentine"
             value="valentine"
           />
@@ -57,25 +49,17 @@ const ThemeSwitcher = () => {
           <input
             type="radio"
             name="theme-dropdown"
-            className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+            className="theme-controller btn btn-ghost btn-sm btn-block justify-start"
             aria-label="Aqua"
             value="aqua"
           />
         </li>
+
         <li>
           <input
             type="radio"
             name="theme-dropdown"
-            className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-            aria-label="Luxury"
-            value="luxury"
-          />
-        </li>
-        <li>
-          <input
-            type="radio"
-            name="theme-dropdown"
-            className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+            className="theme-controller btn btn-ghost btn-sm btn-block justify-start"
             aria-label="Dracula"
             value="dracula"
           />
@@ -84,7 +68,7 @@ const ThemeSwitcher = () => {
           <input
             type="radio"
             name="theme-dropdown"
-            className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+            className="theme-controller btn btn-ghost btn-sm btn-block justify-start"
             aria-label="Business"
             value="business"
           />
@@ -93,7 +77,7 @@ const ThemeSwitcher = () => {
           <input
             type="radio"
             name="theme-dropdown"
-            className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+            className="theme-controller btn btn-ghost btn-sm btn-block justify-start"
             aria-label="Sunset"
             value="sunset"
           />
@@ -102,7 +86,7 @@ const ThemeSwitcher = () => {
           <input
             type="radio"
             name="theme-dropdown"
-            className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+            className="theme-controller btn btn-ghost btn-sm btn-block justify-start"
             aria-label="Winter"
             value="winter"
           />
@@ -111,27 +95,9 @@ const ThemeSwitcher = () => {
           <input
             type="radio"
             name="theme-dropdown"
-            className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+            className="theme-controller btn btn-ghost btn-sm btn-block justify-start"
             aria-label="Emerald"
             value="emerald"
-          />
-        </li>
-        <li>
-          <input
-            type="radio"
-            name="theme-dropdown"
-            className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-            aria-label="Bumblebee"
-            value="bumblebee"
-          />
-        </li>
-        <li>
-          <input
-            type="radio"
-            name="theme-dropdown"
-            className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-            aria-label="Synthwave"
-            value="synthwave"
           />
         </li>
       </ul>
