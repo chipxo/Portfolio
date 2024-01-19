@@ -1,2 +1,0 @@
-Hello node!
-Hello serhii
