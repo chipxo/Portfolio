@@ -1,5 +1,7 @@
 import { RootState } from "@/app/rootReducer.tsx";
+import ErrorMessage from "@/components/common/ErrorMessage";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Skeleton } from "@/components/ui/skeleton";
 import { ProductType } from "@/types/types.tsx";
 import { nanoid } from "@reduxjs/toolkit";
 import React from "react";
@@ -8,11 +10,10 @@ import { Link } from "react-router-dom";
 
 type SearchPageProps = {
   searchResults: ProductType[] | undefined;
-  found: boolean;
 };
 
-const SearchPage: React.FC<SearchPageProps> = ({ searchResults, found }) => {
-  const { inputValue } = useSelector(
+const SearchPage: React.FC<SearchPageProps> = ({ searchResults }) => {
+  const { inputValue, loading, error } = useSelector(
     (state: RootState) => state.searchProducts,
   );
 
@@ -20,7 +21,21 @@ const SearchPage: React.FC<SearchPageProps> = ({ searchResults, found }) => {
     <>
       {searchResults && (
         <div className="grid max-h-[50vh] w-full gap-y-4 overflow-auto rounded-md border bg-background p-4">
-          {found && inputValue.length > 0 ? (
+          {loading &&
+            "qwerty".split("").map((_) => (
+              <div className="flex gap-4" key={nanoid()}>
+                <Skeleton className="h-10 w-10 rounded-full bg-accent" />
+                <div className="w-full space-y-2">
+                  <Skeleton className="h-6 w-52  bg-accent" />
+                  <Skeleton className="h-4 w-24 bg-accent" />
+                </div>
+              </div>
+            ))}
+          {error && <ErrorMessage error={error} />}
+          {!error &&
+          !loading &&
+          inputValue.length > 0 &&
+          searchResults.length > 0 ? (
             searchResults?.map(({ id, title, images, category }) => (
               <Link to={`/products/${id}`} key={nanoid()}>
                 <div className="grid grid-cols-[0.1fr_1fr] items-center gap-x-4">
@@ -29,7 +44,7 @@ const SearchPage: React.FC<SearchPageProps> = ({ searchResults, found }) => {
                     <AvatarFallback>{title.slice(0, 1)}</AvatarFallback>
                   </Avatar>
                   <div className="space-y-1">
-                    <h2 className="text-sm md:text-md">{title}</h2>
+                    <h2 className="md:text-md text-sm">{title}</h2>
                     <p>
                       in category:{" "}
                       <span className="text-md md:tracking-widest">
@@ -50,5 +65,3 @@ const SearchPage: React.FC<SearchPageProps> = ({ searchResults, found }) => {
 };
 
 export default SearchPage;
-
-//<h2 className="text-lg">Nothing Found!</h2>

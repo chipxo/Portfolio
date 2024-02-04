@@ -2,11 +2,9 @@ import { RootState } from "@/app/rootReducer.tsx";
 import { useAppDispatch } from "@/app/store.tsx";
 import { setInputValue } from "@/features/searchBar/searchSlice";
 import { useSelector } from "react-redux";
-
-import ErrorMessage from "@/components/common/ErrorMessage";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ProductType } from "@/types/types";
+import { fetchSearchProducts } from "@/hooks/fetchSearch";
 import { mOpacity } from "@/utils/motionSettings";
 import { AnimatePresence, motion as m } from "framer-motion";
 import { useEffect, useState } from "react";
@@ -16,18 +14,11 @@ import SearchPage from "./SearchPage";
 const Search = () => {
   const dispatch = useAppDispatch();
 
-  const { products, error } = useSelector((state: RootState) => state.products);
-
   const { inputValue } = useSelector(
     (state: RootState) => state.searchProducts,
   );
 
-  const [open, setOpen] = useState(false);
-  const [searchResults, setSearchResults] = useState<ProductType[] | undefined>(
-    [],
-  );
-
-  const [found, setFound] = useState(false);
+  const [open, setOpen] = useState(true);
 
   const navigate = useNavigate();
 
@@ -47,22 +38,20 @@ const Search = () => {
     };
   }, []);
 
+  const { products: searchProducts } = useSelector(
+    (state: RootState) => state.searchProducts,
+  );
+
+  useEffect(() => {
+    dispatch(fetchSearchProducts(inputValue));
+  }, [dispatch, inputValue]);
+
   const handleChange = (value: string) => {
     setOpen(true);
-
     dispatch(setInputValue(value));
-
-    const input = value.toLowerCase();
-
-    const filteredResults = products?.filter(
-      ({ title, category }) =>
-        title.toLowerCase().startsWith(input) ||
-        category.name.toLowerCase().startsWith(input),
-    );
-
-    setFound(!!filteredResults?.length);
-    setSearchResults(filteredResults);
   };
+
+  console.log(searchProducts);
 
   return (
     <div className="relative">
@@ -76,7 +65,7 @@ const Search = () => {
         onFocus={() => setOpen(true)}
         onBlur={() => setOpen(false)}
       />
-      {error && <ErrorMessage error={error} />}
+
       <AnimatePresence>
         {open && (
           <m.div
@@ -102,7 +91,7 @@ const Search = () => {
               style={{ x: "-50%" }}
               className="absolute left-1/2 top-11 z-[200] w-[140%] sm:w-[120%] md:w-full"
             >
-              <SearchPage searchResults={searchResults} found={found} />
+              <SearchPage searchResults={searchProducts} />
             </m.div>
           </>
         )}
