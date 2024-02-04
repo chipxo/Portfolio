@@ -120,7 +120,7 @@ const Form = () => {
         className="fixed inset-0 z-[200] grid items-center bg-black/70 px-4"
       >
         <div className="relative left-1/2 -translate-x-1/2 rounded-md bg-background max-md:container md:max-w-[45vw] xl:max-w-[35vw]">
-          <div className="relative grid grid-cols-[1fr_0.8fr] justify-items-center gap-x-12 border-b px-6 py-2">
+          <div className="relative grid grid-cols-2 justify-items-center lg:gap-x-12 border-b px-8 py-2">
             {/* Buttons for switch between Sign in and Register */}
             <Button
               onClick={() => {
@@ -128,6 +128,7 @@ const Form = () => {
                 dispatch(setRegistered(true));
               }}
               variant={alreadyRegistered ? "default" : "outline"}
+              className="max-sm:bg-transparent max-sm:p-0"
             >
               Sign in
             </Button>
@@ -137,6 +138,7 @@ const Form = () => {
                 dispatch(setRegistered(false));
               }}
               variant={!alreadyRegistered ? "default" : "outline"}
+              className="max-sm:bg-transparent max-sm:border-none max-sm:p-0"
             >
               Register
             </Button>
@@ -145,7 +147,7 @@ const Form = () => {
             <Button
               onClick={handleCloseForm}
               variant="outline"
-              className="absolute right-2 top-2"
+              className="absolute right-2 top-2 max-sm:border-none"
             >
               {closeIcon}
             </Button>
