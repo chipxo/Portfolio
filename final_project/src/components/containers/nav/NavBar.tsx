@@ -21,7 +21,7 @@ const NavBar = () => {
 
   return (
     <nav className="container rounded-b-md py-2">
-      <ul className="grid max-h-[80px] grid-cols-[108px_1fr_0.1fr_0.1fr] place-items-center gap-x-4 sm:grid-cols-[108px_1fr_0.1fr_0.1fr] md:grid-cols-[108px_1fr_0.28fr] lg:grid-cols-[108px_0.22fr_1fr_0.28fr]">
+      <ul className="grid max-h-[80px] grid-cols-[60px_1fr_0.1fr_0.1fr] place-items-center gap-x-4 sm:grid-cols-[60px_1fr_0.1fr_0.1fr] md:grid-cols-[80px_1fr_0.28fr] lg:grid-cols-[100px_0.22fr_1fr_0.28fr]">
         <NavLink
           to="/"
           className="flex h-14 w-14 items-center justify-self-start object-cover"

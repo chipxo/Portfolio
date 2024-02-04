@@ -52,7 +52,6 @@ const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({
   return (
     <div
       className="relative"
-      onClick={() => setOpen((o) => !o)}
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
