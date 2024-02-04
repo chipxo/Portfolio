@@ -128,7 +128,7 @@ const Form = () => {
                 dispatch(setRegistered(true));
               }}
               variant={alreadyRegistered ? "default" : "outline"}
-              className="max-sm:bg-transparent max-sm:p-0"
+              className=""
             >
               Sign in
             </Button>
@@ -138,7 +138,7 @@ const Form = () => {
                 dispatch(setRegistered(false));
               }}
               variant={!alreadyRegistered ? "default" : "outline"}
-              className="max-sm:bg-transparent max-sm:border-none max-sm:p-0"
+              className=""
             >
               Register
             </Button>
@@ -147,7 +147,7 @@ const Form = () => {
             <Button
               onClick={handleCloseForm}
               variant="outline"
-              className="absolute right-2 top-2 max-sm:border-none"
+              className="absolute -right-2 md:right-2 top-2 max-sm:bg-transparent max-sm:border-none"
             >
               {closeIcon}
             </Button>
