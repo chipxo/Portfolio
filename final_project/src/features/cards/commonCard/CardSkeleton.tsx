@@ -14,7 +14,7 @@ type SkeletopProps = {
 
 const CardSkeleton: React.FC<SkeletopProps> = ({ isHome = false }) => {
   return (
-    <Card className="flex h-full w-full flex-col">
+    <Card className="flex h-full w-full flex-col min-w-[140px]">
       <Skeleton className="h-72 w-full bg-accent" />
       <CardHeader>
         <CardTitle>

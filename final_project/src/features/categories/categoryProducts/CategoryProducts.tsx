@@ -40,8 +40,12 @@ const CategoryProducts = () => {
         <CategoriesLayout />
         <FilterCategories />
         <div className="grid grid-cols-2 md:grid-cols-home gap-4">
-          {loading &&
-            "qwer".split("").map((_) => <CardSkeleton key={nanoid()} />)}
+          {!loading &&
+            "qwer".split("").map((_) => (
+              <div key={nanoid()}>
+                <CardSkeleton />
+              </div>
+            ))}
           {!loading && !error && products && products.length > 0 ? (
             products.map((product) => (
               <CommonCard key={nanoid()} {...product} />
