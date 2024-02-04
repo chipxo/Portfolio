@@ -1,7 +1,7 @@
 import { RootState } from "@/app/rootReducer.tsx";
 import { useAppDispatch } from "@/app/store.tsx";
 import ErrorMessage from "@/components/common/ErrorMessage";
-import { cartIcon } from "@/components/common/icons.tsx";
+import { cartIcon, goToRightIcon } from "@/components/common/icons.tsx";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -12,7 +12,7 @@ import { mFLoatMenu, mOpacity } from "@/utils/motionSettings";
 import { AnimatePresence, motion as m } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 type ShoppingCartItemProps = {
   isBurger?: boolean;
@@ -55,70 +55,72 @@ const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      <Link to="/shoppingCart">
-        <Button className="relative" variant="ghost">
-          <span className="text-xl">{cartIcon}</span>
-          <AnimatePresence>
-            {amount > 0 && (
-              <m.div {...mOpacity}>
-                <Badge className="absolute -top-1 right-0" variant="default">
-                  {amount}
-                </Badge>
-              </m.div>
-            )}
-          </AnimatePresence>
-        </Button>
-      </Link>
+      <Button className="relative" variant="ghost">
+        <span className="text-xl">{cartIcon}</span>
+        <AnimatePresence>
+          {amount > 0 && (
+            <m.div {...mOpacity}>
+              <Badge className="absolute -top-1 right-0" variant="default">
+                {amount}
+              </Badge>
+            </m.div>
+          )}
+        </AnimatePresence>
+      </Button>
+
       <AnimatePresence>
         {open && !isBurger && amount ? (
-          <NavLink to="/shoppingCart">
-            <m.div
-              {...mFLoatMenu}
-              style={{ x: "-65%" }}
-              className="absolute top-12 -left-1/2"
-            >
-              <div className="absolute -top-5 h-8 w-full bg-transparent" />
-              <div className="grid max-h-[44vh] w-max max-sm:max-w-[80vw] cursor-pointer gap-y-4 overflow-auto rounded-md border bg-background p-4">
-                {loading && (
-                  <div className="flex gap-4">
-                    <Skeleton className="w-20 mr-2 aspect-square bg-white" />
-                    <div className="w-full space-y-2">
-                      <Skeleton className="h-6 bg-white" />
-                      <Skeleton className="w-5 h-4 bg-white" />
-                    </div>
+          <m.div
+            {...mFLoatMenu}
+            style={{ x: "-65%" }}
+            className="absolute top-12 -left-1/2"
+          >
+            <div className="absolute -top-5 h-8 w-full bg-transparent" />
+            <div className="grid max-h-[44vh] w-max max-sm:max-w-[80vw] cursor-pointer gap-y-4 overflow-auto rounded-md border bg-background p-4">
+              {amount > 0 && (
+                <NavLink to="/shoppingCart">
+                  <h2>Go to shopping cart {goToRightIcon}</h2>
+                </NavLink>
+              )}
+              {loading && (
+                <div className="flex gap-4">
+                  <Skeleton className="w-16 mr-2 aspect-square bg-white" />
+                  <div className="w-full max-w-64 space-y-2">
+                    <Skeleton className="h-6 bg-white" />
+                    <Skeleton className="w-5 h-4 bg-white" />
                   </div>
-                )}
-                {error && <ErrorMessage error={error} />}
-                {!loading &&
-                  !error &&
-                  items?.map((item) => {
-                    if (item && item.id) {
-                      const { id, images, title, price } = item;
-                      return (
-                        <div
-                          key={id}
-                          className="grid grid-cols-[50px_1fr] items-center gap-x-8"
-                        >
-                          <div className="h-16 w-16">
-                            <img
-                              src={images[0]}
-                              alt={title}
-                              className="rounded-sm object-contain"
-                            />
-                          </div>
-                          <div className="">
-                            <h2 className="text-lg font-semibold">{title}</h2>
-                            <p>{price}$</p>
-                          </div>
+                </div>
+              )}
+              {error && <ErrorMessage error={error} />}
+              {!loading &&
+                !error &&
+                items?.map((item) => {
+                  if (item && item.id) {
+                    const { id, images, title, price } = item;
+                    return (
+                      <div
+                        key={id}
+                        className="grid grid-cols-[50px_1fr] items-center gap-x-8"
+                      >
+                        <div className="h-16 w-16">
+                          <img
+                            src={images[0]}
+                            alt={title}
+                            className="rounded-sm object-contain"
+                          />
                         </div>
-                      );
-                    }
+                        <div className="">
+                          <h2 className="text-lg font-semibold">{title}</h2>
+                          <p>{price}$</p>
+                        </div>
+                      </div>
+                    );
+                  }
 
-                    return null;
-                  })}
-              </div>
-            </m.div>
-          </NavLink>
+                  return null;
+                })}
+            </div>
+          </m.div>
         ) : (
           open &&
           !isBurger && (

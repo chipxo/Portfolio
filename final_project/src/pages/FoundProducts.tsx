@@ -46,7 +46,7 @@ const FoundProducts = () => {
               Results for: "{inputValue}"
             </h2>
           )}
-          <div className="grid grid-cols-home gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-home gap-4">
             {loading &&
               "qwerty".split("").map((char) => <CardSkeleton key={char} />)}
 

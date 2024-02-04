@@ -41,7 +41,7 @@ const CategoryProducts = () => {
         <FilterCategories />
         <div className="grid grid-cols-2 md:grid-cols-home gap-4">
           {loading &&
-            "qwerty".split("").map((char) => <CardSkeleton key={char} />)}
+            "qwer".split("").map((_) => <CardSkeleton key={nanoid()} />)}
           {!loading && !error && products && products.length > 0 ? (
             products.map((product) => (
               <CommonCard key={nanoid()} {...product} />
