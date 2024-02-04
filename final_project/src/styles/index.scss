@@ -83,6 +83,10 @@ input {
   }
 }
 
+.slick-dots li button {
+  @apply hidden;
+}
+
 .menu :where(li > details > summary):after {
   @apply hidden;
 }

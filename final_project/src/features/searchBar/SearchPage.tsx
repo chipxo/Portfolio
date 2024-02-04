@@ -29,10 +29,10 @@ const SearchPage: React.FC<SearchPageProps> = ({ searchResults, found }) => {
                     <AvatarFallback>{title.slice(0, 1)}</AvatarFallback>
                   </Avatar>
                   <div className="space-y-1">
-                    <h2>{title}</h2>
+                    <h2 className="text-sm md:text-md">{title}</h2>
                     <p>
                       in category:{" "}
-                      <span className="text-md tracking-widest">
+                      <span className="text-md md:tracking-widest">
                         {category.name}
                       </span>
                     </p>
@@ -41,7 +41,7 @@ const SearchPage: React.FC<SearchPageProps> = ({ searchResults, found }) => {
               </Link>
             ))
           ) : (
-            <h2 className="text-lg">Nothing Found!</h2>
+            <h2 className="text-sm md:text-lg">Nothing Found!</h2>
           )}
         </div>
       )}

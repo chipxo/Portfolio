@@ -100,7 +100,7 @@ const Search = () => {
             <m.div
               {...mOpacity}
               style={{ x: "-50%" }}
-              className="absolute left-1/2 top-11 z-[200] w-full"
+              className="absolute left-1/2 top-11 z-[200] w-[125%]"
             >
               <SearchPage searchResults={searchResults} found={found} />
             </m.div>

@@ -63,7 +63,7 @@ const Home = () => {
             <h2 className="text-start text-xl md:text-2xl md:font-semibold">
               Best selling products:
             </h2>
-            <div className="grid grid-cols-home gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-home gap-4">
               {!loading &&
                 !error &&
                 firstPrs?.map((product) => (

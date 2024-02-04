@@ -12,7 +12,7 @@ import { mFLoatMenu, mOpacity } from "@/utils/motionSettings";
 import { AnimatePresence, motion as m } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 type ShoppingCartItemProps = {
   isBurger?: boolean;
@@ -52,10 +52,11 @@ const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({
   return (
     <div
       className="relative"
+      onClick={() => setOpen((o) => !o)}
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      <NavLink to="/shoppingCart">
+      <Link to="/shoppingCart">
         <Button className="relative" variant="ghost">
           <span className="text-xl">{cartIcon}</span>
           <AnimatePresence>
@@ -68,17 +69,17 @@ const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({
             )}
           </AnimatePresence>
         </Button>
-      </NavLink>
+      </Link>
       <AnimatePresence>
         {open && !isBurger && amount ? (
           <NavLink to="/shoppingCart">
             <m.div
               {...mFLoatMenu}
-              style={{ x: "-72%" }}
-              className="absolute -left-[84%] top-12 xl:-left-1/2"
+              style={{ x: "-65%" }}
+              className="absolute top-12 -left-1/2"
             >
               <div className="absolute -top-5 h-8 w-full bg-transparent" />
-              <div className="grid max-h-[44vh] w-max cursor-pointer gap-y-4 overflow-auto rounded-md border bg-background p-4 ">
+              <div className="grid max-h-[44vh] w-max max-sm:max-w-[80vw] cursor-pointer gap-y-4 overflow-auto rounded-md border bg-background p-4">
                 {loading && (
                   <div className="flex gap-4">
                     <Skeleton className="w-20 mr-2 aspect-square bg-white" />
@@ -89,31 +90,33 @@ const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({
                   </div>
                 )}
                 {error && <ErrorMessage error={error} />}
-                {items?.map((item) => {
-                  if (item && item.id) {
-                    const { id, images, title, price } = item;
-                    return (
-                      <div
-                        key={id}
-                        className="grid grid-cols-[50px_1fr] items-center gap-x-8"
-                      >
-                        <div className="h-16 w-16">
-                          <img
-                            src={images[0]}
-                            alt={title}
-                            className="rounded-sm object-contain"
-                          />
+                {!loading &&
+                  !error &&
+                  items?.map((item) => {
+                    if (item && item.id) {
+                      const { id, images, title, price } = item;
+                      return (
+                        <div
+                          key={id}
+                          className="grid grid-cols-[50px_1fr] items-center gap-x-8"
+                        >
+                          <div className="h-16 w-16">
+                            <img
+                              src={images[0]}
+                              alt={title}
+                              className="rounded-sm object-contain"
+                            />
+                          </div>
+                          <div className="">
+                            <h2 className="text-lg font-semibold">{title}</h2>
+                            <p>{price}$</p>
+                          </div>
                         </div>
-                        <div className="">
-                          <h2 className="text-lg font-semibold">{title}</h2>
-                          <p>{price}$</p>
-                        </div>
-                      </div>
-                    );
-                  }
+                      );
+                    }
 
-                  return null;
-                })}
+                    return null;
+                  })}
               </div>
             </m.div>
           </NavLink>
@@ -122,8 +125,8 @@ const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({
           !isBurger && (
             <m.div
               {...mFLoatMenu}
-              style={{ x: "-50%" }}
-              className="absolute left-1/3 top-11"
+              style={{ x: "-70%" }}
+              className="absolute left-1/2 top-11"
             >
               <div className="absolute -top-6 z-[999] h-8 w-full bg-transparent" />
               <div className="w-max rounded-md border bg-background px-12 py-6 drop-shadow-2xl">

@@ -16,15 +16,34 @@ const Carousel: React.FC<CarouselProps> = ({ products }) => {
     dots: false,
     infinite: true,
     slidesToShow: 4,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+    ],
     autoplay: true,
-    speed: 3000,
+    speed: 4000,
     cssEase: "linear",
     pauseOnHover: false,
   };
 
   return (
     <div className="bg-animated-bg relative my-6 overflow-hidden border-y bg-cover bg-no-repeat py-4 md:my-12 md:shadow-lg">
-      <div className="absolute top-16 z-[30] w-full text-center backdrop-blur-md">
+      <div className="absolute top-8 md:top-16 z-[30] w-full text-center backdrop-blur-md">
         <SliderHeader />
       </div>
       {products && (
@@ -35,7 +54,7 @@ const Carousel: React.FC<CarouselProps> = ({ products }) => {
                 <div key={nanoid()} className="px-1.5">
                   <img
                     src={images[1]}
-                    className="h-fit max-h-44 w-full rounded-md object-cover"
+                    className="h-fit max-h-24 md:max-h-44 w-full rounded-md object-cover"
                     alt={title}
                   />
                 </div>

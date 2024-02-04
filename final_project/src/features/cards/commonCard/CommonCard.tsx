@@ -55,10 +55,10 @@ const CommonCard: React.FC<CardProps> = ({
   return (
     <Card className="flex h-full w-full flex-col">
       {/* Image */}
-      <Link to={`/products/${id}`} className="h-min">
+      <Link to={`/products/${id}`}>
         <img
           src={images?.[0]}
-          className="h-min w-full cursor-pointer rounded-t-md object-cover"
+          className="w-full cursor-pointer rounded-t-md object-cover"
           alt={title}
         />
       </Link>
