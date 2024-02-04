@@ -34,28 +34,31 @@ const CategoryProducts = () => {
   }, [dispatch, categoryId]);
 
   return (
-    <section>
-      <div className="container min-h-[70vh] py-10">
-        {error && <ErrorMessage error={error} />}
-        <CategoriesLayout />
-        <FilterCategories />
-        <div className="grid grid-cols-2 md:grid-cols-home gap-4">
-          {!loading &&
-            "qwer".split("").map((_) => (
-              <div key={nanoid()}>
-                <CardSkeleton />
-              </div>
-            ))}
-          {!loading && !error && products && products.length > 0 ? (
-            products.map((product) => (
-              <CommonCard key={nanoid()} {...product} />
-            ))
-          ) : (
-            <NoProducts />
-          )}
+    <>
+      {loading && (
+        <div className="container grid grid-cols-2 md:grid-cols-home gap-4">
+          {"qwer".split("").map((_) => (
+            <CardSkeleton key={nanoid()} />
+          ))}
         </div>
-      </div>
-    </section>
+      )}
+      <section>
+        <div className="container min-h-[70vh] py-10">
+          {error && <ErrorMessage error={error} />}
+          <CategoriesLayout />
+          <FilterCategories />
+          <div className="grid grid-cols-2 md:grid-cols-home gap-4">
+            {!loading && !error && products && products.length > 0 ? (
+              products.map((product) => (
+                <CommonCard key={nanoid()} {...product} />
+              ))
+            ) : (
+              <NoProducts />
+            )}
+          </div>
+        </div>
+      </section>
+    </>
   );
 };
 

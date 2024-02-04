@@ -54,6 +54,7 @@ const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({
       className="relative"
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
+      onClick={() => setOpen(!open)}
     >
       <Button className="relative" variant="ghost">
         <span className="text-xl">{cartIcon}</span>
