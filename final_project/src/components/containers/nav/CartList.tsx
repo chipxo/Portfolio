@@ -78,7 +78,7 @@ const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({
             <div className="absolute -top-5 h-8 w-full bg-transparent" />
             <div className="grid max-h-[44vh] w-max max-sm:max-w-[80vw] cursor-pointer gap-y-4 overflow-auto rounded-md border bg-background p-4">
               {amount > 0 && (
-                <NavLink to="/shoppingCart">
+                <NavLink to="/shoppingCart" onClick={() => setOpen(false)}>
                   <h2>Go to shopping cart {goToRightIcon}</h2>
                 </NavLink>
               )}
