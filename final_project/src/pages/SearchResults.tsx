@@ -8,7 +8,7 @@ import { nanoid } from "@reduxjs/toolkit";
 import { motion as m } from "framer-motion";
 import { useSelector } from "react-redux";
 
-const FoundProducts = () => {
+const SearchResults = () => {
   const { inputValue, products, loading, error } = useSelector(
     (state: RootState) => state.searchProducts,
   );
@@ -43,4 +43,4 @@ const FoundProducts = () => {
   );
 };
 
-export default FoundProducts;
+export default SearchResults;

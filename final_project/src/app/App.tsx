@@ -1,7 +1,7 @@
 import CategoryProducts from "@/features/categories/categoryProducts/CategoryProducts.tsx";
 import { setSignedIn } from "@/features/registration/registerSlice.tsx";
 import { ThemeProvider } from "@/features/theme/theme-provider";
-import FoundProducts from "@/pages/FoundProducts.tsx";
+import SearchResults from "@/pages/SearchResults.tsx";
 import Home from "@/pages/Home/Home.tsx";
 import Layout from "@/pages/Layout.tsx";
 import Page404 from "@/pages/Page404.tsx";
@@ -30,7 +30,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="/searchResults" element={<FoundProducts />} />
+          <Route path="/searchResults" element={<SearchResults />} />
           <Route path="/products/:prodId" element={<SingleCardPage />} />
           <Route path="/shoppingCart" element={<ShoppingCart />} />
           <Route

@@ -29,14 +29,12 @@ const CategoryProducts = () => {
     window.scrollTo(0, 0);
 
     dispatch(fetchCategoryProducts(`${categoryId}`));
-    dispatch(setHighestPr(0));
-    dispatch(setLowestPr(0));
   }, [dispatch, categoryId]);
 
   return (
     <>
       {loading && (
-        <div className="container grid grid-cols-2 md:grid-cols-home gap-4">
+        <div className="container grid grid-cols-2 gap-4 md:grid-cols-home">
           {"qwer".split("").map((_) => (
             <CardSkeleton key={nanoid()} />
           ))}
@@ -47,7 +45,7 @@ const CategoryProducts = () => {
           {error && <ErrorMessage error={error} />}
           <CategoriesLayout />
           <FilterCategories />
-          <div className="grid grid-cols-2 md:grid-cols-home gap-4">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-home">
             {!loading && !error && products && products.length > 0 ? (
               products.map((product) => (
                 <CommonCard key={nanoid()} {...product} />

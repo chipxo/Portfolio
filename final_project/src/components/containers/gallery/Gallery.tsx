@@ -8,7 +8,6 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
-import { isValidImage } from "@/utils/isValidImage";
 import { mOpacity } from "@/utils/motionSettings.tsx";
 import { motion as m } from "framer-motion";
 import React, { useEffect, useState } from "react";
@@ -64,14 +63,14 @@ const Gallery: React.FC<GalleryProps> = ({
             <CarouselItem>
               <img
                 className="mx-auto aspect-square w-2/3 rounded-md"
-                src={isValidImage(images?.[1]) ? images?.[1] : images?.[0]}
+                src={images?.[1]}
                 alt={title}
               />
             </CarouselItem>
             <CarouselItem>
               <img
                 className="mx-auto aspect-square w-2/3 rounded-md"
-                src={isValidImage(images?.[2]) ? images?.[2] : images?.[0]}
+                src={images?.[2]}
                 alt={title}
               />
             </CarouselItem>

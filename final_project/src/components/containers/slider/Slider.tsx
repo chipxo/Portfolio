@@ -1,5 +1,4 @@
 import { ProductType } from "@/types/types";
-import { isValidImage } from "@/utils/isValidImage";
 import { nanoid } from "@reduxjs/toolkit";
 import React from "react";
 import Slider from "react-slick";
@@ -42,24 +41,21 @@ const Carousel: React.FC<CarouselProps> = ({ products }) => {
   };
 
   return (
-    <div className="bg-animated-bg relative my-6 overflow-hidden border-y bg-cover bg-no-repeat py-4 md:my-12 md:shadow-lg">
-      <div className="absolute top-8 md:top-16 z-[30] w-full text-center backdrop-blur-md">
+    <div className="relative my-6 overflow-hidden border-y bg-animated-bg bg-cover bg-no-repeat py-4 md:my-12 md:shadow-lg">
+      <div className="absolute top-8 z-[30] w-full text-center backdrop-blur-md md:top-16">
         <SliderHeader />
       </div>
       {products && (
         <Slider {...settings}>
-          {products.map(
-            ({ title, images }) =>
-              isValidImage(images[0]) && (
-                <div key={nanoid()} className="px-1.5">
-                  <img
-                    src={images[1]}
-                    className="h-fit max-h-24 md:max-h-44 w-full rounded-md object-cover"
-                    alt={title}
-                  />
-                </div>
-              ),
-          )}
+          {products.map(({ title, images }) => (
+            <div key={nanoid()} className="px-1.5">
+              <img
+                src={images[1]}
+                className="h-fit max-h-24 w-full rounded-md object-cover md:max-h-44"
+                alt={title}
+              />
+            </div>
+          ))}
         </Slider>
       )}
     </div>
