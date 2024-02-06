@@ -2,11 +2,11 @@ import { ProductType } from "@/types/types.tsx";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from "axios";
 
-interface FetchFilterCategoryPayload {
+type FetchFilterCategoryPayload = {
   categoryId: string | null | undefined;
   lowestPr: number;
   highestPr: number;
-}
+};
 
 export const fetchFilterCategoryPrice = createAsyncThunk<
   ProductType[],

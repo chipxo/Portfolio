@@ -57,8 +57,8 @@ const ShoppingCart = () => {
       <div className="container py-4">
         {amount > 0 && <h2 className="pb-4">Total: {totalPrice}$</h2>}
 
-        {error && <ErrorMessage error={error} />}
         {loading && <SingleCardSkeleton />}
+        {error && <ErrorMessage error={error} />}
 
         <div className="grid place-items-center gap-4">
           {!loading && !error && amount > 0 ? (

@@ -70,9 +70,9 @@ const UserPannel: React.FC<UserPanelProps> = ({ isBurger = false }) => {
       className="fixed inset-0 right-0 top-0 z-[999] grid bg-black/40"
     >
       <m.div
-        initial={{ opacity: 0, x: 300 }}
-        animate={{ opacity: 1, x: 0 }}
-        exit={{ opacity: 0, x: 300 }}
+        initial={{ x: 300 }}
+        animate={{ x: 0 }}
+        exit={{ x: 300 }}
         transition={{ duration: 0.4, ease: "easeInOut" }}
         className="relative space-y-4 justify-self-end border-l bg-background bg-user-panel bg-cover bg-center bg-no-repeat p-4 max-sm:w-[72vw] md:w-[40vw] md:p-6 lg:w-[34vw]"
       >

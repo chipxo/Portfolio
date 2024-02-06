@@ -38,11 +38,7 @@ const SingleCard: React.FC<SingleCardType> = ({
   useEffect(() => {
     window.scrollTo(0, 0);
 
-    if (localStorage.getItem(`${prodId}`)) {
-      setChecked(true);
-    } else {
-      setChecked(false);
-    }
+    localStorage.getItem(`${prodId}`) ? setChecked(true) : setChecked(false);
   }, []);
 
   const handleAddBtn = () => {

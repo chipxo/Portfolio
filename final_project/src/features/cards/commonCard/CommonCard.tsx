@@ -33,11 +33,8 @@ const CommonCard: React.FC<CardProps> = ({
 
   useEffect(() => {
     const item = localStorage.getItem(`${id}`);
-    if (item) {
-      setChecked(true);
-    } else {
-      setChecked(false);
-    }
+
+    item ? setChecked(true) : setChecked(false);
   }, []);
 
   const handleAddBtn = (id: number, title: string) => {
@@ -62,9 +59,6 @@ const CommonCard: React.FC<CardProps> = ({
           alt={title}
         />
       </Link>
-
-      {/* <Skeleton className="h-[45%] w-full rounded-b-none bg-destructive-foreground" /> */}
-
       <CardHeader>
         {!isHome && (
           <Badge variant="outline" className="mb-2 w-fit">

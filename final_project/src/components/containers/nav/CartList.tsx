@@ -56,7 +56,7 @@ const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({
       onMouseLeave={() => setOpen(false)}
       onClick={() => setOpen(!open)}
     >
-      <Button className="relative" variant="ghost">
+      <Button className="relative" size="icon" variant="ghost">
         <span className="text-xl">{cartIcon}</span>
         <AnimatePresence>
           {amount > 0 && (
@@ -74,10 +74,10 @@ const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({
           <m.div
             {...mFLoatMenu}
             style={{ x: "-65%" }}
-            className="absolute top-12 -left-1/2"
+            className="absolute -left-1/2 top-12"
           >
             <div className="absolute -top-5 h-8 w-full bg-transparent" />
-            <div className="grid max-h-[44vh] w-max max-sm:max-w-[80vw] cursor-pointer gap-y-4 overflow-auto rounded-md border bg-background p-4">
+            <div className="grid max-h-[44vh] w-max cursor-pointer gap-y-4 overflow-auto rounded-md border bg-background p-4 max-sm:max-w-[80vw]">
               {amount > 0 && (
                 <NavLink to="/shoppingCart" onClick={() => setOpen(false)}>
                   <h2>Go to shopping cart {goToRightIcon}</h2>
@@ -85,10 +85,10 @@ const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({
               )}
               {loading && (
                 <div className="flex gap-4">
-                  <Skeleton className="w-16 mr-2 aspect-square bg-white" />
+                  <Skeleton className="mr-2 aspect-square w-16 bg-white" />
                   <div className="w-full max-w-64 space-y-2">
                     <Skeleton className="h-6 bg-white" />
-                    <Skeleton className="w-5 h-4 bg-white" />
+                    <Skeleton className="h-4 w-5 bg-white" />
                   </div>
                 </div>
               )}

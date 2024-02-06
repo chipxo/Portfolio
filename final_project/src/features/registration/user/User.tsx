@@ -24,11 +24,7 @@ const User = () => {
   const handleUserClick = () => {
     document.body?.setAttribute("class", "overflow-hidden md:mr-[15px]");
 
-    if (signedIn) {
-      dispatch(showUserPanel(true));
-    } else {
-      dispatch(showForm(true));
-    }
+    signedIn ? dispatch(showUserPanel(true)) : dispatch(showForm(true));
   };
 
   const [name, setName] = useState("");
@@ -51,6 +47,7 @@ const User = () => {
         ) : (
           <m.div {...mOpacity}>
             <Button
+              size="icon"
               variant="ghost"
               onClick={handleUserClick}
               className="relative z-[50] cursor-pointer"

@@ -42,10 +42,6 @@ const Home = () => {
   const firstPrs = amountOfProducts?.filter((_, i) => i < 10);
   const secondPrs = amountOfProducts?.filter((_, i) => i > 10);
 
-  const { userData } = useSelector((state: RootState) => state.register);
-
-  console.log(userData);
-
   return (
     <>
       {loading && <HomeLoading />}
@@ -63,7 +59,7 @@ const Home = () => {
             <h2 className="text-start text-xl md:text-2xl md:font-semibold">
               Best selling products:
             </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-home gap-4">
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-home">
               {!loading &&
                 !error &&
                 firstPrs?.map((product) => (
