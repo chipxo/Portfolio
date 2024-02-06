@@ -12,15 +12,15 @@ import { useAppDispatch } from "@/app/store";
 import { Input } from "@/components/ui/input.tsx";
 import { Label } from "@/components/ui/label.tsx";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group.tsx";
-import { FilterByFeature, ProductType } from "@/types/types";
+import { ClickType, ProductType } from "@/types/types";
 import {
   setHighestPr,
   setLowestPr,
 } from "../categoryProducts/categoryFilteredProducts/filteredProductsSlice";
 import { Button } from "@/components/ui/button";
-import React from "react";
+import { forwardRef } from "react";
 
-const ByPrice: React.FC<FilterByFeature> = ({ ref, onRefClick }) => {
+const ByPrice = forwardRef<HTMLButtonElement, ClickType>(({ onClick }, ref) => {
   const dispatch = useAppDispatch();
 
   const { products } = useSelector(
@@ -55,7 +55,7 @@ const ByPrice: React.FC<FilterByFeature> = ({ ref, onRefClick }) => {
   return (
     <Accordion type="single" collapsible>
       <AccordionItem value="item-2">
-        <AccordionTrigger ref={ref} onClick={onRefClick}>
+        <AccordionTrigger ref={ref} onClick={onClick}>
           By price
         </AccordionTrigger>
         <AccordionContent className="px-2 py-2">
@@ -109,6 +109,6 @@ const ByPrice: React.FC<FilterByFeature> = ({ ref, onRefClick }) => {
       </AccordionItem>
     </Accordion>
   );
-};
+});
 
 export default ByPrice;

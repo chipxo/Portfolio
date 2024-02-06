@@ -32,6 +32,7 @@ const FilterProducts = () => {
   useEffect(() => {
     dispatch(fetchFilterCategoryPrice({ lowestPr, highestPr, categoryId }));
   }, [lowestPr, highestPr, categoryId]);
+  console.log(byName.current);
 
   return (
     <Accordion type="single" collapsible className="mb-6">
@@ -42,16 +43,16 @@ const FilterProducts = () => {
         <AccordionContent className="px-2">
           <ByPrice
             ref={byPrice}
-            onRefClick={() => {
-              setSortByPrice((pr) => !pr);
+            onClick={() => {
+              setSortByPrice(!sortByPrice);
               sortByName && byName.current?.click();
             }}
           />
 
           <ByName
             ref={byName}
-            onRefClick={() => {
-              setSortByName((pr) => !pr);
+            onClick={() => {
+              setSortByName(!sortByName);
               sortByPrice && byPrice.current?.click();
             }}
           />

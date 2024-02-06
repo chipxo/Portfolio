@@ -19,7 +19,6 @@ export type CategoriesType = {
   image: string;
 };
 
-export type FilterByFeature = {
-  ref: React.RefObject<HTMLButtonElement>;
-  onRefClick: () => void;
+export type ClickType = {
+  onClick: () => void;
 };
