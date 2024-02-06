@@ -3,20 +3,24 @@ import { useAppDispatch } from "@/app/store";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { mOpacity } from "@/utils/motionSettings";
-import { motion as m } from "framer-motion";
-import React from "react";
+import { AnimatePresence, motion as m } from "framer-motion";
 import { useSelector } from "react-redux";
 import { showForm, showUserPanel } from "../registerSlice";
 import { cartUser } from "@/components/common/icons";
+import { useEffect, useState } from "react";
 
-type UsetAvatarProps = {
-  name: string;
-};
-
-const UserAvatar: React.FC<UsetAvatarProps> = ({ name }) => {
+const UserAvatar = () => {
   const dispatch = useAppDispatch();
 
-  const { signedIn } = useSelector((state: RootState) => state.register);
+  const { signedIn, userData } = useSelector(
+    (state: RootState) => state.register,
+  );
+
+  const [name, setName] = useState("");
+
+  useEffect(() => {
+    setName(userData?.name.slice(0, 1).toUpperCase() as string);
+  }, [userData]);
 
   const handleUserClick = () => {
     document.body?.setAttribute("class", "overflow-hidden md:mr-[15px]");
@@ -24,7 +28,7 @@ const UserAvatar: React.FC<UsetAvatarProps> = ({ name }) => {
   };
 
   return (
-    <>
+    <AnimatePresence>
       {signedIn ? (
         <m.div {...mOpacity}>
           <Avatar onClick={handleUserClick} className="cursor-pointer">
@@ -45,7 +49,7 @@ const UserAvatar: React.FC<UsetAvatarProps> = ({ name }) => {
           </Button>
         </m.div>
       )}
-    </>
+    </AnimatePresence>
   );
 };
 
