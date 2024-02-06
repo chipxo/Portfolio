@@ -1,6 +1,6 @@
-import User from "@/features/registration/user/User.tsx";
+import User from "@/features/registration/user/userComponents/User";
 import { ModeToggle } from "@/features/theme/mode-toggle.tsx";
-import ShoppingCartItem from "./CartList";
+import ShoppingCartItem from "./cartList/CartList";
 
 const AsideBar = () => {
   return (

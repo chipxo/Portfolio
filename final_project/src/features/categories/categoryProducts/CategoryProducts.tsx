@@ -11,10 +11,6 @@ import { nanoid } from "@reduxjs/toolkit";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import {
-  setHighestPr,
-  setLowestPr,
-} from "./categoryFilteredProducts/filteredProductsSlice";
 
 const CategoryProducts = () => {
   const dispatch = useAppDispatch();
@@ -43,8 +39,10 @@ const CategoryProducts = () => {
       <section>
         <div className="container min-h-[70vh] py-10">
           {error && <ErrorMessage error={error} />}
+
           <CategoriesLayout />
           <FilterCategories />
+
           <div className="grid grid-cols-2 gap-4 md:grid-cols-home">
             {!loading && !error && products && products.length > 0 ? (
               products.map((product) => (

@@ -2,14 +2,14 @@ import { RootState } from "@/app/rootReducer.tsx";
 import { useAppDispatch } from "@/app/store.tsx";
 import { setInputValue } from "@/features/searchBar/searchSlice";
 import { useSelector } from "react-redux";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { fetchSearchProducts } from "@/hooks/fetchSearch";
 import { mOpacity } from "@/utils/motionSettings";
 import { AnimatePresence, motion as m } from "framer-motion";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import SearchPage from "./SearchPage";
+import { useNavigate } from "react-router-dom";
+import SearchPage from "./searchPage/SearchPage";
+import SearchBtn from "./SearchBtn";
+import SearchInput from "./SearchInput";
 
 const Search = () => {
   const dispatch = useAppDispatch();
@@ -51,33 +51,16 @@ const Search = () => {
     dispatch(setInputValue(value));
   };
 
-  console.log(searchProducts);
-
   return (
     <div className="relative">
-      <Input
-        type="text"
-        name="search"
-        placeholder="Search..."
-        className="relative z-[200] w-full bg-background"
-        value={inputValue}
+      <SearchInput
         onChange={(e) => handleChange(e.target.value)}
         onFocus={() => setOpen(true)}
         onBlur={() => setOpen(false)}
       />
 
-      <AnimatePresence>
-        {open && (
-          <m.div
-            {...mOpacity}
-            className="absolute right-0 top-0 z-[200] scale-75"
-          >
-            <Link to="/searchResults">
-              <Button variant="default">Search</Button>
-            </Link>
-          </m.div>
-        )}
-      </AnimatePresence>
+      <AnimatePresence>{open && <SearchBtn />}</AnimatePresence>
+
       <AnimatePresence>
         {open && (
           <>

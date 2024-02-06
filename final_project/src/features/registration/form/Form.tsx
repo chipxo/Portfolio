@@ -1,11 +1,10 @@
 import { RootState } from "@/app/rootReducer.tsx";
 import { useAppDispatch } from "@/app/store.tsx";
-import { closeIcon, showPasswordIcon } from "@/components/common/icons.tsx";
+import { showPasswordIcon } from "@/components/common/icons.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { Input } from "@/components/ui/input.tsx";
 import { setAlertText, showAlert } from "@/features/alert/alertSlice.tsx";
 import {
-  setRegistered,
   setSignedIn,
   showForm,
 } from "@/features/registration/registerSlice.tsx";
@@ -17,6 +16,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { twJoin } from "tailwind-merge";
 import { z } from "zod";
+import FormHeader from "./FormHeader";
 
 const signUpSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
@@ -108,11 +108,6 @@ const Form = () => {
     }, 1000);
   };
 
-  const handleCloseForm = () => {
-    document.body?.removeAttribute("class");
-    dispatch(showForm(false));
-  };
-
   return (
     <>
       <m.div
@@ -120,38 +115,7 @@ const Form = () => {
         className="fixed inset-0 z-[200] grid items-center bg-black/70 px-4"
       >
         <div className="relative left-1/2 -translate-x-1/2 rounded-md bg-background max-md:container md:max-w-[45vw] xl:max-w-[35vw]">
-          <div className="relative grid grid-cols-2 justify-items-center lg:gap-x-12 border-b px-8 py-2">
-            {/* Buttons for switch between Sign in and Register */}
-            <Button
-              onClick={() => {
-                reset();
-                dispatch(setRegistered(true));
-              }}
-              variant={alreadyRegistered ? "default" : "outline"}
-              className=""
-            >
-              Sign in
-            </Button>
-            <Button
-              onClick={() => {
-                reset();
-                dispatch(setRegistered(false));
-              }}
-              variant={!alreadyRegistered ? "default" : "outline"}
-              className=""
-            >
-              Register
-            </Button>
-
-            {/* Close the form */}
-            <Button
-              onClick={handleCloseForm}
-              variant="outline"
-              className="absolute -right-2 md:right-2 top-2 max-sm:bg-transparent max-sm:border-none"
-            >
-              {closeIcon}
-            </Button>
-          </div>
+          <FormHeader reset={reset} />
 
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid gap-y-14 border-b px-6 py-8">
