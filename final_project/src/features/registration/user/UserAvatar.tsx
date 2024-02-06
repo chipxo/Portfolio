@@ -6,7 +6,7 @@ import { mOpacity } from "@/utils/motionSettings";
 import { motion as m } from "framer-motion";
 import React from "react";
 import { useSelector } from "react-redux";
-import { showForm, showUserPanel } from "../../registerSlice";
+import { showForm, showUserPanel } from "../registerSlice";
 import { cartUser } from "@/components/common/icons";
 
 type UsetAvatarProps = {

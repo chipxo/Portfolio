@@ -18,3 +18,8 @@ export type CategoriesType = {
   name: string;
   image: string;
 };
+
+export type FilterByFeature = {
+  ref: React.RefObject<HTMLButtonElement>;
+  onRefClick: () => void;
+};

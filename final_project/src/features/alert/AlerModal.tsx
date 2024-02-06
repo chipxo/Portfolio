@@ -18,22 +18,20 @@ const AlertModal = () => {
   }, [openAlert]);
 
   return (
-    <>
-      <AnimatePresence>
-        {openAlert && (
-          <m.div
-            initial={{ opacity: 0, y: -66 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -66 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          >
-            <Alert>
-              <AlertTitle>{text}</AlertTitle>
-            </Alert>
-          </m.div>
-        )}
-      </AnimatePresence>
-    </>
+    <AnimatePresence>
+      {openAlert && (
+        <m.div
+          initial={{ opacity: 0, y: -66 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -66 }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+        >
+          <Alert>
+            <AlertTitle>{text}</AlertTitle>
+          </Alert>
+        </m.div>
+      )}
+    </AnimatePresence>
   );
 };
 

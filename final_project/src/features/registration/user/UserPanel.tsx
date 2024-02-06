@@ -13,9 +13,9 @@ import { mOpacity } from "@/utils/motionSettings.tsx";
 import { AnimatePresence, motion as m } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import Form from "../../form/Form.tsx";
+import Form from "../form/Form.tsx";
 import PanelTitle from "./PanelTitle.tsx";
-import BtnRegisSign from "../buttons/BtnRegisSign.tsx";
+import BtnRegisSign from "./BtnRegisSign.tsx";
 
 type UserPanelProps = {
   isBurger?: boolean;

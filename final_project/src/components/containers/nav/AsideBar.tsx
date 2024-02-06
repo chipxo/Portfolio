@@ -1,4 +1,4 @@
-import User from "@/features/registration/user/userComponents/User";
+import User from "@/features/registration/user/User";
 import { ModeToggle } from "@/features/theme/mode-toggle.tsx";
 import ShoppingCartItem from "./cartList/CartList";
 

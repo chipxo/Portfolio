@@ -20,9 +20,11 @@ const CategoriesNav: React.FC<CategoriesProps> = ({ categories }) => {
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      <h2 className="flex cursor-pointer items-center gap-x-3 text-lg">
-        Categories
-      </h2>
+      <Button variant="ghost">
+        <h2 className="flex cursor-pointer items-center gap-x-3 text-lg">
+          Categories
+        </h2>
+      </Button>
       <AnimatePresence>
         {open && (
           <m.div
@@ -30,7 +32,7 @@ const CategoriesNav: React.FC<CategoriesProps> = ({ categories }) => {
             style={{ x: "-50%" }}
             className="absolute left-1/2 top-10  rounded-md border bg-background"
           >
-            <div className="absolute -top-6 z-[9999] h-8 w-full bg-transparent" />
+            <div className="absolute -top-3 z-[9999] h-4 w-full bg-transparent" />
             <div className="grid max-h-[60vh] cursor-pointer gap-y-4 overflow-auto rounded-md p-4">
               <div className="border-b lg:border-none">
                 <div className="text-md grid grid-cols-filterLayout gap-x-4 gap-y-4 font-Merriweather max-lg:container lg:gap-y-4">

@@ -5,7 +5,7 @@ import {
   showUserPanel,
 } from "@/features/registration/registerSlice";
 import Form from "@/features/registration/form/Form";
-import UserPannel from "@/features/registration/user/userComponents/UserPanel";
+import UserPannel from "@/features/registration/user/UserPanel";
 import { AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";

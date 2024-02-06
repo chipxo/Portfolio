@@ -5,7 +5,7 @@ import NoProducts from "@/components/common/NoProducts";
 import CardSkeleton from "@/features/cards/commonCard/CardSkeleton";
 import CommonCard from "@/features/cards/commonCard/CommonCard";
 import CategoriesLayout from "@/features/categories/CategoriesLayout.tsx";
-import FilterCategories from "@/features/categories/FilterCategories.tsx";
+import FilterProducts from "@/features/categories/filterProducts/FilterProducts";
 import { fetchCategoryProducts } from "@/hooks/fetchCategoryProducts.tsx";
 import { nanoid } from "@reduxjs/toolkit";
 import { useEffect } from "react";
@@ -41,7 +41,7 @@ const CategoryProducts = () => {
           {error && <ErrorMessage error={error} />}
 
           <CategoriesLayout />
-          <FilterCategories />
+          <FilterProducts />
 
           <div className="grid grid-cols-2 gap-4 md:grid-cols-home">
             {!loading && !error && products && products.length > 0 ? (

@@ -15,7 +15,7 @@ const AmountBadge = () => {
       <AnimatePresence>
         {amount > 0 && (
           <m.div {...mOpacity}>
-            <Badge className="absolute -top-1 right-0" variant="default">
+            <Badge className="absolute -right-2 -top-1" variant="default">
               {amount}
             </Badge>
           </m.div>

@@ -109,89 +109,85 @@ const Form = () => {
   };
 
   return (
-    <>
-      <m.div
-        {...mOpacity}
-        className="fixed inset-0 z-[200] grid items-center bg-black/70 px-4"
-      >
-        <div className="relative left-1/2 -translate-x-1/2 rounded-md bg-background max-md:container md:max-w-[45vw] xl:max-w-[35vw]">
-          <FormHeader reset={reset} />
+    <m.div
+      {...mOpacity}
+      className="fixed inset-0 z-[200] grid items-center bg-black/70 px-4"
+    >
+      <div className="relative left-1/2 -translate-x-1/2 rounded-md bg-background max-md:container md:max-w-[45vw] xl:max-w-[35vw]">
+        <FormHeader reset={reset} />
 
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="grid gap-y-14 border-b px-6 py-8">
-              <label htmlFor="name" className="relative">
-                <span className="absolute -top-6 text-sm opacity-60">Name</span>
-                <Input
-                  {...register("name")}
-                  type="text"
-                  name="name"
-                  id="name"
-                  className={twJoin(
-                    "w-full rounded-md border bg-transparent p-2",
-                    errors.name ? "border-red-600" : "border-neutral",
-                  )}
-                />
-                {errors.name && (
-                  <p className="absolute top-11 text-red-600">{`${errors.name.message}`}</p>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="grid gap-y-14 border-b px-6 py-8">
+            <label htmlFor="name" className="relative">
+              <span className="absolute -top-6 text-sm opacity-60">Name</span>
+              <Input
+                {...register("name")}
+                type="text"
+                name="name"
+                id="name"
+                className={twJoin(
+                  "w-full rounded-md border bg-transparent p-2",
+                  errors.name ? "border-red-600" : "border-neutral",
                 )}
-              </label>
-              <label htmlFor="email" className="relative">
-                <span className="absolute -top-6 text-sm opacity-60">
-                  Email
-                </span>
-                <Input
-                  {...register("email")}
-                  type="text"
-                  name="email"
-                  id="email"
-                  className={twJoin(
-                    "w-full rounded-md border bg-transparent p-2",
-                    errors.email ? "border-red-600" : "border-neutral",
-                  )}
-                />
-                {errors.email && (
-                  <p className="absolute top-11 text-red-600">{`${errors.email.message}`}</p>
+              />
+              {errors.name && (
+                <p className="absolute top-11 text-red-600">{`${errors.name.message}`}</p>
+              )}
+            </label>
+            <label htmlFor="email" className="relative">
+              <span className="absolute -top-6 text-sm opacity-60">Email</span>
+              <Input
+                {...register("email")}
+                type="text"
+                name="email"
+                id="email"
+                className={twJoin(
+                  "w-full rounded-md border bg-transparent p-2",
+                  errors.email ? "border-red-600" : "border-neutral",
                 )}
-              </label>
-              <label htmlFor="password" className="relative">
-                <span className="absolute -top-6 text-sm opacity-60">
-                  Password
-                </span>
-                <Input
-                  {...register("password")}
-                  type={`${showPassword ? "text" : "password"}`}
-                  name="password"
-                  id="password"
-                  className={twJoin(
-                    "w-full rounded-md border bg-transparent p-2",
-                    errors.password ? "border-red-600" : "border-neutral",
-                  )}
-                />
+              />
+              {errors.email && (
+                <p className="absolute top-11 text-red-600">{`${errors.email.message}`}</p>
+              )}
+            </label>
+            <label htmlFor="password" className="relative">
+              <span className="absolute -top-6 text-sm opacity-60">
+                Password
+              </span>
+              <Input
+                {...register("password")}
+                type={`${showPassword ? "text" : "password"}`}
+                name="password"
+                id="password"
+                className={twJoin(
+                  "w-full rounded-md border bg-transparent p-2",
+                  errors.password ? "border-red-600" : "border-neutral",
+                )}
+              />
 
-                {/* Icon to show/hide password  */}
-                <span
-                  onClick={() => setShowPassword(!showPassword)}
-                  className={twJoin(
-                    "absolute right-2 top-2 cursor-pointer",
-                    !showPassword &&
-                      "before:bg-base-300 opacity-30 before:absolute before:top-[10px] before:h-[2px] before:w-5 before:-rotate-45",
-                  )}
-                >
-                  {showPasswordIcon}
-                </span>
-                {errors.password && (
-                  <p className="absolute top-11 text-red-600">{`${errors.password.message}`}</p>
+              {/* Icon to show/hide password  */}
+              <span
+                onClick={() => setShowPassword(!showPassword)}
+                className={twJoin(
+                  "absolute right-2 top-2 cursor-pointer",
+                  !showPassword &&
+                    "before:bg-base-300 opacity-30 before:absolute before:top-[10px] before:h-[2px] before:w-5 before:-rotate-45",
                 )}
-              </label>
-            </div>
-            <div className="grid gap-4 px-6 py-4 text-sm">
-              {/* Submitting button */}
-              <Button>{alreadyRegistered ? "Sign in" : "Register"}</Button>
-            </div>
-          </form>
-        </div>
-      </m.div>
-    </>
+              >
+                {showPasswordIcon}
+              </span>
+              {errors.password && (
+                <p className="absolute top-11 text-red-600">{`${errors.password.message}`}</p>
+              )}
+            </label>
+          </div>
+          <div className="grid gap-4 px-6 py-4 text-sm">
+            {/* Submitting button */}
+            <Button>{alreadyRegistered ? "Sign in" : "Register"}</Button>
+          </div>
+        </form>
+      </div>
+    </m.div>
   );
 };
 

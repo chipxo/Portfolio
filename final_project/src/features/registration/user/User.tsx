@@ -3,7 +3,7 @@ import AlertModal from "@/features/alert/AlerModal.tsx";
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import Form from "../../form/Form.tsx";
+import Form from "../form/Form.tsx";
 import UserPannel from "./UserPanel.tsx";
 import UserAvatar from "./UserAvatar.tsx";
 
