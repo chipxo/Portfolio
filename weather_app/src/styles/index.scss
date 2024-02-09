@@ -27,19 +27,20 @@
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 206.9 100% 6.06%;
     --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
+    --card: 206.9 100% 10.06%;
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
+    --primary: 195.07 100% 42.94%;
     --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: 169.05 66.07% 56.08%;
     --secondary-foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
+    --accent: 169.05 66.07% 56.08%;
+    // --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
@@ -68,3 +69,7 @@
 // span {
 //   @apply lg:text-md text-sm;
 // }
+
+.inner-shadow {
+  box-shadow: 0 0 10px 10px rgba($color: #000000, $alpha: 0.4) inset;
+}

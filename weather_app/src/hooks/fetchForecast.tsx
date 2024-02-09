@@ -1,15 +1,15 @@
-import { API_KEY, BASE_URL, CURRENT } from "@/api/api";
-import { WeatherResponse } from "@/types/types";
+import { API_KEY, BASE_URL, DAYS5, FORECAST } from "@/api/api";
+import { Forecast } from "@/types/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from "axios";
 
-const fetchCurWeath = createAsyncThunk(
-  "curWeath/fetchCurWeath",
+const fetchForecast = createAsyncThunk(
+  "forecast/fetchForecast",
   async (city: string) => {
     try {
-      const url = `${BASE_URL}${CURRENT}${API_KEY}&q=${city}`;
+      const url = `${BASE_URL}${FORECAST}${API_KEY}&q=${city}${DAYS5}`;
 
-      const { data }: AxiosResponse<WeatherResponse> = await axios.get(url);
+      const { data }: AxiosResponse<Forecast> = await axios.get(url);
 
       return data;
     } catch (e) {
@@ -23,4 +23,4 @@ const fetchCurWeath = createAsyncThunk(
   },
 );
 
-export default fetchCurWeath;
+export default fetchForecast;

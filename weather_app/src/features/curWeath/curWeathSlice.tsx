@@ -20,7 +20,7 @@ const curWeathSlice = createSlice({
   name: "curWeath",
   initialState,
   reducers: {
-    setSity: (state, action: PayloadAction<string>) => {
+    setCity: (state, action: PayloadAction<string>) => {
       state.city = action.payload;
     },
   },
@@ -34,8 +34,8 @@ const curWeathSlice = createSlice({
         fetchCurWeath.fulfilled,
         (state, action: PayloadAction<WeatherResponse | undefined>) => {
           state.loading = false;
-          state.weather = action.payload;
           state.error = null;
+          state.weather = action.payload;
         },
       )
       .addCase(
@@ -48,6 +48,6 @@ const curWeathSlice = createSlice({
   },
 });
 
-export const { setSity } = curWeathSlice.actions;
+export const { setCity } = curWeathSlice.actions;
 
 export default curWeathSlice.reducer;

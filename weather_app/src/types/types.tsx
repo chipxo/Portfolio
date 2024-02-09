@@ -49,7 +49,7 @@ type Astro = {
   is_sun_up: number;
 };
 
-type Hour = {
+export type Hour = {
   time_epoch: number;
   time: string;
   temp_c: number;
@@ -88,16 +88,12 @@ type Hour = {
   diff_rad: number;
 };
 
-type ForecastDay = {
+export type ForecastDay = {
   date: string;
   date_epoch: number;
   day: Day;
   astro: Astro;
   hour: Hour[];
-};
-
-export type Forecast = {
-  forecastday: ForecastDay[];
 };
 
 type CurrentWeather = {
@@ -129,4 +125,12 @@ type CurrentWeather = {
 export type WeatherResponse = {
   location: Location;
   current: CurrentWeather;
+};
+
+export type Forecast = {
+  current: CurrentWeather;
+  forecast: {
+    forecastday: ForecastDay[];
+  };
+  location: Location;
 };

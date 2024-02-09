@@ -20,6 +20,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "dotenv": "^16.4.1",
+    "embla-carousel-react": "8.0.0-rc22",
     "framer-motion": "^11.0.3",
     "lucide-react": "^0.323.0",
     "postcss": "^8.4.35",
