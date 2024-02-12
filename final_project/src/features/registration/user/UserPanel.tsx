@@ -5,7 +5,6 @@ import { closeIcon } from "@/components/common/icons.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import {
   setSignedIn,
-  setUserData,
   showUserPanel,
 } from "@/features/registration/registerSlice.tsx";
 import { ModeToggle } from "@/features/theme/mode-toggle.tsx";
@@ -23,7 +22,7 @@ type UserPanelProps = {
 
 const UserPannel: React.FC<UserPanelProps> = ({ isBurger = false }) => {
   const dispatch = useAppDispatch();
-  const { userData, openForm, signedIn } = useSelector(
+  const { openForm, signedIn } = useSelector(
     (state: RootState) => state.register,
   );
 
@@ -34,7 +33,7 @@ const UserPannel: React.FC<UserPanelProps> = ({ isBurger = false }) => {
 
     if (userDataString !== null) {
       const userDataFromStorage = JSON.parse(userDataString);
-      dispatch(setUserData(userDataFromStorage));
+      // dispatch(setUserData(userDataFromStorage));
     }
   }, [dispatch]);
 
@@ -50,7 +49,7 @@ const UserPannel: React.FC<UserPanelProps> = ({ isBurger = false }) => {
 
   const handleDeleteAcc = () => {
     localStorage.removeItem("userData");
-    localStorage.removeItem(`user-${userData?.email}`);
+    // localStorage.removeItem(`user-${userData?.email}`);
     localStorage.removeItem("signedIn");
     dispatch(showUserPanel(false));
 

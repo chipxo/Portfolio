@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button.tsx";
 import { Input } from "@/components/ui/input.tsx";
 import { setAlertText, showAlert } from "@/features/alert/alertSlice.tsx";
 import {
+  setRegistered,
   setSignedIn,
   showForm,
 } from "@/features/registration/registerSlice.tsx";
@@ -17,6 +18,8 @@ import { useSelector } from "react-redux";
 import { twJoin } from "tailwind-merge";
 import { z } from "zod";
 import FormHeader from "./FormHeader";
+import signIn from "@/hooks/signIn";
+import registerUser from "@/hooks/registerUser";
 
 const signUpSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
@@ -32,7 +35,7 @@ type TSignUpSchema = z.infer<typeof signUpSchema>;
 const Form = () => {
   const dispatch = useAppDispatch();
 
-  const { alreadyRegistered } = useSelector(
+  const { alreadyRegistered, loading, error } = useSelector(
     (state: RootState) => state.register,
   );
 
@@ -47,64 +50,107 @@ const Form = () => {
     resolver: zodResolver(signUpSchema),
   });
 
+  // const onSubmit: SubmitHandler<TSignUpSchema> = ({
+  //   name,
+  //   email,
+  //   password,
+  // }) => {
+  //   const userDataString = localStorage.getItem(`user-${email}`);
+  //   const userExist = userDataString ? JSON.parse(userDataString) : null;
+
+  //   setTimeout(() => {
+  //     if (alreadyRegistered) {
+  //       if (userExist && userExist.password === password) {
+  //         // if user exists and pass the right password, it makes him signed in, close the form and give the access
+  //         // to user panel
+
+  //         localStorage.setItem("signedIn", JSON.stringify("true"));
+
+  //         dispatch(setSignedIn(true));
+
+  //         dispatch(showForm(false));
+  //         document.body?.removeAttribute("class");
+
+  //         dispatch(setAlertText("You successfully signed in!"));
+  //         dispatch(showAlert(true));
+  //       } else if (userExist && userExist.password !== password) {
+  //         //if user pass wrong password = alert wrong password and reset the form
+
+  //         dispatch(setAlertText("Wrong password, try again!"));
+  //         dispatch(showAlert(true));
+  //       } else {
+  //         //if user pass wrong email
+
+  //         dispatch(setAlertText("User doesnt exist, try again!"));
+  //         dispatch(showAlert(true));
+  //       }
+  //     } else {
+  //       if (userExist) {
+  //         //if user try to registrate with existing email
+
+  //         dispatch(setAlertText("User already exist, try again!"));
+  //         dispatch(showAlert(true));
+  //       } else {
+  //         //if user successfully registrated
+
+  //         localStorage.setItem(
+  //           `user-${email}`,
+  //           JSON.stringify({ name, email, password }),
+  //         );
+
+  //         localStorage.setItem("userData", JSON.stringify({ name, email }));
+
+  //         dispatch(showForm(false));
+  //         document.body?.removeAttribute("class");
+
+  //         dispatch(setAlertText("You successfully registered!"));
+  //         dispatch(showAlert(true));
+  //       }
+  //     }
+  //     reset();
+  //   }, 1000);
+  // };
   const onSubmit: SubmitHandler<TSignUpSchema> = ({
     name,
     email,
     password,
   }) => {
-    const userDataString = localStorage.getItem(`user-${email}`);
-    const userExist = userDataString ? JSON.parse(userDataString) : null;
-
+    const userEmail = localStorage.getItem(`${email}`);
     setTimeout(() => {
       if (alreadyRegistered) {
-        if (userExist && userExist.password === password) {
-          // if user exists and pass the right password, it makes him signed in, close the form and give the access
-          // to user panel
+        dispatch(signIn({ email, password }));
 
-          localStorage.setItem("signedIn", JSON.stringify("true"));
-
-          dispatch(setSignedIn(true));
-
+        if (!error) {
           dispatch(showForm(false));
-          document.body?.removeAttribute("class");
-
+          dispatch(setSignedIn(true));
           dispatch(setAlertText("You successfully signed in!"));
           dispatch(showAlert(true));
-        } else if (userExist && userExist.password !== password) {
-          //if user pass wrong password = alert wrong password and reset the form
-
-          dispatch(setAlertText("Wrong password, try again!"));
-          dispatch(showAlert(true));
+          localStorage.setItem("signedIn", "true");
         } else {
-          //if user pass wrong email
-
-          dispatch(setAlertText("User doesnt exist, try again!"));
+          dispatch(setAlertText("User doesnt exist, try again"));
           dispatch(showAlert(true));
         }
       } else {
-        if (userExist) {
-          //if user try to registrate with existing email
+        if (!userEmail) {
+          dispatch(registerUser({ name, email, password }));
+          reset();
 
-          dispatch(setAlertText("User already exist, try again!"));
-          dispatch(showAlert(true));
+          if (!error) {
+            dispatch(setRegistered(true));
+            dispatch(setAlertText("You successfully registered!"));
+            dispatch(showAlert(true));
+            dispatch(showForm(false));
+            localStorage.setItem(`${email}`, `${name}`);
+          } else {
+            dispatch(setAlertText("Error, try again!"));
+            dispatch(showAlert(true));
+          }
         } else {
-          //if user successfully registrated
-
-          localStorage.setItem(
-            `user-${email}`,
-            JSON.stringify({ name, email, password }),
-          );
-
-          localStorage.setItem("userData", JSON.stringify({ name, email }));
-
-          dispatch(showForm(false));
-          document.body?.removeAttribute("class");
-
-          dispatch(setAlertText("You successfully registered!"));
+          reset();
+          dispatch(setAlertText("User is already registered!"));
           dispatch(showAlert(true));
         }
       }
-      reset();
     }, 1000);
   };
 

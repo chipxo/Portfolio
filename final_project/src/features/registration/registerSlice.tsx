@@ -1,16 +1,16 @@
+import register from "@/hooks/registerUser";
+import signIn from "@/hooks/signIn";
+import { User } from "@/types/types";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-
-type UserData = {
-  name: string;
-  email: string;
-};
 
 type InitialState = {
   alreadyRegistered: boolean;
   signedIn: boolean;
   openForm: boolean;
   openUserPanel: boolean;
-  userData: UserData | null;
+  data: User | null;
+  loading: boolean;
+  error: string | {} | null;
 };
 
 const initialState: InitialState = {
@@ -18,7 +18,9 @@ const initialState: InitialState = {
   signedIn: false,
   openForm: false,
   openUserPanel: false,
-  userData: null,
+  data: null,
+  loading: false,
+  error: null,
 };
 
 const registerSlice = createSlice({
@@ -37,18 +39,39 @@ const registerSlice = createSlice({
     showUserPanel: (state, action: PayloadAction<boolean>) => {
       state.openUserPanel = action.payload;
     },
-    setUserData: (state, action: PayloadAction<UserData>) => {
-      state.userData = action.payload;
-    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(register.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(register.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+
+        state.data = action.payload;
+      })
+      .addCase(register.rejected, (state, action) => {
+        state.error = action.payload ?? "Fetch failed";
+        state.loading = false;
+      })
+      .addCase(signIn.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(signIn.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(signIn.rejected, (state, action) => {
+        state.error = action.payload ?? "Fetch failed";
+        state.loading = false;
+      });
   },
 });
 
-export const {
-  setRegistered,
-  setSignedIn,
-  showForm,
-  showUserPanel,
-  setUserData,
-} = registerSlice.actions;
+export const { setRegistered, setSignedIn, showForm, showUserPanel } =
+  registerSlice.actions;
 
 export default registerSlice.reducer;

@@ -1,9 +1,6 @@
 import { RootState } from "@/app/rootReducer";
 import { useAppDispatch } from "@/app/store";
-import {
-  setUserData,
-  showUserPanel,
-} from "@/features/registration/registerSlice";
+import { showUserPanel } from "@/features/registration/registerSlice";
 import Form from "@/features/registration/form/Form";
 import UserPannel from "@/features/registration/user/UserPanel";
 import { AnimatePresence } from "framer-motion";
@@ -22,7 +19,7 @@ const BurgerBar = () => {
 
     if (userDataString !== null) {
       const userDataFromStorage = JSON.parse(userDataString);
-      dispatch(setUserData(userDataFromStorage));
+      // dispatch(setUserData(userDataFromStorage));
     }
   }, [dispatch]);
 

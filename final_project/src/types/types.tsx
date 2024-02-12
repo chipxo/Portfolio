@@ -22,3 +22,5 @@ export type CategoriesType = {
 export type ClickType = {
   onClick: () => void;
 };
+
+export type User = Record<string, string | number>;
