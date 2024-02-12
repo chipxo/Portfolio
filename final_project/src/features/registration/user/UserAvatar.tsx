@@ -12,15 +12,13 @@ import { useEffect, useState } from "react";
 const UserAvatar = () => {
   const dispatch = useAppDispatch();
 
-  const { signedIn, userData } = useSelector(
-    (state: RootState) => state.register,
-  );
+  const { signedIn } = useSelector((state: RootState) => state.register);
 
   const [name, setName] = useState("");
 
-  useEffect(() => {
-    setName(userData?.name.slice(0, 1).toUpperCase() as string);
-  }, [userData]);
+  // useEffect(() => {
+  //   setName(userData?.name.slice(0, 1).toUpperCase() as string);
+  // }, [userData]);
 
   const handleUserClick = () => {
     document.body?.setAttribute("class", "overflow-hidden md:mr-[15px]");

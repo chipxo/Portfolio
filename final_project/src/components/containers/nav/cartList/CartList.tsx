@@ -76,7 +76,9 @@ const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({
 
               {!loading &&
                 !error &&
-                items?.map((item) => <CartListItem key={nanoid()} {...item} />)}
+                items?.map(
+                  (item) => !!item && <CartListItem key={nanoid()} {...item} />,
+                )}
             </div>
           </m.div>
         ) : (
