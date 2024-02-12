@@ -11,6 +11,7 @@ import { nanoid } from "@reduxjs/toolkit";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import CategoriesSkeleton from "../CategoriesSkeleton";
 
 const CategoryProducts = () => {
   const dispatch = useAppDispatch();
@@ -28,33 +29,41 @@ const CategoryProducts = () => {
   }, [dispatch, categoryId]);
 
   return (
-    <>
+    <section>
       {loading && (
-        <div className="container grid grid-cols-2 gap-4 md:grid-cols-home">
-          {"qwer".split("").map((_) => (
-            <CardSkeleton key={nanoid()} />
-          ))}
-        </div>
-      )}
-      <section>
-        <div className="container min-h-[70vh] py-10">
-          {error && <ErrorMessage error={error} />}
-
-          <CategoriesLayout />
-          <FilterProducts />
-
+        <div className="container my-8">
+          <CategoriesSkeleton />
+          <div className="lg:hidden">
+            <CategoriesSkeleton />
+          </div>
           <div className="grid grid-cols-2 gap-4 md:grid-cols-home">
-            {!loading && !error && products && products.length > 0 ? (
-              products.map((product) => (
-                <CommonCard key={nanoid()} {...product} />
-              ))
-            ) : (
-              <NoProducts />
-            )}
+            {"qwer".split("").map((_) => (
+              <CardSkeleton key={nanoid()} />
+            ))}
           </div>
         </div>
-      </section>
-    </>
+      )}
+      <div className="container min-h-[70vh] py-10">
+        {error && <ErrorMessage error={error} />}
+
+        {!loading && !error && (
+          <>
+            <CategoriesLayout />
+            <FilterProducts />
+          </>
+        )}
+
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-home">
+          {!loading && !error && products && products.length > 0 ? (
+            products.map((product) => (
+              <CommonCard key={nanoid()} {...product} />
+            ))
+          ) : (
+            <NoProducts />
+          )}
+        </div>
+      </div>
+    </section>
   );
 };
 
