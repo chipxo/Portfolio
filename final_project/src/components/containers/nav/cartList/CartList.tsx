@@ -2,7 +2,6 @@ import { RootState } from "@/app/rootReducer.tsx";
 import { useAppDispatch } from "@/app/store.tsx";
 import ErrorMessage from "@/components/common/ErrorMessage";
 import { setAmount } from "@/features/amount/amountSlice";
-import { fetchProducts } from "@/hooks/fetchProducts";
 import { ProductType } from "@/types/types";
 import { mFLoatMenu } from "@/utils/motionSettings";
 import { AnimatePresence, motion as m } from "framer-motion";
@@ -22,8 +21,6 @@ type ShoppingCartItemProps = {
 const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({
   isBurger = false,
 }) => {
-  const [open, setOpen] = useState(false);
-
   const dispatch = useAppDispatch();
 
   const { amount } = useSelector((state: RootState) => state.amount);
@@ -32,19 +29,17 @@ const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({
     (state: RootState) => state.products,
   );
 
+  const [open, setOpen] = useState(false);
+
   const localStorageKeys = Object.keys(localStorage);
 
   const items = localStorageKeys.map((itemId) => {
-    const myCards = products?.find(
-      (product) => product.id === parseFloat(itemId),
-    );
+    const myCards = products?.find(({ id }) => id === parseFloat(itemId));
 
     return myCards as ProductType;
   });
 
   useEffect(() => {
-    dispatch(fetchProducts());
-
     const allKeys = Object.keys(localStorage);
 
     const numberKeys = allKeys.filter((key) => !isNaN(Number(key)));
@@ -69,9 +64,10 @@ const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({
           >
             <div className="absolute -top-5 h-8 w-full bg-transparent" />
             <div className="grid max-h-[44vh] w-max cursor-pointer gap-y-4 overflow-auto rounded-md border bg-background p-4 max-sm:max-w-[80vw]">
-              {amount > 0 && <ToShoppingCart onClick={() => setOpen(false)} />}
+              <ToShoppingCart onClick={() => setOpen(false)} />
 
-              {loading && <CartListSkeleton />}
+              {loading &&
+                "qw".split("").map((char) => <CartListSkeleton key={char} />)}
               {error && <ErrorMessage error={error} />}
 
               {!loading &&

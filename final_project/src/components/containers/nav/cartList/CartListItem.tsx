@@ -1,17 +1,15 @@
 import { ProductType } from "@/types/types";
 import React from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-const CartListItem: React.FC<ProductType> = ({ id, images, title, price }) => {
+const CartListItem: React.FC<ProductType> = ({ images, title, price }) => {
   return (
-    <div key={id} className="grid grid-cols-[50px_1fr] items-center gap-x-8">
-      <div className="h-16 w-16">
-        <img
-          src={images?.[0]}
-          alt={title}
-          className="rounded-sm object-contain"
-        />
-      </div>
-      <div className="">
+    <div className="flex items-center gap-x-8">
+      <Avatar>
+        <AvatarImage src={images?.[0]} />
+        <AvatarFallback>{title.slice(0, 1).toUpperCase()}</AvatarFallback>
+      </Avatar>
+      <div>
         <h2 className="text-lg font-semibold">{title}</h2>
         <p>{price}$</p>
       </div>

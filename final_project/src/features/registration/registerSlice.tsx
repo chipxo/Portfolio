@@ -3,6 +3,11 @@ import signIn from "@/hooks/signIn";
 import { User } from "@/types/types";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
+type Error = {
+  message: string;
+  statusCode: number;
+};
+
 type InitialState = {
   alreadyRegistered: boolean;
   signedIn: boolean;
@@ -10,7 +15,7 @@ type InitialState = {
   openUserPanel: boolean;
   data: User | null;
   loading: boolean;
-  error: string | {} | null;
+  error: {} | Error | null;
 };
 
 const initialState: InitialState = {
@@ -58,14 +63,14 @@ const registerSlice = createSlice({
       })
       .addCase(signIn.pending, (state) => {
         state.loading = true;
-        state.error = null;
       })
       .addCase(signIn.fulfilled, (state, action) => {
         state.loading = false;
-        state.error = null;
+        state.data = action.payload;
+        state.error = action.payload === undefined && true;
       })
       .addCase(signIn.rejected, (state, action) => {
-        state.error = action.payload ?? "Fetch failed";
+        state.error = (action.payload as Error) ?? "Fetch failed";
         state.loading = false;
       });
   },

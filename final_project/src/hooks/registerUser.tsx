@@ -12,9 +12,9 @@ const registerUser = createAsyncThunk(
         name: name,
         email: email,
         password: password,
-        avatar:
-          "https://www.google.com/url?sa=i&url=https%3A%2F%2Fcentrechurch.org%2Fabout%2Fimg-person-placeholder%2F&psig=AOvVaw0EHIXNpmsv8kXHkTdh6NRn&ust=1707819833135000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCKD78-XKpYQDFQAAAAAdAAAAABAE",
+        avatar: "https://picsum.photos/800"
       };
+      
       const { data } = await axios.post(url, userData, {
         headers: {
           "Content-type": "application/json",

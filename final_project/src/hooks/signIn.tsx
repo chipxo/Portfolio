@@ -12,11 +12,13 @@ const signIn = createAsyncThunk(
         email: email,
         password: password,
       };
+
       const { data } = await axios.post(url, userData, {
         headers: {
           "Content-type": "application/json",
         },
       });
+
       return data;
     } catch (e) {
       if (axios.isAxiosError(e)) {

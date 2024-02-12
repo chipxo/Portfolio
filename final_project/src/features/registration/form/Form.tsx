@@ -22,7 +22,10 @@ import signIn from "@/hooks/signIn";
 import registerUser from "@/hooks/registerUser";
 
 const signUpSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters" }),
+  name: z
+    .string()
+    .min(2, { message: "Name must be at least 2 characters" })
+    .optional(),
   email: z
     .string()
     .min(4, { message: "Email must be at least 4 characters" })
@@ -35,7 +38,7 @@ type TSignUpSchema = z.infer<typeof signUpSchema>;
 const Form = () => {
   const dispatch = useAppDispatch();
 
-  const { alreadyRegistered, loading, error } = useSelector(
+  const { alreadyRegistered, error } = useSelector(
     (state: RootState) => state.register,
   );
 
@@ -50,100 +53,49 @@ const Form = () => {
     resolver: zodResolver(signUpSchema),
   });
 
-  // const onSubmit: SubmitHandler<TSignUpSchema> = ({
-  //   name,
-  //   email,
-  //   password,
-  // }) => {
-  //   const userDataString = localStorage.getItem(`user-${email}`);
-  //   const userExist = userDataString ? JSON.parse(userDataString) : null;
-
-  //   setTimeout(() => {
-  //     if (alreadyRegistered) {
-  //       if (userExist && userExist.password === password) {
-  //         // if user exists and pass the right password, it makes him signed in, close the form and give the access
-  //         // to user panel
-
-  //         localStorage.setItem("signedIn", JSON.stringify("true"));
-
-  //         dispatch(setSignedIn(true));
-
-  //         dispatch(showForm(false));
-  //         document.body?.removeAttribute("class");
-
-  //         dispatch(setAlertText("You successfully signed in!"));
-  //         dispatch(showAlert(true));
-  //       } else if (userExist && userExist.password !== password) {
-  //         //if user pass wrong password = alert wrong password and reset the form
-
-  //         dispatch(setAlertText("Wrong password, try again!"));
-  //         dispatch(showAlert(true));
-  //       } else {
-  //         //if user pass wrong email
-
-  //         dispatch(setAlertText("User doesnt exist, try again!"));
-  //         dispatch(showAlert(true));
-  //       }
-  //     } else {
-  //       if (userExist) {
-  //         //if user try to registrate with existing email
-
-  //         dispatch(setAlertText("User already exist, try again!"));
-  //         dispatch(showAlert(true));
-  //       } else {
-  //         //if user successfully registrated
-
-  //         localStorage.setItem(
-  //           `user-${email}`,
-  //           JSON.stringify({ name, email, password }),
-  //         );
-
-  //         localStorage.setItem("userData", JSON.stringify({ name, email }));
-
-  //         dispatch(showForm(false));
-  //         document.body?.removeAttribute("class");
-
-  //         dispatch(setAlertText("You successfully registered!"));
-  //         dispatch(showAlert(true));
-  //       }
-  //     }
-  //     reset();
-  //   }, 1000);
-  // };
   const onSubmit: SubmitHandler<TSignUpSchema> = ({
     name,
     email,
     password,
   }) => {
-    const userEmail = localStorage.getItem(`${email}`);
+    const { email: userEmail } =
+      JSON.parse(localStorage.getItem("userData") as string) || {};
+    console.log(userEmail);
+
+    const userData = localStorage.getItem("userData");
+
     setTimeout(() => {
       if (alreadyRegistered) {
         dispatch(signIn({ email, password }));
+        // console.log(error);
 
-        if (!error) {
+        if (error || !userData) {
+          dispatch(
+            setAlertText("User doesnt exist or password is wrong, try again!"),
+          );
+          dispatch(showAlert(true));
+          reset();
+        } else {
           dispatch(showForm(false));
           dispatch(setSignedIn(true));
           dispatch(setAlertText("You successfully signed in!"));
           dispatch(showAlert(true));
           localStorage.setItem("signedIn", "true");
-        } else {
-          dispatch(setAlertText("User doesnt exist, try again"));
-          dispatch(showAlert(true));
         }
       } else {
         if (!userEmail) {
-          dispatch(registerUser({ name, email, password }));
+          name && dispatch(registerUser({ name, email, password }));
           reset();
 
-          if (!error) {
+          if (error) {
+            dispatch(setAlertText("Error, try again!"));
+            dispatch(showAlert(true));
+          } else {
             dispatch(setRegistered(true));
             dispatch(setAlertText("You successfully registered!"));
             dispatch(showAlert(true));
             dispatch(showForm(false));
-            localStorage.setItem(`${email}`, `${name}`);
-          } else {
-            dispatch(setAlertText("Error, try again!"));
-            dispatch(showAlert(true));
+            localStorage.setItem("userData", JSON.stringify({ name, email }));
           }
         } else {
           reset();
@@ -164,22 +116,24 @@ const Form = () => {
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid gap-y-14 border-b px-6 py-8">
-            <label htmlFor="name" className="relative">
-              <span className="absolute -top-6 text-sm opacity-60">Name</span>
-              <Input
-                {...register("name")}
-                type="text"
-                name="name"
-                id="name"
-                className={twJoin(
-                  "w-full rounded-md border bg-transparent p-2",
-                  errors.name ? "border-red-600" : "border-neutral",
+            {!alreadyRegistered && (
+              <label htmlFor="name" className="relative">
+                <span className="absolute -top-6 text-sm opacity-60">Name</span>
+                <Input
+                  {...register("name")}
+                  type="text"
+                  name="name"
+                  id="name"
+                  className={twJoin(
+                    "w-full rounded-md border bg-transparent p-2",
+                    errors.name ? "border-red-600" : "border-neutral",
+                  )}
+                />
+                {errors.name && (
+                  <p className="absolute top-11 text-red-600">{`${errors.name.message}`}</p>
                 )}
-              />
-              {errors.name && (
-                <p className="absolute top-11 text-red-600">{`${errors.name.message}`}</p>
-              )}
-            </label>
+              </label>
+            )}
             <label htmlFor="email" className="relative">
               <span className="absolute -top-6 text-sm opacity-60">Email</span>
               <Input

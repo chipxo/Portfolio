@@ -4,7 +4,6 @@ import { showUserPanel } from "@/features/registration/registerSlice";
 import Form from "@/features/registration/form/Form";
 import UserPannel from "@/features/registration/user/UserPanel";
 import { AnimatePresence } from "framer-motion";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import Burger from "./Burger";
 
@@ -13,15 +12,6 @@ const BurgerBar = () => {
   const { openUserPanel, openForm } = useSelector(
     (state: RootState) => state.register,
   );
-
-  useEffect(() => {
-    const userDataString = localStorage.getItem("userData");
-
-    if (userDataString !== null) {
-      const userDataFromStorage = JSON.parse(userDataString);
-      // dispatch(setUserData(userDataFromStorage));
-    }
-  }, [dispatch]);
 
   return (
     <>

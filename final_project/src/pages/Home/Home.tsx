@@ -56,9 +56,11 @@ const Home = () => {
             </div>
           )}
           <div className="border-neutral space-y-10 py-10 max-lg:container">
-            <h2 className="text-start text-xl md:text-2xl md:font-semibold">
-              Best selling products:
-            </h2>
+            {!loading && (
+              <h2 className="text-start text-xl md:text-2xl md:font-semibold">
+                Best selling products:
+              </h2>
+            )}
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-home">
               {!loading &&
                 !error &&
@@ -75,7 +77,7 @@ const Home = () => {
                 ))}
             </div>
             <div className="mx-auto w-fit">
-              {!open && (
+              {!loading && !open && (
                 <Button onClick={() => setOpen(true)}>Show more</Button>
               )}
             </div>

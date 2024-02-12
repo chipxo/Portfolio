@@ -46,10 +46,18 @@ const ByPrice = forwardRef<HTMLButtonElement, ClickType>(({ onClick }, ref) => {
   const handleFilterPrice = () => {
     if (highestPr > lowestPr) {
       dispatch(setCategoryProducts(filteredProducts));
-    } else if (highestPr && lowestPr !== 0) {
+    } else if (highestPr && lowestPr) {
       dispatch(setAlertText("Highest price has to be more than lowest"));
       dispatch(showAlert(true));
     }
+  };
+
+  const handleLowPr = (value: string) => {
+    !isNaN(Number(value)) && dispatch(setLowestPr(Number(value)));
+  };
+
+  const handleHighPr = (value: string) => {
+    !isNaN(Number(value)) && dispatch(setHighestPr(Number(value)));
   };
 
   return (
@@ -82,20 +90,14 @@ const ByPrice = forwardRef<HTMLButtonElement, ClickType>(({ onClick }, ref) => {
             <Input
               name="lowestPr"
               placeholder="Enter lowest price"
-              value={lowestPr > 0 ? lowestPr : ""}
-              onChange={(e) =>
-                !isNaN(Number(e.target.value)) &&
-                dispatch(setLowestPr(Number(e.target.value)))
-              }
+              value={lowestPr || ""}
+              onChange={(e) => handleLowPr(e.target.value)}
             />
             <Input
               name="highestPr"
               placeholder="Enter highest price"
-              value={highestPr > 0 ? highestPr : ""}
-              onChange={(e) =>
-                !isNaN(Number(e.target.value)) &&
-                dispatch(setHighestPr(Number(e.target.value)))
-              }
+              value={highestPr || ""}
+              onChange={(e) => handleHighPr(e.target.value)}
             />
           </div>
           <Button

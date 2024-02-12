@@ -10,9 +10,9 @@ import SecondUl from "./AsideBar";
 import CategoriesNav from "./CategoriesNav.tsx";
 
 const NavBar = () => {
-  const { categories } = useSelector((state: RootState) => state.categories);
-
   const dispatch = useAppDispatch();
+
+  const { categories } = useSelector((state: RootState) => state.categories);
 
   useEffect(() => {
     dispatch(fetchCategories());

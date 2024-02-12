@@ -28,8 +28,9 @@ const CommonCard: React.FC<CardProps> = ({
   price,
   isHome = false,
 }) => {
-  const [checked, setChecked] = useState(false);
   const dispatch = useAppDispatch();
+
+  const [checked, setChecked] = useState(false);
 
   useEffect(() => {
     const item = localStorage.getItem(`${id}`);

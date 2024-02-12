@@ -11,7 +11,7 @@ const SingleCardSkeleton = () => {
   return (
     <Card className="grid py-6 md:grid-cols-[0.45fr_1fr] lg:grid-cols-[0.3fr_1fr]">
       <div className="px-6">
-        <Skeleton className="h-[80vh] w-full bg-accent md:h-72" />
+        <Skeleton className="w-full bg-accent md:h-72" />
       </div>
       <div className="mt-2">
         <CardHeader>
@@ -24,7 +24,7 @@ const SingleCardSkeleton = () => {
         <CardContent className="text-2xl">
           <Skeleton className="h-12 w-14 bg-accent" />
         </CardContent>
-        <CardFooter className="mt-20 space-x-4 pb-0">
+        <CardFooter className="space-x-4 pb-0">
           <Skeleton className="h-10 w-10 bg-accent" />
           <Skeleton className="h-10 w-10 bg-accent" />
         </CardFooter>

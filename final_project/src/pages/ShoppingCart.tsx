@@ -2,6 +2,7 @@ import { RootState } from "@/app/rootReducer.tsx";
 import { useAppDispatch } from "@/app/store.tsx";
 import ErrorMessage from "@/components/common/ErrorMessage.tsx";
 import NoProducts from "@/components/common/NoProducts.tsx";
+import { Skeleton } from "@/components/ui/skeleton";
 import { decreaseAmount } from "@/features/amount/amountSlice.tsx";
 import BuyCard from "@/features/cards/shopCart/BuyCard";
 import { setTotalPrice } from "@/features/cards/shopCart/totalPriceSlice";
@@ -55,23 +56,26 @@ const ShoppingCart = () => {
   return (
     <section className="min-h-[70vh]">
       <div className="container py-4">
-        {amount > 0 && <h2 className="pb-4">Total: {totalPrice}$</h2>}
+        {!loading && amount && <h2 className="pb-4">Total: {totalPrice}$</h2>}
 
-        {loading && <SingleCardSkeleton />}
+        {loading && (
+          <>
+            <Skeleton className="mb-6 h-6 w-24 bg-accent" />
+            <SingleCardSkeleton />
+          </>
+        )}
         {error && <ErrorMessage error={error} />}
 
         <div className="grid place-items-center gap-4">
-          {!loading && !error && amount > 0 ? (
-            cards?.map((card) => (
-              <BuyCard
-                {...card}
-                key={nanoid()}
-                onClick={() => deleteItem(card.id)}
-              />
-            ))
-          ) : (
-            <NoProducts />
-          )}
+          {!loading && !error && amount
+            ? cards?.map((card) => (
+                <BuyCard
+                  {...card}
+                  key={nanoid()}
+                  onClick={() => deleteItem(card.id)}
+                />
+              ))
+            : !loading && <NoProducts />}
         </div>
       </div>
     </section>

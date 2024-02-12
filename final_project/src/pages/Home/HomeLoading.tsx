@@ -5,7 +5,7 @@ import CategoriesSkeleton from "@/features/categories/CategoriesSkeleton";
 
 const HomeLoading = () => {
   return (
-    <section className="space-y-12">
+    <section className="space-y-12 border-none">
       <SliderSkeleton />
       <div className="container border-t pt-4">
         <div className="lg:hidden">

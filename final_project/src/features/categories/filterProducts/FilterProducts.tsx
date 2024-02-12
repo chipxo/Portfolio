@@ -31,8 +31,17 @@ const FilterProducts = () => {
 
   useEffect(() => {
     dispatch(fetchFilterCategoryPrice({ lowestPr, highestPr, categoryId }));
-  }, [lowestPr, highestPr, categoryId]);
-  console.log(byName.current);
+  }, [dispatch]);
+
+  const handleByPrice = () => {
+    setSortByPrice(!sortByPrice);
+    sortByName && byName.current?.click();
+  };
+
+  const handleByName = () => {
+    setSortByName(!sortByName);
+    sortByPrice && byPrice.current?.click();
+  };
 
   return (
     <Accordion type="single" collapsible className="mb-6">
@@ -41,21 +50,8 @@ const FilterProducts = () => {
           <h2>Filter</h2>
         </AccordionTrigger>
         <AccordionContent className="px-2">
-          <ByPrice
-            ref={byPrice}
-            onClick={() => {
-              setSortByPrice(!sortByPrice);
-              sortByName && byName.current?.click();
-            }}
-          />
-
-          <ByName
-            ref={byName}
-            onClick={() => {
-              setSortByName(!sortByName);
-              sortByPrice && byPrice.current?.click();
-            }}
-          />
+          <ByPrice ref={byPrice} onClick={handleByPrice} />
+          <ByName ref={byName} onClick={handleByName} />
         </AccordionContent>
       </AccordionItem>
     </Accordion>

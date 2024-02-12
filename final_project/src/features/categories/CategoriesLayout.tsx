@@ -10,7 +10,9 @@ import { useSelector } from "react-redux";
 import CategoriesItem from "./CategoriesItem";
 
 const CategoriesLayout = () => {
-  const { categories } = useSelector((state: RootState) => state.categories);
+  const { categories, loading, error } = useSelector(
+    (state: RootState) => state.categories,
+  );
 
   return (
     <div className="lg:hidden">
@@ -20,9 +22,11 @@ const CategoriesLayout = () => {
             <h2>Categories</h2>
           </AccordionTrigger>
           <AccordionContent className="grid items-center gap-6 px-4 sm:grid-cols-2">
-            {categories?.map((category) => (
-              <CategoriesItem key={nanoid()} {...category} />
-            ))}
+            {!loading &&
+              !error &&
+              categories?.map((category) => (
+                <CategoriesItem key={nanoid()} {...category} />
+              ))}
           </AccordionContent>
         </AccordionItem>
       </Accordion>
