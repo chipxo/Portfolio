@@ -33,6 +33,7 @@ const Search = () => {
         setOpen(false);
         navigate("/searchResults");
         inputElement.blur();
+        dispatch(fetchSearchProducts(inputValue));
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -43,8 +44,8 @@ const Search = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(fetchSearchProducts(inputValue));
-  }, [dispatch]);
+    !!inputValue.length && dispatch(fetchSearchProducts(inputValue));
+  }, [dispatch, inputValue]);
 
   const handleChange = (value: string) => {
     setOpen(true);

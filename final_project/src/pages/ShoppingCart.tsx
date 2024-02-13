@@ -56,7 +56,7 @@ const ShoppingCart = () => {
   return (
     <section className="min-h-[70vh]">
       <div className="container py-4">
-        {!loading && amount && <h2 className="pb-4">Total: {totalPrice}$</h2>}
+        {!loading && !!amount && <h2 className="pb-4">Total: {totalPrice}$</h2>}
 
         {loading && (
           <>
@@ -67,7 +67,7 @@ const ShoppingCart = () => {
         {error && <ErrorMessage error={error} />}
 
         <div className="grid place-items-center gap-4">
-          {!loading && !error && amount
+          {!loading && !error && !!amount
             ? cards?.map((card) => (
                 <BuyCard
                   {...card}

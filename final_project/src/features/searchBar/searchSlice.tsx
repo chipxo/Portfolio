@@ -13,7 +13,7 @@ const initialState: InitialState = {
   inputValue: "",
   products: undefined,
   loading: false,
-  error: {},
+  error: null,
 };
 
 const searchSlice = createSlice({

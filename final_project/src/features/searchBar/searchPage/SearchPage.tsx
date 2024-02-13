@@ -21,22 +21,16 @@ const SearchPage: React.FC<SearchPageProps> = ({ searchResults }) => {
       {searchResults && (
         <div className="grid max-h-[50vh] w-full gap-y-4 overflow-auto rounded-md border bg-background p-4">
           {loading &&
-            "qwerty"
-              .split("")
-              .map((_) => <SearchItemsSkeleton key={nanoid()} />)}
+            "qwe".split("").map((_) => <SearchItemsSkeleton key={nanoid()} />)}
 
           {error && <ErrorMessage error={error} />}
 
-          {!error &&
-          !loading &&
-          inputValue.length > 0 &&
-          searchResults.length > 0 ? (
-            searchResults?.map((result) => (
-              <SearchPageItems key={nanoid()} {...result} />
-            ))
-          ) : (
-            <h2 className="text-sm md:text-lg">Nothing Found!</h2>
-          )}
+          {!error && !loading && !!inputValue.length && !!searchResults.length
+            ? searchResults.map((result) => (
+                <SearchPageItems key={nanoid()} {...result} />
+              ))
+            : !loading &&
+              !error && <h2 className="text-sm md:text-lg">Nothing Found!</h2>}
         </div>
       )}
     </>

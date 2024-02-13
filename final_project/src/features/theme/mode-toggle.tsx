@@ -7,10 +7,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useTheme } from "@/features/theme/theme-provider";
+import { Theme, useTheme } from "@/features/theme/theme-provider";
+import { nanoid } from "@reduxjs/toolkit";
 
 export function ModeToggle() {
   const { setTheme } = useTheme();
+
+  const themes = ["light", "dark", "system"];
 
   return (
     <DropdownMenu>
@@ -22,24 +25,15 @@ export function ModeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem
-          className="cursor-pointer"
-          onClick={() => setTheme("light")}
-        >
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          className="cursor-pointer"
-          onClick={() => setTheme("dark")}
-        >
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          className="cursor-pointer"
-          onClick={() => setTheme("system")}
-        >
-          System
-        </DropdownMenuItem>
+        {themes.map((theme) => (
+          <DropdownMenuItem
+            key={nanoid()}
+            className="cursor-pointer"
+            onClick={() => setTheme(theme as Theme)}
+          >
+            {`${theme[0].toUpperCase()}${theme.slice(1)}`}
+          </DropdownMenuItem>
+        ))}
       </DropdownMenuContent>
     </DropdownMenu>
   );

@@ -1,9 +1,9 @@
 import { useAppDispatch } from "@/app/store.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import {
-  closeForm,
   closeUserPanel,
   setRegistered,
+  showForm,
 } from "@/features/registration/registerSlice.tsx";
 import React from "react";
 
@@ -17,11 +17,9 @@ const BtnRegisSign: React.FC<BtnProps> = ({ signIn = false, text }) => {
 
   const handleClick = () => {
     dispatch(closeUserPanel());
-    dispatch(closeForm());
+    dispatch(showForm());
 
-    setTimeout(() => {
-      dispatch(setRegistered(signIn));
-    }, 3000);
+    dispatch(setRegistered(signIn));
   };
 
   return (

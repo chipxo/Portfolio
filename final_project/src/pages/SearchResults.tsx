@@ -16,7 +16,7 @@ const SearchResults = () => {
   return (
     <section className="min-h-[70vh] border-y">
       {error && <ErrorMessage error={error} />}
-      {products && inputValue && products ? (
+      {inputValue && products && products?.length > 0 ? (
         <div className="container py-6 md:py-12">
           {!loading && !error && (
             <h2 className="mb-10 text-3xl font-semibold">
@@ -37,7 +37,7 @@ const SearchResults = () => {
           </div>
         </div>
       ) : (
-        !loading && !error && <NoProducts />
+        <NoProducts />
       )}
     </section>
   );

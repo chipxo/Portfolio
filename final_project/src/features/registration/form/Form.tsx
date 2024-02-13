@@ -73,12 +73,12 @@ const Form = () => {
       {...mOpacity}
       className="fixed inset-0 z-[200] grid items-center bg-black/70 px-4"
     >
-      <div className="relative left-1/2 -translate-x-1/2 rounded-md bg-background max-md:container md:max-w-[64vw] xl:w-[45vw] xl:max-w-[800px]">
+      <div className="relative left-1/2 -translate-x-1/2 rounded-md bg-background max-md:container md:max-w-[64vw] xl:w-[45vw] xl:max-w-[700px]">
         <FormHeader reset={reset} />
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="sm:grid sm:grid-cols-[1fr_0.6fr]"
+          className="sm:grid sm:grid-cols-[1fr_0.7fr]"
         >
           <div>
             <div className="grid gap-y-14 border-b px-2 py-8 sm:px-6">

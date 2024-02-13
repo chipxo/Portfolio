@@ -9,8 +9,10 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { mOpacity } from "@/utils/motionSettings.tsx";
+import { nanoid } from "@reduxjs/toolkit";
 import { motion as m } from "framer-motion";
 import React, { useEffect, useState } from "react";
+import { twJoin } from "tailwind-merge";
 
 type GalleryProps = {
   images: string[];
@@ -38,6 +40,9 @@ const Gallery: React.FC<GalleryProps> = ({
     });
   }, [api]);
 
+  const imgs = [0, 1, 2];
+  const nums = [1, 2, 3];
+
   return (
     <m.div
       {...mOpacity}
@@ -54,41 +59,30 @@ const Gallery: React.FC<GalleryProps> = ({
         </Button>
         <Carousel setApi={setApi}>
           <CarouselContent>
-            <CarouselItem>
-              <img
-                className="mx-auto aspect-square w-2/3 rounded-md"
-                src={images?.[0]}
-                alt={title}
-              />
-            </CarouselItem>
-            <CarouselItem>
-              <img
-                className="mx-auto aspect-square w-2/3 rounded-md"
-                src={images?.[1]}
-                alt={title}
-              />
-            </CarouselItem>
-            <CarouselItem>
-              <img
-                className="mx-auto aspect-square w-2/3 rounded-md"
-                src={images?.[2]}
-                alt={title}
-              />
-            </CarouselItem>
+            {imgs.map((src) => (
+              <CarouselItem key={src}>
+                <img
+                  className="mx-auto aspect-square w-2/3 rounded-md"
+                  src={images?.[src]}
+                  alt={title}
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </CarouselItem>
+            ))}
           </CarouselContent>
           <CarouselPrevious />
           <CarouselNext />
         </Carousel>
         <div className="absolute -bottom-6 left-1/2 grid w-fit -translate-x-1/2 grid-cols-3 gap-3">
-          <span
-            className={`h-2 w-2 rounded-full border md:h-3 md:w-3 ${current === 1 && "border-ring bg-primary"}`}
-          />
-          <span
-            className={`h-2 w-2 rounded-full border md:h-3 md:w-3 ${current === 2 && "border-ring bg-primary"}`}
-          />
-          <span
-            className={`h-2 w-2 rounded-full border md:h-3 md:w-3 ${current === 3 && "border-ring bg-primary"}`}
-          />
+          {nums.map((num) => (
+            <span
+              key={nanoid()}
+              className={twJoin(
+                "h-2 w-2 rounded-full border md:h-3 md:w-3",
+                current === num && "border-ring bg-primary",
+              )}
+            />
+          ))}
         </div>
       </div>
     </m.div>
