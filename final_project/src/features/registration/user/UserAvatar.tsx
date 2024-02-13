@@ -13,9 +13,7 @@ const UserAvatar = () => {
 
   const { signedIn } = useSelector((state: RootState) => state.register);
 
-  const { name } = JSON.parse(localStorage.getItem("userData") as string) || {
-    name: "Guest",
-  };
+  const name = localStorage.getItem("userName");
 
   const handleUserClick = () => {
     document.body?.setAttribute("class", "overflow-hidden md:mr-[15px]");
@@ -28,7 +26,7 @@ const UserAvatar = () => {
         <m.div {...mOpacity}>
           <Avatar onClick={handleUserClick} className="cursor-pointer">
             <AvatarFallback className="border-2 border-primary/60 bg-background">
-              {name.slice(0, 1).toUpperCase()}
+              {name?.slice(0, 1).toUpperCase()}
             </AvatarFallback>
           </Avatar>
         </m.div>

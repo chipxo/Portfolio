@@ -20,6 +20,17 @@ import { z } from "zod";
 import FormHeader from "./FormHeader";
 import signIn from "@/hooks/signIn";
 import registerUser from "@/hooks/registerUser";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
+import {
+  auth,
+  googleProvider,
+  handleGoogleSignIn,
+} from "@/features/registration/form/firebase";
+import { FirebaseError } from "firebase/app";
 
 const signUpSchema = z.object({
   name: z
@@ -38,7 +49,7 @@ type TSignUpSchema = z.infer<typeof signUpSchema>;
 const Form = () => {
   const dispatch = useAppDispatch();
 
-  const { alreadyRegistered, error } = useSelector(
+  const { alreadyRegistered } = useSelector(
     (state: RootState) => state.register,
   );
 
@@ -53,57 +64,59 @@ const Form = () => {
     resolver: zodResolver(signUpSchema),
   });
 
-  const onSubmit: SubmitHandler<TSignUpSchema> = ({
+  const onSubmit: SubmitHandler<TSignUpSchema> = async ({
     name,
     email,
     password,
   }) => {
-    const { email: userEmail } =
-      JSON.parse(localStorage.getItem("userData") as string) || {};
-    console.log(userEmail);
-
-    const userData = localStorage.getItem("userData");
-
-    setTimeout(() => {
+    try {
       if (alreadyRegistered) {
-        dispatch(signIn({ email, password }));
-        // console.log(error);
+        const { user } = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password,
+        );
+        console.log(user);
 
-        if (error || !userData) {
-          dispatch(
-            setAlertText("User doesnt exist or password is wrong, try again!"),
-          );
-          dispatch(showAlert(true));
-          reset();
-        } else {
-          dispatch(showForm(false));
-          dispatch(setSignedIn(true));
-          dispatch(setAlertText("You successfully signed in!"));
-          dispatch(showAlert(true));
-          localStorage.setItem("signedIn", "true");
-        }
+        dispatch(showForm(false));
+        dispatch(setSignedIn(true));
+        dispatch(setAlertText("You successfully signed in!"));
+        dispatch(showAlert(true));
+        localStorage.setItem("signedIn", "true");
       } else {
-        if (!userEmail) {
-          name && dispatch(registerUser({ name, email, password }));
-          reset();
+        const { user } = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password,
+        );
+        console.log(user);
 
-          if (error) {
-            dispatch(setAlertText("Error, try again!"));
-            dispatch(showAlert(true));
-          } else {
-            dispatch(setRegistered(true));
-            dispatch(setAlertText("You successfully registered!"));
-            dispatch(showAlert(true));
-            dispatch(showForm(false));
-            localStorage.setItem("userData", JSON.stringify({ name, email }));
-          }
-        } else {
-          reset();
-          dispatch(setAlertText("User is already registered!"));
-          dispatch(showAlert(true));
-        }
+        dispatch(setRegistered(true));
+        dispatch(setAlertText("You successfully registered!"));
+        dispatch(showAlert(true));
+        dispatch(showForm(false));
+        localStorage.setItem("userName", `${name}`);
       }
-    }, 1000);
+    } catch (e) {
+      const error = e as FirebaseError;
+      console.log(error);
+
+      if (error.message.includes("email-already-in-use")) {
+        dispatch(setAlertText("Email is already in use, try again!"));
+        dispatch(showAlert(true));
+        reset();
+      } else if (error.message.includes("invalid-credential")) {
+        dispatch(
+          setAlertText("Email isn't registeres or wrong password, try again!"),
+        );
+        dispatch(showAlert(true));
+        reset();
+      } else {
+        dispatch(setAlertText("Authentication error, try again!"));
+        dispatch(showAlert(true));
+        reset();
+      }
+    }
   };
 
   return (
@@ -184,6 +197,13 @@ const Form = () => {
           <div className="grid gap-4 px-6 py-4 text-sm">
             {/* Submitting button */}
             <Button>{alreadyRegistered ? "Sign in" : "Register"}</Button>
+            <Button
+              type="button"
+              onClick={() => handleGoogleSignIn(dispatch)}
+              className="bg-google"
+            >
+              Sign in with Google
+            </Button>
           </div>
         </form>
       </div>

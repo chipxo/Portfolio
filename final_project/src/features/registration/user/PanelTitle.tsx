@@ -1,7 +1,5 @@
 const PanelTitle = () => {
-  const { name } = JSON.parse(localStorage.getItem("userData") as string) || {
-    name: "Guest",
-  };
+  const name = localStorage.getItem("userName");
 
   return <h2 className="text-lg md:text-xl">Hi, {name}</h2>;
 };

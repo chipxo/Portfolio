@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import PanelTitle from "./PanelTitle";
 import { Button } from "@/components/ui/button";
 import { motion as m, AnimatePresence } from "framer-motion";
 import { mOpacity } from "@/utils/motionSettings";
 import { useAppDispatch } from "@/app/store";
 import { setSignedIn, showUserPanel } from "../registerSlice";
+import { auth } from "../form/firebase";
 
 const PanelContent = () => {
   const dispatch = useAppDispatch();
@@ -21,14 +22,19 @@ const PanelContent = () => {
     }, 800);
   };
 
-  const handleDeleteAcc = () => {
+  const handleDeleteAcc = async () => {
     dispatch(showUserPanel(false));
 
-    setTimeout(() => {
+    try {
+      setTimeout(() => {}, 800);
+
+      await auth.currentUser?.delete();
       localStorage.removeItem("signedIn");
-      localStorage.removeItem("userData");
+      localStorage.removeItem("userName");
       dispatch(setSignedIn(false));
-    }, 800);
+    } catch (e) {
+      console.error("Error deleting account:", e);
+    }
   };
 
   return (
