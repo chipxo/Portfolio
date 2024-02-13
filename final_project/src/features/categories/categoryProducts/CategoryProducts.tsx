@@ -19,11 +19,6 @@ const CategoryProducts = () => {
   const { products, loading, error } = useSelector(
     (state: RootState) => state.categoryProducts,
   );
-
-  const { loading: filtLoad } = useSelector(
-    (state: RootState) => state.categoryFilteredProducts,
-  );
-
   const { categoryId } = useParams();
 
   useEffect(() => {
@@ -51,7 +46,7 @@ const CategoryProducts = () => {
       <div className="container min-h-[70vh] py-10">
         {error && <ErrorMessage error={error} />}
 
-        {!loading && !error && (
+        {!loading && !error && !!products?.length && (
           <>
             <CategoriesLayout />
             <FilterProducts />
@@ -59,11 +54,11 @@ const CategoryProducts = () => {
         )}
 
         <div className="grid grid-cols-2 gap-4 md:grid-cols-home">
-          {!loading && !error && products
+          {!loading && !error && !!products?.length
             ? products.map((product) => (
                 <CommonCard key={nanoid()} {...product} />
               ))
-            : !loading && !filtLoad && <NoProducts />}
+            : !loading && !error && <NoProducts />}
         </div>
       </div>
     </section>
