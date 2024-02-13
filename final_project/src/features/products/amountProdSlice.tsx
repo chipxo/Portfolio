@@ -17,7 +17,11 @@ const initialState: ProductsStateType = {
 const amountOfProductsSlice = createSlice({
   name: "amountOfProducts",
   initialState,
-  reducers: {},
+  reducers: {
+    delAmountOfProducts: (state) => {
+      state.products = [];
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAmountOfProducts.pending, (state) => {
@@ -43,5 +47,7 @@ const amountOfProductsSlice = createSlice({
       );
   },
 });
+
+export const { delAmountOfProducts } = amountOfProductsSlice.actions;
 
 export default amountOfProductsSlice.reducer;

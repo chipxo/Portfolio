@@ -41,6 +41,7 @@ const Gallery: React.FC<GalleryProps> = ({
   return (
     <m.div
       {...mOpacity}
+      onClick={handleCloseGallery}
       className="fixed inset-0 z-[999] grid place-items-center bg-black/85"
     >
       <div className="relative sm:max-w-[70vw] xl:max-w-[50vw]">

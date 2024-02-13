@@ -1,7 +1,7 @@
 import { useAppDispatch } from "@/app/store";
 import { Button } from "@/components/ui/button";
 import React from "react";
-import { setRegistered, showForm } from "../registerSlice";
+import { closeForm, setRegistered } from "../registerSlice";
 import { RootState } from "@/app/rootReducer";
 import { useSelector } from "react-redux";
 import { closeIcon } from "@/components/common/icons";
@@ -19,7 +19,7 @@ const FormHeader: React.FC<FormHeaderProps> = ({ reset }) => {
 
   const handleCloseForm = () => {
     document.body.removeAttribute("class");
-    dispatch(showForm(false));
+    dispatch(closeForm());
   };
 
   return (

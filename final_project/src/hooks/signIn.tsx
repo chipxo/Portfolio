@@ -1,33 +1,23 @@
-import { SIGN_IN } from "@/api/api";
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { User } from "@/types/types";
-import axios from "axios";
+import { makeAlert } from "@/features/alert/alertSlice";
+import { auth } from "@/features/registration/form/firebase";
+import { closeForm, setSignedIn } from "@/features/registration/registerSlice";
+import { Dispatch } from "@reduxjs/toolkit";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
-const signIn = createAsyncThunk(
-  "register/signIn",
-  async ({ email, password }: User) => {
-    try {
-      const url = SIGN_IN;
-      const userData = {
-        email: email,
-        password: password,
-      };
+type SignInProps = {
+  email: string;
+  password: string;
+  dispatch: Dispatch;
+};
 
-      const { data } = await axios.post(url, userData, {
-        headers: {
-          "Content-type": "application/json",
-        },
-      });
+export const signIn = async ({ email, password, dispatch }: SignInProps) => {
+  const { user } = await signInWithEmailAndPassword(auth, email, password);
+  console.log(user);
 
-      return data;
-    } catch (e) {
-      if (axios.isAxiosError(e)) {
-        console.log(`Axios error: ${e}`);
-      } else {
-        console.log(`Sign in failed: ${e}`);
-      }
-    }
-  },
-);
+  dispatch(setSignedIn(true));
+  localStorage.setItem("signedIn", "true");
 
-export default signIn;
+  dispatch(closeForm());
+
+  dispatch(makeAlert("You successfully signed in!"));
+};

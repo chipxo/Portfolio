@@ -1,35 +1,34 @@
-import { CREATE_USER } from "@/api/api";
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { User } from "@/types/types";
-import axios from "axios";
+import { makeAlert } from "@/features/alert/alertSlice";
+import { auth } from "@/features/registration/form/firebase";
+import {
+  closeForm,
+  setRegistered,
+} from "@/features/registration/registerSlice";
+import { Dispatch } from "@reduxjs/toolkit";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
-const registerUser = createAsyncThunk(
-  "register/registerUser",
-  async ({ name, email, password }: User) => {
-    try {
-      const url = CREATE_USER;
-      const userData = {
-        name: name,
-        email: email,
-        password: password,
-        avatar: "https://picsum.photos/800"
-      };
-      
-      const { data } = await axios.post(url, userData, {
-        headers: {
-          "Content-type": "application/json",
-        },
-      });
+type registerProps = {
+  name: string | undefined;
+  email: string;
+  password: string;
+  dispatch: Dispatch;
+};
 
-      return data;
-    } catch (e) {
-      if (axios.isAxiosError(e)) {
-        console.log(`Axios error: ${e}`);
-      } else {
-        console.log(`Sign in failed: ${e}`);
-      }
-    }
-  },
-);
+const registerUser = async ({
+  name,
+  email,
+  password,
+  dispatch,
+}: registerProps) => {
+  const { user } = await createUserWithEmailAndPassword(auth, email, password);
+  console.log(user);
+
+  name && localStorage.setItem("userName", `${name}`);
+
+  dispatch(setRegistered(true));
+  dispatch(closeForm());
+
+  dispatch(makeAlert("You successfully registered!"));
+};
 
 export default registerUser;

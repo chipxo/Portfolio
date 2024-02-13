@@ -13,7 +13,7 @@ const AmountBadge = () => {
     <Button className="relative" size="icon" variant="ghost">
       <span className="text-xl">{cartIcon}</span>
       <AnimatePresence>
-        {amount > 0 && (
+        {amount && (
           <m.div {...mOpacity}>
             <Badge className="absolute -right-2 -top-1" variant="default">
               {amount}

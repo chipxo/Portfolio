@@ -7,7 +7,6 @@ import {
 } from "@/components/ui/accordion.tsx";
 import { useSelector } from "react-redux";
 import { setCategoryProducts } from "../categoryProducts/categoryProductsSlice";
-import { setAlertText, showAlert } from "@/features/alert/alertSlice";
 import { useAppDispatch } from "@/app/store";
 import { Input } from "@/components/ui/input.tsx";
 import { Label } from "@/components/ui/label.tsx";
@@ -19,6 +18,7 @@ import {
 } from "../categoryProducts/categoryFilteredProducts/filteredProductsSlice";
 import { Button } from "@/components/ui/button";
 import { forwardRef } from "react";
+import { makeAlert } from "@/features/alert/alertSlice";
 
 const ByPrice = forwardRef<HTMLButtonElement, ClickType>(({ onClick }, ref) => {
   const dispatch = useAppDispatch();
@@ -47,8 +47,7 @@ const ByPrice = forwardRef<HTMLButtonElement, ClickType>(({ onClick }, ref) => {
     if (highestPr > lowestPr) {
       dispatch(setCategoryProducts(filteredProducts));
     } else if (highestPr && lowestPr) {
-      dispatch(setAlertText("Highest price has to be more than lowest"));
-      dispatch(showAlert(true));
+      dispatch(makeAlert("Highest price has to be more than lowest"));
     }
   };
 

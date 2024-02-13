@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { motion as m, AnimatePresence } from "framer-motion";
 import { mOpacity } from "@/utils/motionSettings";
 import { useAppDispatch } from "@/app/store";
-import { setSignedIn, showUserPanel } from "../registerSlice";
+import { closeUserPanel, setSignedIn } from "../registerSlice";
 import { auth } from "../form/firebase";
 
 const PanelContent = () => {
@@ -14,7 +14,7 @@ const PanelContent = () => {
 
   const handleSignOut = () => {
     document.body?.removeAttribute("class");
-    dispatch(showUserPanel(false));
+    dispatch(closeUserPanel());
 
     setTimeout(() => {
       localStorage.removeItem("signedIn");
@@ -23,14 +23,14 @@ const PanelContent = () => {
   };
 
   const handleDeleteAcc = async () => {
-    dispatch(showUserPanel(false));
+    dispatch(closeUserPanel());
 
     try {
-      setTimeout(() => {}, 800);
-
       await auth.currentUser?.delete();
+
       localStorage.removeItem("signedIn");
       localStorage.removeItem("userName");
+
       dispatch(setSignedIn(false));
     } catch (e) {
       console.error("Error deleting account:", e);
@@ -52,7 +52,7 @@ const PanelContent = () => {
           {open && (
             <m.div
               {...mOpacity}
-              className="col-span-2 mt-5 text-center text-lg"
+              className="mt-5 text-center text-lg sm:col-span-2"
             >
               <h2>Are you sure?</h2>
               <div className="mt-4 grid grid-cols-2 gap-x-16">

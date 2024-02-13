@@ -14,6 +14,7 @@ import { motion as m } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import HomeLoading from "./HomeLoading";
+import { delAmountOfProducts } from "@/features/products/amountProdSlice";
 
 const Home = () => {
   const dispatch = useAppDispatch();
@@ -35,6 +36,9 @@ const Home = () => {
 
     dispatch(fetchAmountOfProducts(0));
     dispatch(fetchAmountOfProducts(10));
+    return () => {
+      dispatch(delAmountOfProducts());
+    };
   }, [dispatch]);
 
   const [open, setOpen] = useState(false);

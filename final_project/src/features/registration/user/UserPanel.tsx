@@ -45,13 +45,7 @@ const UserPannel: React.FC<UserPanelProps> = ({ isBurger = false }) => {
                 </div>
               </div>
             )}
-            <AnimatePresence>
-              {openForm && (
-                <div>
-                  <Form />
-                </div>
-              )}
-            </AnimatePresence>
+            <AnimatePresence>{openForm && <Form />}</AnimatePresence>
           </>
         )}
       </m.div>

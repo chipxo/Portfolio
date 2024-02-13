@@ -1,5 +1,3 @@
-import register from "@/hooks/registerUser";
-import signIn from "@/hooks/signIn";
 import { User } from "@/types/types";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
@@ -38,45 +36,28 @@ const registerSlice = createSlice({
     setSignedIn: (state, action: PayloadAction<boolean>) => {
       state.signedIn = action.payload;
     },
-    showForm: (state, action: PayloadAction<boolean>) => {
-      state.openForm = action.payload;
+    showForm: (state) => {
+      state.openForm = true;
     },
-    showUserPanel: (state, action: PayloadAction<boolean>) => {
-      state.openUserPanel = action.payload;
+    closeForm: (state) => {
+      state.openForm = false;
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(register.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(register.fulfilled, (state, action) => {
-        state.loading = false;
-        state.error = null;
-
-        state.data = action.payload;
-      })
-      .addCase(register.rejected, (state, action) => {
-        state.error = action.payload ?? "Fetch failed";
-        state.loading = false;
-      })
-      .addCase(signIn.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(signIn.fulfilled, (state, action) => {
-        state.loading = false;
-        state.data = action.payload;
-        state.error = action.payload === undefined && true;
-      })
-      .addCase(signIn.rejected, (state, action) => {
-        state.error = (action.payload as Error) ?? "Fetch failed";
-        state.loading = false;
-      });
+    showUserPanel: (state) => {
+      state.openUserPanel = true;
+    },
+    closeUserPanel: (state) => {
+      state.openUserPanel = false;
+    },
   },
 });
 
-export const { setRegistered, setSignedIn, showForm, showUserPanel } =
-  registerSlice.actions;
+export const {
+  setRegistered,
+  setSignedIn,
+  showUserPanel,
+  closeUserPanel,
+  showForm,
+  closeForm,
+} = registerSlice.actions;
 
 export default registerSlice.reducer;

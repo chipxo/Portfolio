@@ -17,7 +17,7 @@ const UserAvatar = () => {
 
   const handleUserClick = () => {
     document.body?.setAttribute("class", "overflow-hidden md:mr-[15px]");
-    signedIn ? dispatch(showUserPanel(true)) : dispatch(showForm(true));
+    signedIn ? dispatch(showUserPanel()) : dispatch(showForm());
   };
 
   return (

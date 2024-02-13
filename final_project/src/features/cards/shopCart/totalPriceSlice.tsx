@@ -22,6 +22,7 @@ const totalPriceSlice = createSlice({
       action: PayloadAction<{ id: number; price: number }>,
     ) => {
       const { id, price } = action.payload;
+
       state.totalPrice += price;
       state.counts[id] = (state.counts[id] || 1) + 1;
     },
@@ -30,6 +31,7 @@ const totalPriceSlice = createSlice({
       action: PayloadAction<{ id: number; price: number }>,
     ) => {
       const { id, price } = action.payload;
+
       state.totalPrice -= price;
       state.counts[id] = (state.counts[id] || 2) - 1;
     },

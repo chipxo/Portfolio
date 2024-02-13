@@ -18,6 +18,10 @@ const Search = () => {
     (state: RootState) => state.searchProducts,
   );
 
+  const { products: searchProducts } = useSelector(
+    (state: RootState) => state.searchProducts,
+  );
+
   const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -38,25 +42,31 @@ const Search = () => {
     };
   }, []);
 
-  const { products: searchProducts } = useSelector(
-    (state: RootState) => state.searchProducts,
-  );
-
   useEffect(() => {
     dispatch(fetchSearchProducts(inputValue));
-  }, [dispatch, inputValue]);
+  }, [dispatch]);
 
   const handleChange = (value: string) => {
     setOpen(true);
     dispatch(setInputValue(value));
   };
 
+  const handleFocus = () => {
+    document.body.setAttribute("class", "mr-[15px] overflow-hidden");
+    setOpen(true);
+  };
+
+  const handleBlur = () => {
+    document.body.removeAttribute("class");
+    setOpen(false);
+  };
+
   return (
     <div className="relative">
       <SearchInput
         onChange={(e) => handleChange(e.target.value)}
-        onFocus={() => setOpen(true)}
-        onBlur={() => setOpen(false)}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
       />
 
       <AnimatePresence>{open && <SearchBtn />}</AnimatePresence>

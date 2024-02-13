@@ -16,20 +16,20 @@ const SearchResults = () => {
   return (
     <section className="min-h-[70vh] border-y">
       {error && <ErrorMessage error={error} />}
-      {products && inputValue.length > 0 && products?.length > 0 ? (
+      {products && inputValue && products ? (
         <div className="container py-6 md:py-12">
-          {inputValue.length > 0 && (
+          {!loading && !error && (
             <h2 className="mb-10 text-3xl font-semibold">
               Results for: "{inputValue}"
             </h2>
           )}
-          <div className="grid grid-cols-2 sm:grid-cols-home gap-4">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-home">
             {loading &&
               "qwerty".split("").map((char) => <CardSkeleton key={char} />)}
 
             {!loading &&
               !error &&
-              products?.map((product) => (
+              products.map((product) => (
                 <m.div {...mOpacity} key={nanoid()}>
                   <CommonCard {...product} />
                 </m.div>
@@ -37,7 +37,7 @@ const SearchResults = () => {
           </div>
         </div>
       ) : (
-        <NoProducts />
+        !loading && !error && <NoProducts />
       )}
     </section>
   );

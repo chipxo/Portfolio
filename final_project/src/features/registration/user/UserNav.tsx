@@ -3,14 +3,14 @@ import Logo from "@/components/common/Logo";
 import { closeIcon } from "@/components/common/icons";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/features/theme/mode-toggle";
-import { showUserPanel } from "../registerSlice";
+import { closeUserPanel } from "../registerSlice";
 
 const UserNav = () => {
   const dispatch = useAppDispatch();
 
   const handleClosePanel = () => {
-    document.body?.removeAttribute("class");
-    dispatch(showUserPanel(false));
+    document.body.removeAttribute("class");
+    dispatch(closeUserPanel());
   };
 
   return (

@@ -3,16 +3,10 @@ import {
   tikTokIcon,
   twitterIcon,
 } from "@/components/common/icons";
+import getCurYear from "@/utils/getCurYear";
 import { nanoid } from "@reduxjs/toolkit";
 
 const Footer = () => {
-  const getCurrentDate = () => {
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
-
-    return year;
-  };
-
   const links = [
     { link: "https://www.instagram.com", icon: instagramIcon },
     { link: "https://www.twitter.com", icon: twitterIcon },
@@ -25,7 +19,7 @@ const Footer = () => {
         <h2 className="mb-4 text-2xl font-bold md:text-4xl">Vivo.</h2>
         <p className="md:text-lg"> Providing reliable clothes since 2022</p>
         <p className="md:text-lg">
-          Copyright © {getCurrentDate()} - All right reserved
+          Copyright © {getCurYear()} - All right reserved
         </p>
       </div>
       <nav>

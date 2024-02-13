@@ -41,12 +41,14 @@ const CommonCard: React.FC<CardProps> = ({
   const handleAddBtn = (id: number, title: string) => {
     dispatch(addAmount());
     setChecked(true);
+
     localStorage.setItem(`${id}`, `${title}`);
   };
 
   const handleDelBtn = (id: number) => {
     dispatch(decreaseAmount());
     setChecked(false);
+
     localStorage.removeItem(`${id}`);
   };
 

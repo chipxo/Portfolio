@@ -42,9 +42,7 @@ const BuyCard: React.FC<BuyCardProps> = ({
   };
 
   const decreaseCount = () => {
-    if (count > 1) {
-      dispatch(decTotalPrice({ id, price }));
-    }
+    count > 1 && dispatch(decTotalPrice({ id, price }));
   };
 
   return (

@@ -42,15 +42,17 @@ const SingleCard: React.FC<SingleCardType> = ({
   }, []);
 
   const handleAddBtn = () => {
+    dispatch(addAmount());
+
     setChecked(true);
     localStorage.setItem(`${id}`, `${title}`);
-    dispatch(addAmount());
   };
 
   const handleDelBtn = (id: number) => {
+    dispatch(decreaseAmount());
+
     setChecked(false);
     localStorage.removeItem(`${id}`);
-    dispatch(decreaseAmount());
   };
 
   return (
