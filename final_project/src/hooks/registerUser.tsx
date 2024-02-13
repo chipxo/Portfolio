@@ -7,7 +7,7 @@ import {
 import { Dispatch } from "@reduxjs/toolkit";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
-type registerProps = {
+type RegisterProps = {
   name: string | undefined;
   email: string;
   password: string;
@@ -19,7 +19,7 @@ const registerUser = async ({
   email,
   password,
   dispatch,
-}: registerProps) => {
+}: RegisterProps) => {
   const { user } = await createUserWithEmailAndPassword(auth, email, password);
   console.log(user);
 
