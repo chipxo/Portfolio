@@ -56,7 +56,7 @@ const Form = () => {
         reset();
       } else if (error.message.includes("invalid-credential")) {
         dispatch(
-          makeAlert("Email isn't registeres or wrong password, try again!"),
+          makeAlert("Email isn't registered or wrong password, try again!"),
         );
 
         reset();
