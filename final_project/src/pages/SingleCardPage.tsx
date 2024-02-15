@@ -1,10 +1,10 @@
-import { RootState } from "@/app/rootReducer.tsx";
-import { useAppDispatch } from "@/app/store.tsx";
+import { RootState } from "@/app/rootReducer";
+import { useAppDispatch } from "@/app/store";
 import ErrorMessage from "@/components/common/ErrorMessage";
-import Gallery from "@/components/containers/gallery/Gallery.tsx";
+import Gallery from "@/components/containers/gallery/Gallery";
 import SingleCard from "@/features/cards/singleCard/SingleCard";
-import SingleCardSkeleton from "@/features/cards/singleCard/SingleCardSkeleton.tsx";
-import { fetchProduct } from "@/hooks/fetchProduct.tsx";
+import SingleCardSkeleton from "@/features/cards/singleCard/SingleCardSkeleton";
+import { fetchProduct } from "@/hooks/fetchProduct";
 import { ProductType } from "@/types/types";
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";

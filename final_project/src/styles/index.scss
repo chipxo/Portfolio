@@ -95,12 +95,10 @@ input {
   @apply w-[15px];
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
   @apply bg-background;
 }
 
-// /* Handle */
 ::-webkit-scrollbar-thumb {
   @apply bg-primary;
 }

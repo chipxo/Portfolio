@@ -1,13 +1,13 @@
-import { RootState } from "@/app/rootReducer.tsx";
-import { useAppDispatch } from "@/app/store.tsx";
+import { RootState } from "@/app/rootReducer";
+import { useAppDispatch } from "@/app/store";
 import Logo from "@/components/common/Logo";
-import Search from "@/features/searchBar/Search.tsx";
-import { fetchCategories } from "@/hooks/fetchCategories.tsx";
+import Search from "@/features/searchBar/Search";
+import { fetchCategories } from "@/hooks/fetchCategories";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import BurgerBar from "../burger/BurgerBar.tsx";
+import BurgerBar from "../burger/BurgerBar";
 import SecondUl from "./AsideBar";
-import CategoriesNav from "./CategoriesNav.tsx";
+import CategoriesNav from "./CategoriesNav";
 
 const NavBar = () => {
   const dispatch = useAppDispatch();

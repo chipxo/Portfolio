@@ -14,6 +14,9 @@ import { ProductType } from "@/types/types";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { addAmount, decreaseAmount } from "../../amount/amountSlice";
+import addProduct from "@/indexedDB/addProduct";
+import deleteProduct from "@/indexedDB/deleteProduct";
+import getItem from "@/indexedDB/getItem";
 
 type CardProps = ProductType & {
   isHome?: boolean;
@@ -33,23 +36,35 @@ const CommonCard: React.FC<CardProps> = ({
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    const item = localStorage.getItem(`${id}`);
+    const checkItem = async () => {
+      const item = await getItem(id);
 
-    item ? setChecked(true) : setChecked(false);
+      setChecked(item);
+    };
+
+    checkItem();
   }, []);
 
-  const handleAddBtn = (id: number, title: string) => {
-    dispatch(addAmount());
-    setChecked(true);
+  const handleAddBtn = async (id: number, title: string, price: number) => {
+    try {
+      await addProduct({ id, title, price });
 
-    localStorage.setItem(`${id}`, `${title}`);
+      dispatch(addAmount());
+      setChecked(true);
+    } catch (e) {
+      console.log(`Error in addBtn: ${e}`);
+    }
   };
 
-  const handleDelBtn = (id: number) => {
-    dispatch(decreaseAmount());
-    setChecked(false);
+  const handleDelBtn = async (id: number) => {
+    try {
+      await deleteProduct(id, price);
 
-    localStorage.removeItem(`${id}`);
+      dispatch(decreaseAmount());
+      setChecked(false);
+    } catch (e) {
+      console.log(`Error in delBtn: ${e}`);
+    }
   };
 
   return (
@@ -89,7 +104,7 @@ const CommonCard: React.FC<CardProps> = ({
               {cartDelete}
             </Button>
             <Button
-              onClick={() => handleAddBtn(id, title)}
+              onClick={() => handleAddBtn(id, title, price)}
               disabled={checked}
               variant="outline"
             >

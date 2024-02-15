@@ -1,5 +1,5 @@
-import { RootState } from "@/app/rootReducer.tsx";
-import { useAppDispatch } from "@/app/store.tsx";
+import { RootState } from "@/app/rootReducer";
+import { useAppDispatch } from "@/app/store";
 import { setInputValue } from "@/features/searchBar/searchSlice";
 import { useSelector } from "react-redux";
 import { fetchSearchProducts } from "@/hooks/fetchSearch";

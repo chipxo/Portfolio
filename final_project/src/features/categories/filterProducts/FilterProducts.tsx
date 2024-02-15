@@ -3,11 +3,10 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion.tsx";
-
-import { RootState } from "@/app/rootReducer.tsx";
-import { useAppDispatch } from "@/app/store.tsx";
-import { fetchFilterCategoryPrice } from "@/hooks/fetchFilterCategoryPrice.tsx";
+} from "@/components/ui/accordion";
+import { RootState } from "@/app/rootReducer";
+import { useAppDispatch } from "@/app/store";
+import { fetchFilterCategoryPrice } from "@/hooks/fetchFilterCategoryPrice";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";

@@ -1,11 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface TotalPriceState {
-  counts: Record<number, number>;
-  totalPrice: number;
-}
+export type Count = {
+  count: number;
+  price: number;
+};
 
-const initialState: TotalPriceState = {
+type InitialState = {
+  counts: Record<number, Count>;
+  totalPrice: number;
+};
+
+const initialState: InitialState = {
   counts: {},
   totalPrice: 0,
 };
@@ -14,6 +19,9 @@ const totalPriceSlice = createSlice({
   name: "totalPrice",
   initialState,
   reducers: {
+    setCounts: (state, action) => {
+      state.counts = action.payload;
+    },
     setTotalPrice: (state, action: PayloadAction<number>) => {
       state.totalPrice = action.payload;
     },
@@ -24,7 +32,14 @@ const totalPriceSlice = createSlice({
       const { id, price } = action.payload;
 
       state.totalPrice += price;
-      state.counts[id] = (state.counts[id] || 1) + 1;
+
+      const updatedCount = (state.counts[id]?.count || 1) + 1;
+
+      state.counts[id] = {
+        ...state.counts[id],
+        count: updatedCount,
+        price: price * updatedCount,
+      };
     },
     decTotalPrice: (
       state,
@@ -33,11 +48,18 @@ const totalPriceSlice = createSlice({
       const { id, price } = action.payload;
 
       state.totalPrice -= price;
-      state.counts[id] = (state.counts[id] || 2) - 1;
+
+      const updatedCount = (state.counts[id]?.count || 2) - 1;
+
+      state.counts[id] = {
+        ...state.counts[id],
+        count: updatedCount,
+        price: price * updatedCount,
+      };
     },
   },
 });
 
-export const { setTotalPrice, incTotalPrice, decTotalPrice } =
+export const { setTotalPrice, incTotalPrice, decTotalPrice, setCounts } =
   totalPriceSlice.actions;
 export default totalPriceSlice.reducer;

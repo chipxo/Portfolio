@@ -1,5 +1,5 @@
-import { fetchAmountOfProducts } from "@/hooks/fetchAmountOfProducts.tsx";
-import { ProductType } from "@/types/types.tsx";
+import { fetchAmountOfProducts } from "@/hooks/fetchAmountOfProducts";
+import { ProductType } from "@/types/types";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 type ProductsStateType = {

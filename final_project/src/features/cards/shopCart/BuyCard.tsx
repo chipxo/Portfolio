@@ -1,12 +1,6 @@
-import { RootState } from "@/app/rootReducer.tsx";
-import { useAppDispatch } from "@/app/store.tsx";
-import { cartDelete } from "@/components/common/icons.tsx";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar.tsx";
-import { Button } from "@/components/ui/button.tsx";
+import { cartDelete } from "@/components/common/icons";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -14,35 +8,51 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ProductType } from "@/types/types.tsx";
+import { ProductType } from "@/types/types";
 import React from "react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { decTotalPrice, incTotalPrice } from "./totalPriceSlice.tsx";
+import incPrice from "@/indexedDB/incPrice";
+import decPrice from "@/indexedDB/decPrice";
+import deleteProduct from "@/indexedDB/deleteProduct";
+import { db } from "@/indexedDB/db";
+import { useLiveQuery } from "dexie-react-hooks";
 
-type BuyCardProps = ProductType & {
-  onClick?: () => void;
-};
-
-const BuyCard: React.FC<BuyCardProps> = ({
+const BuyCard: React.FC<ProductType> = ({
   id,
   images,
-  price,
+  price: prodPrice,
   title,
-  onClick,
 }) => {
-  const dispatch = useAppDispatch();
-
-  const count = useSelector(
-    (state: RootState) => state.totalPrice.counts[id] || 1,
-  );
-
-  const increaseCount = () => {
-    dispatch(incTotalPrice({ id, price }));
+  const defaultValues = {
+    price: prodPrice,
+    count: 1,
   };
 
-  const decreaseCount = () => {
-    count > 1 && dispatch(decTotalPrice({ id, price }));
+  const { price, count } =
+    useLiveQuery(() => db.addedProducts.get(id)) || defaultValues;
+
+  const incCount = async () => {
+    try {
+      await incPrice(id, prodPrice * (count + 1));
+    } catch (e) {
+      console.log(`Error in incCount: ${e}`);
+    }
+  };
+
+  const decrCount = async () => {
+    try {
+      await decPrice(id, prodPrice * (count - 1));
+    } catch (e) {
+      console.log(`Error in decrCount: ${e}`);
+    }
+  };
+
+  const deleteItem = async () => {
+    try {
+      await deleteProduct(id, price || prodPrice);
+    } catch (e) {
+      console.log(`Error in deleteItem: ${e}`);
+    }
   };
 
   return (
@@ -73,31 +83,26 @@ const BuyCard: React.FC<BuyCardProps> = ({
         <CardFooter className="flex-grow">
           <div className="grid grid-cols-[1fr_0.7fr] md:grid-cols-2 md:gap-8">
             <div className="grid grid-cols-3 justify-items-center gap-3 sm:pr-4 md:border-r">
-              <Button
-                variant="ghost"
-                className="text-xl"
-                onClick={increaseCount}
-              >
+              <Button variant="ghost" className="text-xl" onClick={incCount}>
                 +
               </Button>
-
               <Button
                 variant="outline"
                 className="cursor-default hover:bg-background"
               >
-                {count}
+                {count ?? 1}
               </Button>
               <Button
-                onClick={decreaseCount}
+                onClick={decrCount}
                 variant="ghost"
                 className="text-xl"
-                disabled={count <= 1}
+                disabled={count === 1}
               >
                 -
               </Button>
             </div>
             <div className="w-fit max-sm:justify-self-end">
-              <Button onClick={onClick}>{cartDelete}</Button>
+              <Button onClick={deleteItem}>{cartDelete}</Button>
             </div>
           </div>
         </CardFooter>

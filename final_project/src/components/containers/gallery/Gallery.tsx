@@ -8,7 +8,7 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
-import { mOpacity } from "@/utils/motionSettings.tsx";
+import { mOpacity } from "@/utils/motionSettings";
 import { nanoid } from "@reduxjs/toolkit";
 import { motion as m } from "framer-motion";
 import React, { useEffect, useState } from "react";

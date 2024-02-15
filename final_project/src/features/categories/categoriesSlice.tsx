@@ -1,5 +1,5 @@
-import { fetchCategories } from "@/hooks/fetchCategories.tsx";
-import { CategoriesType } from "@/types/types.tsx";
+import { fetchCategories } from "@/hooks/fetchCategories";
+import { CategoriesType } from "@/types/types";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 type InitialStateType = {

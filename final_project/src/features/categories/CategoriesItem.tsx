@@ -1,4 +1,3 @@
-import { toRightIcon } from "@/components/common/icons";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CategoriesType } from "@/types/types";
 import React from "react";
@@ -12,9 +11,7 @@ const CategoriesItem: React.FC<CategoriesType> = ({ id, image, name }) => {
           <AvatarImage src={image} />
           <AvatarFallback>{name.slice(0, 1)}</AvatarFallback>
         </Avatar>
-        <p className="text-lg">
-          {name} {toRightIcon}
-        </p>
+        <p className="text-lg">{name}</p>
       </div>
     </Link>
   );

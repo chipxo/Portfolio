@@ -1,10 +1,10 @@
-import { RootState } from "@/app/rootReducer.tsx";
-import { useAppDispatch } from "@/app/store.tsx";
-import { showPasswordIcon } from "@/components/common/icons.tsx";
-import { Button } from "@/components/ui/button.tsx";
-import { Input } from "@/components/ui/input.tsx";
-import { makeAlert } from "@/features/alert/alertSlice.tsx";
-import { mOpacity } from "@/utils/motionSettings.tsx";
+import { RootState } from "@/app/rootReducer";
+import { useAppDispatch } from "@/app/store";
+import { showPasswordIcon } from "@/components/common/icons";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { makeAlert } from "@/features/alert/alertSlice";
+import { mOpacity } from "@/utils/motionSettings";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion as m } from "framer-motion";
 import { useState } from "react";

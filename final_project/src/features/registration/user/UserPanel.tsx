@@ -1,12 +1,12 @@
-import { RootState } from "@/app/rootReducer.tsx";
-import { mOpacity } from "@/utils/motionSettings.tsx";
+import { RootState } from "@/app/rootReducer";
+import { mOpacity } from "@/utils/motionSettings";
 import { AnimatePresence, motion as m } from "framer-motion";
 import React from "react";
 import { useSelector } from "react-redux";
-import Form from "../form/Form.tsx";
-import BtnRegisSign from "./BtnRegisSign.tsx";
-import UserNav from "./UserNav.tsx";
-import PanelContent from "./PanelContent.tsx";
+import Form from "../form/Form";
+import BtnRegisSign from "./BtnRegisSign";
+import UserNav from "./UserNav";
+import PanelContent from "./PanelContent";
 
 type UserPanelProps = {
   isBurger?: boolean;

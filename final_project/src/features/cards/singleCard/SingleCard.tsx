@@ -1,7 +1,7 @@
-import { useAppDispatch } from "@/app/store.tsx";
-import { cartDelete, cartIcon } from "@/components/common/icons.tsx";
+import { useAppDispatch } from "@/app/store";
+import { cartDelete, cartIcon } from "@/components/common/icons";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button.tsx";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -10,11 +10,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ProductType } from "@/types/types.tsx";
+import { ProductType } from "@/types/types";
 import { nanoid } from "@reduxjs/toolkit";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { addAmount, decreaseAmount } from "../../amount/amountSlice.tsx";
+import { addAmount, decreaseAmount } from "@/features/amount/amountSlice";
+import getItem from "@/indexedDB/getItem";
+import addProduct from "@/indexedDB/addProduct";
+import deleteProduct from "@/indexedDB/deleteProduct";
 
 type SingleCardType = ProductType & {
   handleGalleryClick?: () => void;
@@ -37,22 +40,27 @@ const SingleCard: React.FC<SingleCardType> = ({
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    const checkItem = async () => {
+      const item = await getItem(Number(prodId) || id);
 
-    localStorage.getItem(`${prodId}`) ? setChecked(true) : setChecked(false);
+      setChecked(item);
+    };
+
+    checkItem();
   }, []);
 
-  const handleAddBtn = () => {
+  const handleAddBtn = async (id: number, title: string, price: number) => {
     dispatch(addAmount());
-
     setChecked(true);
-    localStorage.setItem(`${id}`, `${title}`);
+
+    await addProduct({ id, title, price });
   };
 
-  const handleDelBtn = (id: number) => {
+  const handleDelBtn = async (id: number, price: number) => {
     dispatch(decreaseAmount());
-
     setChecked(false);
-    localStorage.removeItem(`${id}`);
+
+    await deleteProduct(id, price);
   };
 
   return (
@@ -102,12 +110,12 @@ const SingleCard: React.FC<SingleCardType> = ({
           <Button
             variant="outline"
             disabled={checked}
-            onClick={handleAddBtn}
+            onClick={() => handleAddBtn(id, title, price)}
             className="mr-4"
           >
             {cartIcon}
           </Button>
-          <Button disabled={!checked} onClick={() => handleDelBtn(id)}>
+          <Button disabled={!checked} onClick={() => handleDelBtn(id, price)}>
             {cartDelete}
           </Button>
         </CardFooter>

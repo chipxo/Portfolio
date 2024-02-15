@@ -1,12 +1,12 @@
-import { RootState } from "@/app/rootReducer.tsx";
-import { useAppDispatch } from "@/app/store.tsx";
-import ErrorMessage from "@/components/common/ErrorMessage.tsx";
+import { RootState } from "@/app/rootReducer";
+import { useAppDispatch } from "@/app/store";
+import ErrorMessage from "@/components/common/ErrorMessage";
 import NoProducts from "@/components/common/NoProducts";
 import CardSkeleton from "@/features/cards/commonCard/CardSkeleton";
 import CommonCard from "@/features/cards/commonCard/CommonCard";
-import CategoriesLayout from "@/features/categories/CategoriesLayout.tsx";
+import CategoriesLayout from "@/features/categories/CategoriesLayout";
 import FilterProducts from "@/features/categories/filterProducts/FilterProducts";
-import { fetchCategoryProducts } from "@/hooks/fetchCategoryProducts.tsx";
+import { fetchCategoryProducts } from "@/hooks/fetchCategoryProducts";
 import { nanoid } from "@reduxjs/toolkit";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";

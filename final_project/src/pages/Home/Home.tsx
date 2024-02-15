@@ -1,13 +1,13 @@
-import { RootState } from "@/app/rootReducer.tsx";
-import { useAppDispatch } from "@/app/store.tsx";
+import { RootState } from "@/app/rootReducer";
+import { useAppDispatch } from "@/app/store";
 import ErrorMessage from "@/components/common/ErrorMessage";
 import Carousel from "@/components/containers/slider/Slider";
 import { Button } from "@/components/ui/button";
 import CommonCard from "@/features/cards/commonCard/CommonCard";
-import CategoriesLayout from "@/features/categories/CategoriesLayout.tsx";
-import { fetchAmountOfProducts } from "@/hooks/fetchAmountOfProducts.tsx";
-import { fetchCategories } from "@/hooks/fetchCategories.tsx";
-import { fetchProducts } from "@/hooks/fetchProducts.tsx";
+import CategoriesLayout from "@/features/categories/CategoriesLayout";
+import { fetchAmountOfProducts } from "@/hooks/fetchAmountOfProducts";
+import { fetchCategories } from "@/hooks/fetchCategories";
+import { fetchProducts } from "@/hooks/fetchProducts";
 import { mOpacity } from "@/utils/motionSettings";
 import { nanoid } from "@reduxjs/toolkit";
 import { motion as m } from "framer-motion";
@@ -36,6 +36,7 @@ const Home = () => {
 
     dispatch(fetchAmountOfProducts(0));
     dispatch(fetchAmountOfProducts(10));
+
     return () => {
       dispatch(delAmountOfProducts());
     };

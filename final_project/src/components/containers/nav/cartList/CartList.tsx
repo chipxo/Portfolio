@@ -1,5 +1,5 @@
-import { RootState } from "@/app/rootReducer.tsx";
-import { useAppDispatch } from "@/app/store.tsx";
+import { RootState } from "@/app/rootReducer";
+import { useAppDispatch } from "@/app/store";
 import ErrorMessage from "@/components/common/ErrorMessage";
 import { setAmount } from "@/features/amount/amountSlice";
 import { ProductType } from "@/types/types";
@@ -13,6 +13,8 @@ import ToShoppingCart from "./ToShoppingCart";
 import NoItemsAdded from "./NoItemsAdded";
 import AmountBadge from "./AmountBadge";
 import { nanoid } from "@reduxjs/toolkit";
+import { db } from "@/indexedDB/db";
+import { useLiveQuery } from "dexie-react-hooks";
 
 type ShoppingCartItemProps = {
   isBurger?: boolean;
@@ -31,21 +33,20 @@ const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({
 
   const [open, setOpen] = useState(false);
 
-  const localStorageKeys = Object.keys(localStorage);
+  const [cards, setCards] = useState<ProductType[] | null>(null);
 
-  const items = localStorageKeys.map((itemId) => {
-    const myCards = products?.find(({ id }) => id === parseFloat(itemId));
-
-    return myCards as ProductType;
-  });
+  const addedProducts = useLiveQuery(() => db.addedProducts.toArray());
 
   useEffect(() => {
-    const allKeys = Object.keys(localStorage);
+    dispatch(setAmount(addedProducts?.length as number));
+  }, [dispatch, addedProducts]);
 
-    const numberKeys = allKeys.filter((key) => !isNaN(Number(key)));
+  useEffect(() => {
+    const addedId = addedProducts?.map(({ id }) => id);
+    const filterItems = products?.filter(({ id }) => addedId?.includes(id));
 
-    dispatch(setAmount(numberKeys.length));
-  }, [dispatch]);
+    setCards(filterItems as ProductType[]);
+  }, [products, addedProducts]);
 
   return (
     <div
@@ -72,7 +73,7 @@ const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({
 
               {!loading &&
                 !error &&
-                items?.map(
+                cards?.map(
                   (item) => !!item && <CartListItem key={nanoid()} {...item} />,
                 )}
             </div>

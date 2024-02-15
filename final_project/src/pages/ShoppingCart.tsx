@@ -1,17 +1,17 @@
-import { RootState } from "@/app/rootReducer.tsx";
-import { useAppDispatch } from "@/app/store.tsx";
-import ErrorMessage from "@/components/common/ErrorMessage.tsx";
-import NoProducts from "@/components/common/NoProducts.tsx";
+import { RootState } from "@/app/rootReducer";
+import { useAppDispatch } from "@/app/store";
+import ErrorMessage from "@/components/common/ErrorMessage";
+import NoProducts from "@/components/common/NoProducts";
 import { Skeleton } from "@/components/ui/skeleton";
-import { decreaseAmount } from "@/features/amount/amountSlice.tsx";
 import BuyCard from "@/features/cards/shopCart/BuyCard";
-import { setTotalPrice } from "@/features/cards/shopCart/totalPriceSlice";
 import SingleCardSkeleton from "@/features/cards/singleCard/SingleCardSkeleton";
-import { fetchProducts } from "@/hooks/fetchProducts.tsx";
-import { ProductType } from "@/types/types.tsx";
+import { fetchProducts } from "@/hooks/fetchProducts";
+import { ProductType } from "@/types/types";
 import { nanoid } from "@reduxjs/toolkit";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useLiveQuery } from "dexie-react-hooks";
+import { db } from "@/indexedDB/db";
 
 const ShoppingCart = () => {
   const dispatch = useAppDispatch();
@@ -20,13 +20,11 @@ const ShoppingCart = () => {
     (state: RootState) => state.products,
   );
 
-  const { amount } = useSelector((state: RootState) => state.amount);
-
-  const { totalPrice } = useSelector((state: RootState) => state.totalPrice);
-
   const [cards, setCards] = useState<ProductType[] | undefined>([]);
 
-  const localStorageKeys = Object.keys(localStorage);
+  const { totalPrice } = useLiveQuery(() => db.totalPrice.get(1)) || {};
+
+  const addedProducts = useLiveQuery(() => db.addedProducts.toArray());
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -34,29 +32,19 @@ const ShoppingCart = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    const filterItems = products?.filter(({ id }) =>
-      localStorageKeys.includes(String(id)),
-    );
+    const addedIdArr = addedProducts?.map(({ id }) => id);
 
-    const newTotalPrice = filterItems?.reduce(
-      (sum, card) => sum + (card?.price || 0),
-      0,
-    );
-
-    dispatch(setTotalPrice(newTotalPrice as number));
+    const filterItems = products?.filter(({ id }) => addedIdArr?.includes(id));
 
     setCards(filterItems);
-  }, [amount, products]);
-
-  const deleteItem = (id: number) => {
-    dispatch(decreaseAmount());
-    localStorage.removeItem(`${id}`);
-  };
+  }, [products, addedProducts]);
 
   return (
     <section className="min-h-[70vh]">
       <div className="container py-4">
-        {!loading && !!amount && <h2 className="pb-4">Total: {totalPrice}$</h2>}
+        {!loading && !!totalPrice && (
+          <h2 className="pb-4">Total: {totalPrice}$</h2>
+        )}
 
         {loading && (
           <>
@@ -67,14 +55,8 @@ const ShoppingCart = () => {
         {error && <ErrorMessage error={error} />}
 
         <div className="grid place-items-center gap-4">
-          {!loading && !error && !!amount
-            ? cards?.map((card) => (
-                <BuyCard
-                  {...card}
-                  key={nanoid()}
-                  onClick={() => deleteItem(card.id)}
-                />
-              ))
+          {!loading && !error && !!cards?.length
+            ? cards?.map((card) => <BuyCard {...card} key={nanoid()} />)
             : !loading && <NoProducts />}
         </div>
       </div>

@@ -1,4 +1,3 @@
-import { toRightIcon } from "@/components/common/icons";
 import { Button } from "@/components/ui/button";
 import { CategoriesType } from "@/types/types";
 import { mFLoatMenu } from "@/utils/motionSettings";
@@ -30,21 +29,18 @@ const CategoriesNav: React.FC<CategoriesProps> = ({ categories }) => {
           <m.div
             {...mFLoatMenu}
             style={{ x: "-50%" }}
-            className="absolute left-1/2 top-10  rounded-md border bg-background"
+            className="absolute left-1/2 top-10 rounded-md border bg-background"
           >
             <div className="absolute -top-3 z-[9999] h-4 w-full bg-transparent" />
             <div className="grid max-h-[60vh] cursor-pointer gap-y-4 overflow-auto rounded-md p-4">
-              <div className="border-b lg:border-none">
-                <div className="text-md grid grid-cols-filterLayout gap-x-4 gap-y-4 font-Merriweather max-lg:container lg:gap-y-4">
-                  {categories?.map(({ id, name }) => (
-                    <Link to={`/products/categories/${id}`} key={nanoid()}>
-                      <Button variant="ghost">
-                        {name}
-                        <span className="ml-2 mt-0.5">{toRightIcon}</span>
-                      </Button>
-                    </Link>
-                  ))}
-                </div>
+              <div className="text-md grid gap-y-4 font-Merriweather">
+                {categories?.map(({ id, name }) => (
+                  <Link to={`/products/categories/${id}`} key={nanoid()}>
+                    <Button variant="ghost" className="w-full justify-start">
+                      {name}
+                    </Button>
+                  </Link>
+                ))}
               </div>
             </div>
           </m.div>
