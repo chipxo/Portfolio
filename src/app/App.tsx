@@ -5,7 +5,7 @@ import ParticlesBg from "@/components/particleBg/ParticlesBg";
 import Home from "@/components/home/Home";
 import Projects from "@/components/projects/Projects";
 import Skills from "@/components/skills/Skills";
-import Expierence from "@/components/expierence/Expierence";
+import Experience from "@/components/experience/Experience";
 import Contact from "@/components/contact/Contact";
 import Footer from "@/components/footer/Footer";
 import ThemeToggle from "@/features/theme/ThemeToggle";
@@ -19,7 +19,7 @@ const App = () => {
         <About />
         <Projects />
         <Skills />
-        <Expierence />
+        <Experience />
         <Contact />
       </main>
       <Footer />

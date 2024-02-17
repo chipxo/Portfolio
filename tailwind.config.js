@@ -17,9 +17,22 @@ module.exports = {
       },
     },
     extend: {
+      dropShadow: {
+        ReactIcon: "0 0 10px #41D1FF",
+        ViteIcon: "0 0 10px #BD34FE",
+        ReduxIcon: "0 0 10px rgba(109 40 217/0.7)",
+        TsIcon: "0 0 10px rgba(59 130 246/0.6)",
+        TailwindIcon: "0 0 10px rgb(14 165 233)",
+        ScssIcon: "0 0 10px rgba(244 114 182/0.6)",
+        FirebaseIcon: "0 0 8px rgb(250 204 21)",
+        FrMotionIcon: "0 0 8px #59529d",
+      },
       fontFamily: {
         Raleway: ["Raleway", "Poiret", "sans-serif"],
         Poiret: ["Poiret", "Raleway", "sans-serif"],
+      },
+      gridTemplateColumns: {
+        skills: "repeat(auto-fill, minmax(150px, 1fr))",
       },
       colors: {
         border: "hsl(var(--border))",

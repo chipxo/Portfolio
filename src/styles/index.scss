@@ -76,7 +76,7 @@
   }
   section,
   footer {
-    @apply font-Raleway my-4 border-y bg-background py-4 shadow-md lg:my-10 lg:py-10;
+    @apply relative z-50 my-4 border-y bg-background py-4 font-Raleway shadow-md lg:my-10 lg:py-10;
   }
   h2,
   h3 {
