@@ -6,7 +6,6 @@ const About = () => {
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
-        transition={{ duration: 0.2 }}
         className="container text-center"
       >
         <h2 className="mb-4 text-2xl font-extrabold">About me</h2>

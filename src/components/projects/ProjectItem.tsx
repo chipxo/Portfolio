@@ -72,7 +72,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
 
       <Tilt
         className={twJoin(
-          "h-full w-full overflow-hidden rounded-sm border max-md:hidden",
+          "overflow-hidden rounded-sm border max-md:hidden",
           oddNum && " md:max-lg:-order-1",
         )}
       >

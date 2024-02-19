@@ -12,9 +12,8 @@ const Home = () => {
         <Tilt>
           <motion.div
             initial={{ x: -200, scale: 0 }}
-            animate={{ x: 0, scale: 1 }}
+            whileInView={{ x: 0, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.3, ease: "linear" }}
             className="mx-auto w-32 rounded-full border-transparent bg-gradient-to-r from-yellow-400 to-blue-500 bg-clip-border md:w-64"
           >
             <img
