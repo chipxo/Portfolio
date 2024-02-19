@@ -11,10 +11,10 @@ const Home = () => {
       <div className="container grid gap-4 gap-y-6 lg:grid-cols-[0.5fr_1fr]">
         <Tilt>
           <motion.div
-            initial={{ x: -400, scale: 0 }}
+            initial={{ x: -200, scale: 0 }}
             animate={{ x: 0, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, ease: "easeIn" }}
+            transition={{ duration: 0.3, ease: "linear" }}
             className="mx-auto w-32 rounded-full border-transparent bg-gradient-to-r from-yellow-400 to-blue-500 bg-clip-border md:w-64"
           >
             <img
@@ -29,7 +29,7 @@ const Home = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: "easeIn" }}
+            transition={{ duration: 0.4, ease: "linear" }}
             className="mx-auto w-fit pt-4 text-center text-xl font-bold sm:text-2xl md:text-4xl md:font-extrabold lg:text-end"
           >
             Hi, <span className="text-primary">I'm Serhii.</span> I'm a{" "}
@@ -37,7 +37,7 @@ const Home = () => {
             building websites.
           </motion.h2>
           <div className="grid flex-grow grid-cols-2 items-end justify-evenly gap-4 pb-4 md:flex lg:justify-end">
-            <a href="#contact">
+            <a href="#contact" className="max-md:mx-auto">
               <Button variant="outline" size="lg">
                 Contact me
               </Button>
@@ -47,6 +47,7 @@ const Home = () => {
               download="Serhii Chyipesh CV"
               target="_blank"
               rel="noreferrer"
+              className="max-md:mx-auto"
             >
               <Button variant="outline" size="lg">
                 My CV {ArrowDown}

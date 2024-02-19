@@ -44,13 +44,13 @@ const NavBar = () => {
       y: 0,
       scale: 1,
       opacity: 1,
-      transition: { duration: 0.4, ease: "easeIn" },
+      transition: { duration: 0.3, ease: "linear" },
     },
     exit: {
       opacity: 0,
       scale: 0,
       y: -200,
-      transition: { duration: 0.4, ease: "easeOut" },
+      transition: { duration: 0.3, ease: "linear" },
     },
   };
 
@@ -90,7 +90,7 @@ const NavBar = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
+              transition={{ duration: 0.3, ease: "linear" }}
               className="fixed inset-0 -z-10 backdrop-blur-sm sm:hidden"
             />
             <motion.ul

@@ -18,7 +18,7 @@ const Footer = () => {
         initial={{ scale: 0 }}
         whileInView={{ scale: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5, ease: "easeIn" }}
+        transition={{ duration: 0.3, ease: "linear" }}
         className="container space-y-4"
       >
         <h2 className="mb-6 text-center">Contact me</h2>
