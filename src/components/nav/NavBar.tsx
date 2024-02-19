@@ -5,39 +5,38 @@ import links from "./links.json";
 import Burger from "../burger/Burger";
 
 const NavBar = () => {
-  const [activeLinkId, setActiveLinkId] = useState(links[0].id);
-  const [open, setOpen] = useState(true);
+  // const [activeLinkId, setActiveLinkId] = useState(links[0].id);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
+  const body = document.body;
 
-      // let foundActiveLink = false;
+  const [open, setOpen] = useState(window.innerWidth >= 640 ? true : false);
 
-      links.forEach(({ id, link }) => {
-        const targetSection = document.querySelector(link) as HTMLElement;
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const scrollPosition = window.scrollY;
 
-        if (targetSection) {
-          const { offsetTop, offsetHeight } = targetSection;
+  //     links.forEach(({ id, link }) => {
+  //       const targetSection = document.querySelector(link) as HTMLElement;
 
-          if (
-            scrollPosition >= offsetTop - 100 &&
-            scrollPosition < offsetTop + offsetHeight - 100
-            // && !foundActiveLink
-          ) {
-            setActiveLinkId(id);
-            // foundActiveLink = true;
-          }
-        }
-      });
-    };
+  //       if (targetSection) {
+  //         const { offsetTop, offsetHeight } = targetSection;
 
-    window.addEventListener("scroll", handleScroll);
+  //         if (
+  //           scrollPosition >= offsetTop - 300 &&
+  //           scrollPosition < offsetTop + offsetHeight - 300
+  //         ) {
+  //           setActiveLinkId(id);
+  //         }
+  //       }
+  //     });
+  //   };
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [links]);
+  //   window.addEventListener("scroll", handleScroll);
+
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, [links]);
 
   const container = {
     hidden: { y: -200, opacity: 0, scale: 0 },
@@ -45,21 +44,15 @@ const NavBar = () => {
       y: 0,
       scale: 1,
       opacity: 1,
-      transition: { duration: 0.5, ease: "easeIn", delayChildren: 0.6 },
+      transition: { duration: 0.4, ease: "easeIn" },
     },
     exit: {
       opacity: 0,
       scale: 0,
       y: -200,
-      transition: { duration: 0.4, ease: "linear" },
+      transition: { duration: 0.4, ease: "easeOut" },
     },
   };
-
-  const item = {
-    hidden: { scale: 0 },
-    show: { scale: 1, transition: { ease: "linear" } },
-  };
-  const body = document.body;
 
   useEffect(() => {
     const handleResize = () => {
@@ -67,6 +60,7 @@ const NavBar = () => {
 
       if (width >= 640) {
         setOpen(true);
+
         body.removeAttribute("class");
       } else if (width < 640) {
         setOpen(false);
@@ -91,30 +85,42 @@ const NavBar = () => {
       <Burger open={open} onClick={hanldeOpen} />
       <AnimatePresence>
         {open && (
-          <motion.ul
-            variants={container}
-            initial="hidden"
-            animate="show"
-            exit="exit"
-            className="xl:text-md grid grid-cols-3 overflow-hidden border bg-background text-sm shadow-lg sm:grid-cols-6 sm:rounded-3xl"
-          >
-            <motion.div className="fixed inset-0 -z-10 backdrop-blur-sm sm:hidden" />
-            {links.map(({ id, text, link }, i) => (
-              <motion.li
-                key={text + i}
-                variants={item}
-                className={twJoin(
-                  "inline-flex cursor-pointer justify-center py-1.5 transition-colors hover:animate-pulse",
-                  activeLinkId === id ? "bg-accent" : "",
-                  i !== 0 && i !== 3 && "border-l",
-                  i === 3 && "sm:border-l",
-                  i < 3 && "max-sm:border-b",
-                )}
-              >
-                <a href={link}>{text}</a>
-              </motion.li>
-            ))}
-          </motion.ul>
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="fixed inset-0 -z-10 backdrop-blur-sm sm:hidden"
+            />
+            <motion.ul
+              variants={container}
+              initial="hidden"
+              animate="show"
+              exit="exit"
+              className="xl:text-md grid grid-cols-3 overflow-hidden border bg-background text-sm shadow-lg sm:grid-cols-6 sm:rounded-3xl"
+            >
+              {links.map(({ id, text, link }, i) => (
+                <li
+                  key={id + i}
+                  className={twJoin(
+                    "grid cursor-pointer py-1.5 text-center transition-colors",
+                    // activeLinkId === id ? "bg-accent" : "",
+                    i !== 0 && i !== 3 && "border-l",
+                    i === 3 && "sm:border-l",
+                    i < 3 && "max-sm:border-b",
+                  )}
+                >
+                  <a onClick={hanldeOpen} href={link} className="sm:hidden">
+                    {text}
+                  </a>
+                  <a href={link} className="max-sm:hidden">
+                    {text}
+                  </a>
+                </li>
+              ))}
+            </motion.ul>
+          </>
         )}
       </AnimatePresence>
     </motion.nav>

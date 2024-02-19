@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Theme, useTheme } from "@/features/theme/theme-provider";
 import { nanoid } from "@reduxjs/toolkit";
+import { motion } from "framer-motion";
 
 const ThemeToggle = () => {
   const { setTheme } = useTheme();
@@ -15,7 +16,11 @@ const ThemeToggle = () => {
   const themes = ["light", "dark", "system"];
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <motion.div
+      initial={{ x: 100 }}
+      animate={{ x: 0 }}
+      className="fixed bottom-4 right-4 z-50 sm:bottom-6 sm:right-6"
+    >
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" size="icon" className="rounded-full">
@@ -36,7 +41,7 @@ const ThemeToggle = () => {
           ))}
         </DropdownMenuContent>
       </DropdownMenu>
-    </div>
+    </motion.div>
   );
 };
 
