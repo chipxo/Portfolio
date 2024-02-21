@@ -91,20 +91,20 @@ const NavBar = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3, ease: "linear" }}
-              className="fixed inset-0 -z-10 backdrop-blur-sm sm:hidden"
+              className="fixed inset-0 -z-10 h-screen backdrop-blur-lg sm:hidden"
             />
             <motion.ul
               variants={container}
               initial="hidden"
               animate="show"
               exit="exit"
-              className="xl:text-md grid grid-cols-3 overflow-hidden border bg-background text-sm shadow-lg sm:grid-cols-6 sm:rounded-3xl"
+              className="xl:text-md drop-shadow-primary grid grid-cols-3 overflow-hidden border border-primary/30 bg-background text-sm shadow-lg sm:grid-cols-6 sm:rounded-3xl"
             >
               {links.map(({ id, text, link }, i) => (
                 <li
                   key={id + i}
                   className={twJoin(
-                    "grid cursor-pointer py-1.5 text-center transition-colors",
+                    "grid cursor-pointer border-primary/30 py-1.5 text-center transition-colors",
                     // activeLinkId === id ? "bg-accent" : "",
                     i !== 0 && i !== 3 && "border-l",
                     i === 3 && "sm:border-l",

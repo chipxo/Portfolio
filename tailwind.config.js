@@ -32,6 +32,7 @@ module.exports = {
         ScssIcon: "0 0 10px rgba(244 114 182/0.6)",
         FirebaseIcon: "0 0 8px rgb(250 204 21)",
         FrMotionIcon: "0 0 8px #59529d",
+        primary: "0 0 2px hsl(0 72.2% 50.6%)",
       },
       fontFamily: {
         Raleway: ["Raleway", "Poiret", "sans-serif"],

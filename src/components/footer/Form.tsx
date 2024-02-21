@@ -8,6 +8,7 @@ import { Button } from "../ui/button";
 import { Label } from "@/components/ui/label";
 import { useRef } from "react";
 import emailjs from "@emailjs/browser";
+import { motion } from "framer-motion";
 
 const Form = () => {
   const form = useRef<HTMLFormElement | null>(null);
@@ -53,60 +54,88 @@ const Form = () => {
     <form
       ref={form}
       onSubmit={handleSubmit(onSubmit)}
-      className="grid gap-y-8 sm:place-items-center"
+      className="grid gap-y-8 overflow-hidden sm:place-items-center"
     >
       <div className="grid gap-y-8 sm:w-1/2">
-        <Label htmlFor="user_name" className="relative">
-          <Input
-            {...register("user_name")}
-            name="user_name"
-            type="text"
-            placeholder="Your name"
-            // "w-full rounded-md border bg-transparent p-2",
-            className={twJoin(
-              "bg-background",
-              errors.user_name ? "border-red-600" : "border-neutral",
+        <motion.div
+          initial={{ opacity: 0, x: -200 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+        >
+          <Label htmlFor="user_name" className="relative">
+            <Input
+              {...register("user_name")}
+              name="user_name"
+              type="text"
+              placeholder="Your name"
+              // "w-full rounded-md border bg-transparent p-2",
+              className={twJoin(
+                "bg-background",
+                errors.user_name ? "border-red-600" : "border-neutral",
+              )}
+            />
+            {errors.user_name && (
+              <p className="absolute top-11 text-red-600">{`${errors.user_name.message}`}</p>
             )}
-          />
-          {errors.user_name && (
-            <p className="absolute top-11 text-red-600">{`${errors.user_name.message}`}</p>
-          )}
-        </Label>
-        <Label htmlFor="user_email" className="relative">
-          <Input
-            {...register("user_email")}
-            name="user_email"
-            type="text"
-            placeholder="Your email"
-            // "w-full rounded-md border bg-transparent p-2",
-            className={twJoin(
-              "bg-background",
-              errors.user_email ? "border-red-600" : "border-neutral",
+          </Label>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, x: 200 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.8 }}
+        >
+          <Label htmlFor="user_email" className="relative">
+            <Input
+              {...register("user_email")}
+              name="user_email"
+              type="text"
+              placeholder="Your email"
+              // "w-full rounded-md border bg-transparent p-2",
+              className={twJoin(
+                "bg-background",
+                errors.user_email ? "border-red-600" : "border-neutral",
+              )}
+            />
+            {errors.user_email && (
+              <p className="absolute top-11 text-red-600">{`${errors.user_email.message}`}</p>
             )}
-          />
-          {errors.user_email && (
-            <p className="absolute top-11 text-red-600">{`${errors.user_email.message}`}</p>
-          )}
-        </Label>
-        <Label htmlFor="message" className="relative">
-          <Textarea
-            {...register("message")}
-            name="message"
-            placeholder="Your message"
-            className={twJoin(
-              "relative bg-background",
-              errors.message ? "border-red-600" : "border-neutral",
+          </Label>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 1.2 }}
+        >
+          <Label htmlFor="message" className="relative">
+            <Textarea
+              {...register("message")}
+              name="message"
+              placeholder="Your message"
+              className={twJoin(
+                "relative bg-background",
+                errors.message ? "border-red-600" : "border-neutral",
+              )}
+            />
+            {errors.message && (
+              <p className="absolute -bottom-6 text-red-600">{`${errors.message.message}`}</p>
             )}
-          />
-          {errors.message && (
-            <p className="absolute -bottom-6 text-red-600">{`${errors.message.message}`}</p>
-          )}
-        </Label>
+          </Label>
+        </motion.div>
       </div>
-
-      <Button variant="outline" className="sm:w-1/2">
-        Send
-      </Button>
+      <motion.div
+        initial={{ scale: 0 }}
+        whileInView={{ scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: 1.6 }}
+        className="sm:w-1/2"
+      >
+        <Button variant="default" className="w-full">
+          Send
+        </Button>
+      </motion.div>{" "}
     </form>
   );
 };

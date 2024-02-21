@@ -1,3 +1,4 @@
+import { GitHubIcon, ShadcnIcon } from "./../icons/icons";
 import {
   FirebaseIcon,
   ReduxIcon,
@@ -11,44 +12,59 @@ import {
 
 const skillsList = [
   {
-    text: "ReactIcon",
+    id: 1,
+    text: "React",
     icon: ReactIcon,
     className: "drop-shadow-ReactIcon",
   },
   {
-    text: "ViteIcon",
+    id: 2,
+    text: "Vite",
     icon: ViteIcon,
     className: "drop-shadow-ViteIcon",
   },
   {
-    text: "ReduxIcon",
+    id: 3,
+    text: "Redux",
     icon: ReduxIcon,
     className: "drop-shadow-ReduxIcon",
   },
+  { id: 4, text: "TypeScript", icon: TsIcon, className: "drop-shadow-TsIcon" },
   {
-    text: "TsIcon",
-    icon: TsIcon,
-    className: "drop-shadow-TsIcon",
-  },
-  {
-    text: "TailwindIcon",
+    id: 5,
+    text: "TailwindCSS",
     icon: TailwindIcon,
     className: "drop-shadow-TailwindIcon",
   },
   {
-    text: "ScssIcon",
+    id: 6,
+    text: "SCSS",
     icon: ScssIcon,
     className: "drop-shadow-ScssIcon",
   },
   {
-    text: "FirebaseIcon",
+    id: 7,
+    text: "Firebase",
     icon: FirebaseIcon,
     className: "drop-shadow-FirebaseIcon",
   },
   {
-    text: "FrMotionIcon",
+    id: 8,
+    text: "Framer Motion",
     icon: FrMotionIcon,
     className: "drop-shadow-FrMotionIcon",
+  },
+  {
+    id: 9,
+    text: "Shadcn/ui",
+    icon: ShadcnIcon,
+    className: "drop-shadow-2xl",
+  },
+  {
+    id: 10,
+    text: "GitHub",
+    icon: GitHubIcon,
+    className: "drop-shadow-2xl",
   },
   // {
   //   text: "RestAPI",

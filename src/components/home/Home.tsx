@@ -2,19 +2,22 @@ import { Button } from "../ui/button";
 import CV_photo from "@/assets/CV_photo.jpg";
 import CV from "@/assets/CV.pdf";
 import { motion } from "framer-motion";
-import { ArrowDown, GitHubIcon, LinkedinIcon } from "../icons/icons";
+import { ArrowDown, GitHubButton, LinkedinButton } from "../icons/icons";
 import Tilt from "react-parallax-tilt";
 
 const Home = () => {
   return (
-    <section id="home" className="mt-14 overflow-hidden">
+    <section
+      id="home"
+      className="mt-0 border-none bg-transparent bg-gradient-to-br from-primary/40 via-transparent to-transparent pt-14 lg:pt-20"
+    >
       <div className="container grid gap-4 gap-y-6 lg:grid-cols-[0.5fr_1fr]">
         <Tilt>
           <motion.div
-            initial={{ x: -200, scale: 0 }}
-            whileInView={{ x: 0, scale: 1 }}
-            viewport={{ once: true }}
-            className="mx-auto w-32 rounded-full border-transparent bg-gradient-to-r from-yellow-400 to-blue-500 bg-clip-border md:w-64"
+            // initial={{ x: -200, scale: 0 }}
+            // whileInView={{ x: 0, scale: 1 }}
+            // viewport={{ once: true }}
+            className="mx-auto w-32 rounded-full border-transparent bg-primary/60 from-transparent to-primary bg-clip-border md:w-64"
           >
             <img
               src={CV_photo}
@@ -25,11 +28,11 @@ const Home = () => {
         </Tilt>
         <div className="flex flex-col gap-y-6">
           <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, ease: "linear" }}
-            className="mx-auto w-fit pt-4 text-center text-xl font-bold sm:text-2xl md:text-4xl md:font-extrabold lg:text-end"
+            // initial={{ opacity: 0 }}
+            // whileInView={{ opacity: 1 }}
+            // viewport={{ once: true }}
+            // transition={{ duration: 0.4, ease: "linear" }}
+            className="mx-auto w-fit pt-4 text-center text-xl font-bold drop-shadow-lg sm:text-2xl md:text-4xl md:font-extrabold lg:text-end"
           >
             Hi, <span className="text-primary">I'm Serhii.</span> I'm a{" "}
             <span className="text-primary">front-end developer.</span> I enjoy
@@ -48,12 +51,12 @@ const Home = () => {
               rel="noreferrer"
               className="max-md:mx-auto"
             >
-              <Button variant="outline" size="lg">
+              <Button variant="default" size="lg">
                 My CV {ArrowDown}
               </Button>
             </a>
-            <LinkedinIcon isHome />
-            <GitHubIcon isHome />
+            <LinkedinButton isHome />
+            <GitHubButton isHome />
           </div>
         </div>
       </div>

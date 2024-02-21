@@ -11,9 +11,9 @@ const Projects = () => {
         <h2 className="mx-auto w-fit text-2xl font-semibold lg:text-3xl">
           My projects
         </h2>
-        <div className="grid gap-4 lg:grid-cols-2">
-          {projectsList.map((project, i) => (
-            <ProjectItem key={project.id} {...project} i={i} />
+        <div className="grid gap-4 overflow-hidden lg:grid-cols-2 lg:gap-8">
+          {projectsList.map((project) => (
+            <ProjectItem key={project.id} {...project} />
           ))}
         </div>
       </div>

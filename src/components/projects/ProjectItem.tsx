@@ -9,27 +9,26 @@ type ProjectItemProps = {
   technologies: JSX.Element[];
   screen: string;
   src: string;
-  i: number;
 };
 
 const ProjectItem: React.FC<ProjectItemProps> = ({
+  id,
   name,
   technologies,
   screen,
   src,
-  i,
 }) => {
-  const oddNum = i % 2 !== 0;
-  const lastItem = i === 4;
+  const oddNum = id % 2 !== 0;
+  const lastItem = id === 4;
 
   return (
     <motion.div
-      initial={{ x: 0, opacity: 0, scale: 0 }}
-      whileInView={{ x: 0, opacity: 1, scale: 1 }}
+      initial={{ x: oddNum ? 300 : -300, opacity: 0 }}
+      whileInView={{ x: 0, opacity: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.4 }}
       className={twJoin(
-        "grid items-center justify-evenly gap-4 rounded-md border border-accent bg-background p-6 drop-shadow-2xl md:gap-8 lg:grid-cols-[0.6fr_1fr] lg:last:col-span-2",
+        "animated_border relative grid items-center justify-evenly gap-4 overflow-hidden rounded-md border bg-background p-6 md:gap-8 lg:grid-cols-[0.6fr_1fr] lg:last:col-span-2",
         oddNum ? "md:max-lg:grid-cols-[1fr_0.5fr]" : "md:grid-cols-[0.5fr_1fr]",
       )}
     >
@@ -55,7 +54,15 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
           )}
         >
           {technologies.map((technology, i) => (
-            <div key={name + i}>{technology}</div>
+            <motion.div
+              key={name + i}
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 + i * 0.3 }}
+            >
+              {technology}
+            </motion.div>
           ))}
         </div>
       </div>

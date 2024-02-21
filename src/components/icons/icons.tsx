@@ -75,7 +75,15 @@ export const ArrowDown = (
   <FontAwesomeIcon icon={faArrowDown} className="ml-2" />
 );
 
-export const LinkedinIcon = ({ isHome = false }) => (
+export const GitHubIcon = (
+  <FontAwesomeIcon icon={faGithub} className="text-2xl" />
+);
+
+export const LinkedinIcon = (
+  <FontAwesomeIcon icon={faLinkedin} className="text-2xl" />
+);
+
+export const LinkedinButton = ({ isHome = false }) => (
   <Button
     variant="ghost"
     size="icon"
@@ -91,7 +99,7 @@ export const LinkedinIcon = ({ isHome = false }) => (
   </Button>
 );
 
-export const GitHubIcon = ({ isHome = false }) => (
+export const GitHubButton = ({ isHome = false }) => (
   <Button
     variant="ghost"
     size="icon"

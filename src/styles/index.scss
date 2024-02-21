@@ -6,64 +6,47 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 20 14.3% 4.1%;
-
+    --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
-    --card-foreground: 20 14.3% 4.1%;
-
+    --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 20 14.3% 4.1%;
-
-    --primary: 352 86.4% 53.7%;
-    --primary-foreground: 60 9.1% 97.8%;
-
-    --secondary: 197 24.1% 94.3%;
-    --secondary-foreground: 24 9.8% 10%;
-
-    --muted: 60 4.8% 85.9%;
-    --muted-foreground: 25 5.3% 44.7%;
-
-    --accent: 60 4.8% 85.9%;
-    --accent-foreground: 24 9.8% 10%;
-
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 72.2% 50.6%;
+    --primary-foreground: 0 85.7% 97.3%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 60 9.1% 97.8%;
-
-    --border: 20 5.9% 90%;
-    --input: 20 5.9% 90%;
-    --ring: 20 14.3% 4.1%;
-
-    --radius: 0.5rem;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 72.2% 50.6%;
+    --radius: 0.3rem;
   }
 
   .dark {
-    --background: 234.8 21.1% 21.4%;
-    --foreground: 60 9.1% 97.8%;
-
-    --card: 20 14.3% 4.1%;
-    --card-foreground: 60 9.1% 97.8%;
-
-    --popover: 20 14.3% 4.1%;
-    --popover-foreground: 60 9.1% 97.8%;
-
-    --primary: 349 96.4% 43.3%;
-    --primary-foreground: 60 9.1% 97.8%;
-
-    --secondary: 218 16.9% 61.8%;
-    --secondary-foreground: 60 9.1% 97.8%;
-
-    --muted: 12 6.5% 15.1%;
-    --muted-foreground: 24 5.4% 63.9%;
-
-    --accent: 12 6.5% 15.1%;
-    --accent-foreground: 60 9.1% 97.8%;
-
+    --background: 0 3% 6.5%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 72.2% 50.6%;
+    --primary-foreground: 0 85.7% 97.3%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 60 9.1% 97.8%;
-
-    --border: 12 6.5% 15.1%;
-    --input: 12 6.5% 15.1%;
-    --ring: 24 5.7% 82.9%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 72.2% 50.6%;
   }
 }
 
@@ -75,10 +58,54 @@
     @apply bg-background text-foreground;
   }
   section {
-    @apply relative z-50 my-4 scroll-mt-[40vh] border-y bg-background py-4 font-Raleway drop-shadow-md lg:my-10 lg:py-10;
+    @apply relative z-50 my-4 scroll-mt-[40vh] border-y border-primary/30 bg-background py-4 font-Raleway drop-shadow-md lg:my-10 lg:py-10;
   }
   h2,
   h3 {
-    @apply text-lg lg:text-xl;
+    @apply text-xl font-semibold lg:text-2xl;
   }
+  .animated_border {
+    --border-angle: 0turn; // For animation.
+
+    --gradient-border: conic-gradient(
+      from var(--border-angle),
+      transparent 25%,
+      hsl(0 72.2% 50.6%),
+      transparent
+    );
+
+    border: 1px solid transparent;
+    border-image: var(--gradient-border);
+    border-image-slice: 1;
+
+    animation: bg-spin 3s linear infinite;
+  }
+
+  @keyframes bg-spin {
+    to {
+      --border-angle: 1turn;
+    }
+  }
+
+  .box:hover {
+    animation-play-state: paused;
+  }
+
+  @property --border-angle {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0turn;
+  }
+}
+
+::-webkit-scrollbar {
+  @apply w-[15px];
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-background;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply rounded-lg bg-primary;
 }

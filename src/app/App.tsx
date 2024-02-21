@@ -12,6 +12,7 @@ import ThemeToggle from "@/features/theme/ThemeToggle";
 const App = () => {
   return (
     <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+      {/* <div className="absolute left-0 top-0 h-1/2 w-full bg-gradient-to-br from-primary/30 via-transparent to-transparent" /> */}
       <Header />
       <main>
         <Home />
