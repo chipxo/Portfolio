@@ -1,15 +1,14 @@
 import { motion } from "framer-motion";
 import React from "react";
-import { twMerge } from "tailwind-merge";
 
 type SkillItemProps = {
-  className: string;
+  className?: string;
   icon: JSX.Element;
   text: string;
   id: number;
 };
 
-const SkillItem: React.FC<SkillItemProps> = ({ className, icon, text, id }) => {
+const SkillItem: React.FC<SkillItemProps> = ({ icon, text, id }) => {
   return (
     <motion.div
       initial={{ x: -20 * id, opacity: 0 }}
