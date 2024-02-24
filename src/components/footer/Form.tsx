@@ -69,7 +69,6 @@ const Form = () => {
               name="user_name"
               type="text"
               placeholder="Your name"
-              // "w-full rounded-md border bg-transparent p-2",
               className={twJoin(
                 "bg-background",
                 errors.user_name ? "border-red-600" : "border-neutral",
@@ -92,7 +91,6 @@ const Form = () => {
               name="user_email"
               type="text"
               placeholder="Your email"
-              // "w-full rounded-md border bg-transparent p-2",
               className={twJoin(
                 "bg-background",
                 errors.user_email ? "border-red-600" : "border-neutral",
@@ -135,7 +133,7 @@ const Form = () => {
         <Button variant="default" className="w-full">
           Send
         </Button>
-      </motion.div>{" "}
+      </motion.div>
     </form>
   );
 };

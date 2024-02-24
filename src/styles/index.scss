@@ -58,7 +58,10 @@
     @apply bg-background text-foreground;
   }
   section {
-    @apply relative z-50 my-4 scroll-mt-[40vh] border-y border-primary/30 bg-background py-4 font-Raleway drop-shadow-md lg:my-10 lg:py-10;
+    @apply relative z-50 scroll-mt-[40vh]  border-primary/30 bg-transparent py-4 font-Raleway drop-shadow-md backdrop-blur-md md:py-8 lg:py-10;
+    &:not(section#experience) {
+      @apply border-y;
+    }
   }
   h2,
   h3 {
@@ -79,16 +82,16 @@
     border-image-slice: 1;
 
     animation: bg-spin 3s linear infinite;
+
+    &:hover {
+      animation-play-state: paused;
+    }
   }
 
   @keyframes bg-spin {
     to {
       --border-angle: 1turn;
     }
-  }
-
-  .box:hover {
-    animation-play-state: paused;
   }
 
   @property --border-angle {

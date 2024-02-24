@@ -2,8 +2,9 @@ import { motion } from "framer-motion";
 import React from "react";
 import { twJoin } from "tailwind-merge";
 import Tilt from "react-parallax-tilt";
+import Technologies from "./Technologies";
 
-type ProjectItemProps = {
+export type ProjectItemProps = {
   id: number;
   name: string;
   technologies: JSX.Element[];
@@ -53,17 +54,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
             technologies.length >= 5 ? "md:grid-cols-4" : "md:grid-cols-3",
           )}
         >
-          {technologies.map((technology, i) => (
-            <motion.div
-              key={name + i}
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 + i * 0.3 }}
-            >
-              {technology}
-            </motion.div>
-          ))}
+          <Technologies technologies={technologies} />
         </div>
       </div>
 

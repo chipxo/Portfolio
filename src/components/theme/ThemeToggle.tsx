@@ -6,7 +6,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Theme, useTheme } from "@/features/theme/theme-provider";
+import { Theme, useTheme } from "./theme-provider";
 import { nanoid } from "@reduxjs/toolkit";
 import { motion } from "framer-motion";
 
