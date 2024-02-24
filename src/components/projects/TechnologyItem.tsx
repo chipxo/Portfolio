@@ -12,6 +12,7 @@ const TechnologyItem: React.FC<TechnologyItemProps> = ({ technology, i }) => {
       whileInView={{ scale: 1 }}
       viewport={{ once: true }}
       transition={{ delay: 0.4 + i * 0.3 }}
+      className="inline-flex items-center"
     >
       {technology}
     </motion.div>

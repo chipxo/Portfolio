@@ -51,7 +51,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
         <div
           className={twJoin(
             "mt-2 items-center gap-4 max-md:flex max-md:flex-wrap max-md:justify-center md:grid md:place-items-center",
-            technologies.length >= 5 ? "md:grid-cols-4" : "md:grid-cols-3",
+            technologies.length > 5 ? "md:grid-cols-5" : "md:grid-cols-4",
           )}
         >
           <Technologies technologies={technologies} />

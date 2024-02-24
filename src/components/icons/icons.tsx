@@ -44,7 +44,7 @@ export const ViteIcon = (
 );
 
 export const FrMotionIcon = (
-  <img src={frMotionLogo} alt="Framer Motion Logo" className="w-6 sm:w-8" />
+  <img src={frMotionLogo} alt="Framer Motion Logo" className="w-6 sm:w-7" />
 );
 
 export const HTMLIcon = (
@@ -67,7 +67,7 @@ export const ShadcnIcon = (
   <img
     src={shadcnLogo}
     alt="Shadcn Logo"
-    className="w-6 rounded-sm object-cover sm:w-8"
+    className="w-6 rounded-md object-cover sm:w-8"
   />
 );
 
@@ -76,7 +76,7 @@ export const ArrowDown = (
 );
 
 export const GitHubIcon = (
-  <FontAwesomeIcon icon={faGithub} className="text-2xl" />
+  <FontAwesomeIcon icon={faGithub} className="text-2xl md:text-3xl" />
 );
 
 export const LinkedinIcon = (

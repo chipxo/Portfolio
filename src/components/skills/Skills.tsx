@@ -6,7 +6,7 @@ const Skills = () => {
   return (
     <section id="skills">
       <h2 className="mx-auto mb-8 w-fit text-2xl">My Skills</h2>
-      <div className="container grid grid-cols-[repeat(auto-fill,_minmax(140px,_1fr))] items-center gap-2 px-12 lg:grid-cols-[repeat(auto-fill,_minmax(240px,_1fr))]">
+      <div className="container grid grid-cols-[repeat(auto-fill,_minmax(140px,_1fr))] items-center gap-2 lg:grid-cols-[repeat(auto-fill,_minmax(240px,_1fr))] lg:px-12">
         <AnimatePresence>
           {skillsList.map((skill) => (
             <SkillItem key={skill.id} {...skill} />
