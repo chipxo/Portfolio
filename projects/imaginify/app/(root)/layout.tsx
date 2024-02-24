@@ -1,3 +1,4 @@
+import MobileNav from "@/components/shared/MobileNav";
 import Sidebar from "@/components/shared/Sidebar";
 import React from "react";
 
@@ -9,7 +10,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <main className="root">
       <Sidebar />
-      {/* MObileNav */}
+      <MobileNav />
+
       <div className="root-container">
         <div className="wrapper">{children}</div>
       </div>
