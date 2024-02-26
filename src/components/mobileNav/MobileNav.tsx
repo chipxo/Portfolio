@@ -45,16 +45,16 @@ const MobileNav = () => {
                   <LinkedinButton />
                 </li>
               </ul>
-              <Button variant="outline" className="w-full">
-                {links.map(
-                  ({ id, text, link }) =>
-                    id === 6 && (
-                      <a key={id} href={link} onClick={closeMenu}>
+              {links.map(
+                ({ id, text, link }) =>
+                  id === 6 && (
+                    <a key={id} href={link} onClick={closeMenu}>
+                      <Button variant="outline" className="w-full">
                         {text} me
-                      </a>
-                    ),
-                )}
-              </Button>
+                      </Button>
+                    </a>
+                  ),
+              )}
             </nav>
           </SheetFooter>
         </SheetContent>

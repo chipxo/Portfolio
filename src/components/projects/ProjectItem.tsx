@@ -3,7 +3,6 @@ import React from "react";
 import { twJoin } from "tailwind-merge";
 import Tilt from "react-parallax-tilt";
 import Technologies from "./Technologies";
-import { ArrowRight } from "../icons/icons";
 
 export type ProjectItemProps = {
   id: number;
