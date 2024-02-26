@@ -10,7 +10,11 @@ import frMotionLogo from "@/assets/frMotionLogo.svg";
 import shadcnLogo from "@/assets/shadcnLogo.png";
 import { IoLogoCss3 } from "react-icons/io5";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowDown,
+  faArrowRight,
+  faBars,
+} from "@fortawesome/free-solid-svg-icons";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { Button } from "../ui/button";
 import { twJoin } from "tailwind-merge";
@@ -75,12 +79,23 @@ export const ArrowDown = (
   <FontAwesomeIcon icon={faArrowDown} className="ml-2" />
 );
 
+export const ArrowRight = (
+  <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
+);
+
 export const GitHubIcon = (
   <FontAwesomeIcon icon={faGithub} className="text-2xl md:text-3xl" />
 );
 
 export const LinkedinIcon = (
   <FontAwesomeIcon icon={faLinkedin} className="text-2xl" />
+);
+
+export const MenuIcon = (
+  <FontAwesomeIcon
+    icon={faBars}
+    className="text-2xl font-extrabold text-primary"
+  />
 );
 
 export const LinkedinButton = ({ isHome = false }) => (

@@ -66,8 +66,9 @@ const NavBar = () => {
   };
 
   return (
-    <motion.nav className="font-Raleway sm:container sm:py-3">
+    <motion.nav className="font-Raleway sm:container max-sm:hidden sm:py-3">
       <Burger open={open} onClick={handleOpen} />
+
       <AnimatePresence>
         {open && (
           <>

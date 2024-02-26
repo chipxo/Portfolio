@@ -3,6 +3,7 @@ import React from "react";
 import { twJoin } from "tailwind-merge";
 import Tilt from "react-parallax-tilt";
 import Technologies from "./Technologies";
+import { ArrowRight } from "../icons/icons";
 
 export type ProjectItemProps = {
   id: number;
@@ -35,7 +36,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
     >
       <div
         className={twJoin(
-          "grid gap-y-3 text-center md:gap-y-4",
+          "grid gap-y-3 text-center md:gap-y-4 lg:gap-y-8",
           lastItem && "lg:gap-y-8",
         )}
       >
@@ -56,6 +57,10 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
         >
           <Technologies technologies={technologies} />
         </div>
+        {/* <a className="inline-flex items-center text-start">
+          View code
+          <span className="inline-flex">{ArrowRight}</span>
+        </a> */}
       </div>
 
       <a
