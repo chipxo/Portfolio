@@ -2,7 +2,7 @@ import { GitHubButton, LinkedinButton } from "../icons/icons";
 import HomeTitle from "./HomeTitle";
 import HomeImg from "./HomeImg";
 import ContactMe from "./ContactMe";
-import MyCV from "./MyCV";
+import MyResume from "./MyResume";
 
 const Home = () => {
   return (
@@ -16,7 +16,7 @@ const Home = () => {
           <HomeTitle />
           <div className="grid flex-grow grid-cols-2 items-end justify-evenly gap-4 pb-4 md:flex lg:justify-end">
             <ContactMe />
-            <MyCV />
+            <MyResume />
             <LinkedinButton isHome />
             <GitHubButton isHome />
           </div>

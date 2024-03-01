@@ -1,21 +1,21 @@
-import CV from "@/assets/CV.pdf";
+import Resume from "@/assets/Resume_Serhii_Chyipesh.pdf";
 import { Button } from "../ui/button";
 import { ArrowDown } from "../icons/icons";
 
-const MyCV = () => {
+const MyResume = () => {
   return (
     <a
-      href={CV}
-      download="Serhii Chyipesh CV"
+      href={Resume}
+      download="Serhii Chyipesh Resume"
       target="_blank"
       rel="noreferrer"
       className="max-md:mx-auto"
     >
       <Button variant="default" size="lg">
-        My CV {ArrowDown}
+        My Resume {ArrowDown}
       </Button>
     </a>
   );
 };
 
-export default MyCV;
+export default MyResume;

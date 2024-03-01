@@ -24,7 +24,7 @@ const MobileNav = () => {
             {MenuIcon}
           </Button>
         </SheetTrigger>
-        <SheetContent className="flex w-1/2 flex-col justify-between p-5 sm:hidden">
+        <SheetContent className="flex w-2/3 flex-col justify-between p-5 sm:hidden">
           <SheetHeader className="pt-6 text-end">
             {links.map(
               ({ id, text, link }) =>
